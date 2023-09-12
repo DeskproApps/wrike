@@ -17,7 +17,7 @@
       "title": "Access Token",
       "description": "Example backend only setting",
       "type": "string",
-      "isRequired": false,
+      "isRequired": true,
       "isBackendOnly": true
     }
   },
