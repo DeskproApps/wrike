@@ -9,6 +9,7 @@ import { INote } from "../../api/types";
 import { useQueryWithClient } from "@deskpro/app-sdk";
 import { getUsersByIds } from "../../api/api";
 import { useMemo } from "react";
+import { addBlankTargetToLinks } from "../../utils/utils";
 
 type Props = {
   notes: INote[];
@@ -83,7 +84,7 @@ export const Notes = ({ notes, id }: Props) => {
               </Stack>
               <HTMLDiv
                 dangerouslySetInnerHTML={{
-                  __html: note.text.replaceAll("<a", `<a target="_blank" `),
+                  __html: addBlankTargetToLinks(note.text),
                 }}
               />
             </Stack>

@@ -60,7 +60,8 @@ export const CreateNote = () => {
 
             navigate(-1);
           }}
-          text={submitting ? "Creating..." : "Create"}
+          loading={submitting}
+          text={"Create"}
           disabled={submitting}
         />
         <Button onClick={() => navigate(-1)} text="Cancel" intent="secondary" />
