@@ -1,7 +1,7 @@
 import { H1 } from "@deskpro/deskpro-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledLink = styled(Link)`
   all: unset;
@@ -26,5 +26,30 @@ export const FontAwesomeIconHover = styled(FontAwesomeIcon)`
   &:visited {
     text-decoration: none;
     color: orange;
+  }
+`;
+
+export const dpNormalize = css`
+  p {
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0;
+  }
+
+  p:first-child,
+  ol:first-child,
+  ul:first-child {
+    margin-top: 0;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  a,
+  a:hover {
+    color: ${({ theme }) => theme.colors.cyan100};
   }
 `;

@@ -10,6 +10,7 @@ import { useQueryWithClient } from "@deskpro/app-sdk";
 import { getUsersByIds } from "../../api/api";
 import { useMemo } from "react";
 import { addBlankTargetToLinks } from "../../utils/utils";
+import { dpNormalize } from "../../styles";
 
 type Props = {
   notes: INote[];
@@ -20,6 +21,8 @@ const HTMLDiv = styled.div`
   & > p {
     margin: 0;
   }
+
+  ${dpNormalize}
 `;
 
 export const Notes = ({ notes, id }: Props) => {
