@@ -137,7 +137,7 @@ export const LinkTask = () => {
                       fields={[
                         {
                           ...task,
-                          linked_tickets: taskLinketCount[task.id] || 0,
+                          linked_tickets: taskLinketCount[task.id] || "0",
                         },
                       ]}
                       hasCheckbox={true}

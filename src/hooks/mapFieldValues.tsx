@@ -61,6 +61,13 @@ export const useMapFieldValues = () => {
 
           break;
 
+        case "number":
+          value =
+            (field as ITask)[metadataField.name as keyof ITask]?.toString() ||
+            "-";
+
+          break;
+
         case "Currency_customField":
           value = (() => {
             const data = (field as unknown as Record<string, ICustomFields>)[
