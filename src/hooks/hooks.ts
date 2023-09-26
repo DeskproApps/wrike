@@ -118,9 +118,28 @@ export const useLinkTasks = () => {
     },
     [client, decrementTaskTicketCount, ticket]
   );
+
+  const unlinkAllTasks = useCallback(async () => {
+    if (!client || !ticket) return;
+
+    const linkedTasks = await getLinkedTasks();
+
+    await Promise.all(
+      (linkedTasks ?? []).map((task) =>
+        client?.getEntityAssociation("linkedTasks", ticket?.id).delete(task)
+      )
+    );
+
+    await Promise.all(
+      (linkedTasks ?? []).map((task) => decrementTaskTicketCount(task))
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [client, ticket]);
+
   return {
     linkTasks,
     isLinking,
+    unlinkAllTasks,
     getLinkedTasks,
     unlinkTask,
   };

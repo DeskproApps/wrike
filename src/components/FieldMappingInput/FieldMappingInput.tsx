@@ -79,7 +79,16 @@ export const FieldMappingInput = forwardRef(
                     marginTop: "4px",
                   }}
                 >
-                  <H1>{field.label}</H1>
+                  <Stack>
+                    <div style={{ color: theme?.colors?.grey80 }}>
+                      <H1>{field.label}</H1>
+                    </div>
+                    {field.required && (
+                      <Stack style={{ color: theme?.colors?.red100 }}>
+                        <H1>⠀*</H1>
+                      </Stack>
+                    )}
+                  </Stack>
                   <TextArea
                     variant="inline"
                     value={watch(field.name)}

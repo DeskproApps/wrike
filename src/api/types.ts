@@ -5,6 +5,23 @@ export type IWrikeResponse<T> = {
   kind: string;
   data: T;
 };
+export interface IWorkflow {
+  id: string;
+  name: string;
+  standard: boolean;
+  hidden: boolean;
+  customStatuses: CustomStatus[];
+}
+
+export interface CustomStatus {
+  id: string;
+  name: string;
+  standardName: boolean;
+  color: string;
+  standard: boolean;
+  group: string;
+  hidden: boolean;
+}
 
 export interface INote {
   id: string;

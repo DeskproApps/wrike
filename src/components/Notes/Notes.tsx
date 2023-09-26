@@ -9,7 +9,7 @@ import { INote } from "../../api/types";
 import { useQueryWithClient } from "@deskpro/app-sdk";
 import { getUsersByIds } from "../../api/api";
 import { useMemo } from "react";
-import { addBlankTargetToLinks } from "../../utils/utils";
+import { mutateDangerouslySetHTML } from "../../utils/utils";
 import { dpNormalize } from "../../styles";
 
 type Props = {
@@ -21,6 +21,7 @@ const HTMLDiv = styled.div`
   & > p {
     margin: 0;
   }
+  max-width: 100%;
 
   ${dpNormalize}
 `;
@@ -82,14 +83,21 @@ export const Notes = ({ notes, id }: Props) => {
                   name={`${user?.firstName} ${user?.lastName}`}
                 ></Avatar>
                 <H2 style={{ width: "5ch" }}>
-                  {formatDateSince(new Date(note.createdDate)).slice(0, 5)}
+                  {formatDateSince(new Date(note.createdDate)).slice(0, 8)}
                 </H2>
               </Stack>
-              <HTMLDiv
-                dangerouslySetInnerHTML={{
-                  __html: addBlankTargetToLinks(note.text),
-                }}
-              />
+              <Stack>
+                <HTMLDiv
+                  style={{
+                    fontSize: "12px",
+                    maxWidth: "100%",
+                    wordBreak: "break-word",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: mutateDangerouslySetHTML(note.text),
+                  }}
+                />
+              </Stack>
             </Stack>
             <HorizontalDivider full={i === notes.length - 1} />
           </Stack>

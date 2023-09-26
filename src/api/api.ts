@@ -5,6 +5,7 @@ import {
   ITask,
   ITaskFromList,
   IUser,
+  IWorkflow,
   IWrikeResponse,
   RequestMethod,
 } from "./types";
@@ -75,6 +76,11 @@ export const getTasksByPrompt = async (
     )}&descendants=true&pageSize=1000`,
     "GET"
   );
+
+export const getWorkflows = async (
+  client: IDeskproClient
+): Promise<IWrikeResponse<IWorkflow[]>> =>
+  installedRequest(client, `api/v4/workflows`, "GET");
 
 export const getTasks = async (
   client: IDeskproClient

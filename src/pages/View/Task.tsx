@@ -7,7 +7,12 @@ import {
 import { Stack } from "@deskpro/deskpro-ui";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getCustomFields, getNotesByTaskId, getTaskById } from "../../api/api";
+import {
+  getCustomFields,
+  getNotesByTaskId,
+  getTaskById,
+  getWorkflows,
+} from "../../api/api";
 import { FieldMapping } from "../../components/FieldMapping/FieldMapping";
 import { Notes } from "../../components/Notes/Notes";
 import { useLinkTasks, useTicketCount } from "../../hooks/hooks";
@@ -91,6 +96,10 @@ export const ViewTask = () => {
     }
   );
 
+  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
+    getWorkflows(client)
+  );
+
   useEffect(() => {
     if (!customFieldsQuery.isSuccess || !tasksByIdQuery.isSuccess) return;
 
@@ -100,6 +109,10 @@ export const ViewTask = () => {
 
     setTask({
       ...task,
+      status:
+        workflowsQuery.data?.data[0].customStatuses.find(
+          (e) => e.id === task.customStatusId
+        )?.name || "",
       customFields: task.customFields.map((customFieldTask) => {
         const customFieldMeta = customFields.find(
           (customField) => customField.id === customFieldTask.id

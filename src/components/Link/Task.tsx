@@ -5,7 +5,7 @@ import {
 } from "@deskpro/app-sdk";
 import { AnyIcon, Button, Checkbox, Input, Stack } from "@deskpro/deskpro-ui";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useDebounce from "../../hooks/debounce";
 import { useLinkTasks, useTicketCount } from "../../hooks/hooks";
@@ -14,7 +14,7 @@ import { Title } from "../../styles";
 import { FieldMapping } from "../FieldMapping/FieldMapping";
 import { HorizontalDivider } from "../HorizontalDivider/HorizontalDivider";
 import { LoadingSpinnerCenter } from "../LoadingSpinnerCenter/LoadingSpinnerCenter";
-import { getTasksByPrompt } from "../../api/api";
+import { getTasksByPrompt, getWorkflows } from "../../api/api";
 
 export const LinkTask = () => {
   const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
@@ -76,7 +76,24 @@ export const LinkTask = () => {
     }
   );
 
-  const tasks = tasksQuery.data?.data;
+  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
+    getWorkflows(client)
+  );
+
+  const tasks = useMemo(() => {
+    if (!tasksQuery.isSuccess || !workflowsQuery) return [];
+
+    const tasksNoStatus = tasksQuery.data?.data;
+
+    const workflows = workflowsQuery.data?.data[0];
+
+    return tasksNoStatus?.map((task) => ({
+      ...task,
+      status: workflows?.customStatuses?.find(
+        (status) => status.id === task.customStatusId
+      )?.name,
+    }));
+  }, [tasksQuery, workflowsQuery]);
 
   return (
     <Stack gap={10} style={{ width: "100%" }} vertical>
@@ -96,7 +113,7 @@ export const LinkTask = () => {
             <Button
               onClick={() => linkTasks(selectedTasks)}
               disabled={selectedTasks.length === 0}
-              text="Link Issue"
+              text="Link Task"
             ></Button>
             <Button
               disabled={selectedTasks.length === 0}

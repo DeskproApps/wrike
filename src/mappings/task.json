@@ -16,7 +16,7 @@
       "required": true
     },
     {
-      "name": "status",
+      "name": "customStatus",
       "label": "Status",
       "type": "dropdown"
     },

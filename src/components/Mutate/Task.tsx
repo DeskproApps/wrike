@@ -18,6 +18,7 @@ import {
   getTaskById,
   getTasks,
   getUsers,
+  getWorkflows,
 } from "../../api/api";
 import { useLinkTasks } from "../../hooks/hooks";
 import { useQueryMutationWithClient } from "../../hooks/useQueryWithClient";
@@ -26,7 +27,7 @@ import { getTaskSchema } from "../../schemas";
 import { DropdownSelect } from "../DropdownSelect/DropdownSelect";
 import { FieldMappingInput } from "../FieldMappingInput/FieldMappingInput";
 import { LoadingSpinnerCenter } from "../LoadingSpinnerCenter/LoadingSpinnerCenter";
-import { IMPORTANCES, STATUSES } from "../../utils/consts";
+import { IMPORTANCES } from "../../utils/consts";
 import { ITaskFromList, IWrikeResponse } from "../../api/types";
 
 const inputs = TaskJson.create;
@@ -56,7 +57,6 @@ export const MutateTask = ({ id }: { id?: string }) => {
 
     client.deregisterElement("editButton");
   });
-
   useDeskproAppEvents({
     async onElementEvent(id) {
       switch (id) {
@@ -90,6 +90,10 @@ export const MutateTask = ({ id }: { id?: string }) => {
     }
   );
 
+  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
+    getWorkflows(client)
+  );
+
   const tasksQuery = useQueryWithClient(["tasks"], (client) =>
     getTasks(client)
   );
@@ -109,7 +113,7 @@ export const MutateTask = ({ id }: { id?: string }) => {
 
     reset({
       title: task.title,
-      status: task.status,
+      customStatus: task.customStatusId,
       importance: task.importance,
       folder: task.parentIds[0],
       start_date: task.dates?.start,
@@ -196,11 +200,28 @@ export const MutateTask = ({ id }: { id?: string }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersQuery.isSuccess]);
 
+  const statuses = useMemo(() => {
+    if (!workflowsQuery.isSuccess) return [];
+
+    const statusesPath = workflowsQuery.data?.data[0].customStatuses;
+
+    return statusesPath.map((status) => ({
+      key: status.name,
+      value: status.id,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workflowsQuery]);
+
   const dropdownData = useMemo(() => {
-    if (!usersQuery.isSuccess || !tasksQuery.isSuccess) return {};
+    if (
+      !usersQuery.isSuccess ||
+      !tasksQuery.isSuccess ||
+      !workflowsQuery.isSuccess
+    )
+      return {};
 
     return {
-      status: STATUSES.map((status) => ({ key: status, value: status })),
+      customStatus: statuses,
       importance: IMPORTANCES.map((importance) => ({
         key: importance,
         value: importance,
@@ -226,7 +247,12 @@ export const MutateTask = ({ id }: { id?: string }) => {
         ),
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [usersQuery.isSuccess, customFieldsQuery.isSuccess, tasksQuery.isSuccess]);
+  }, [
+    usersQuery.isSuccess,
+    customFieldsQuery.isSuccess,
+    tasksQuery.isSuccess,
+    workflowsQuery.isSuccess,
+  ]);
 
   if (
     (!isEditMode && !foldersQuery.isSuccess) ||

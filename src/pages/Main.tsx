@@ -6,12 +6,12 @@ import {
   useQueryWithClient,
 } from "@deskpro/app-sdk";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLinkTasks, useTicketCount } from "../hooks/hooks";
 import { FieldMapping } from "../components/FieldMapping/FieldMapping";
 import TaskJson from "../mappings/task.json";
 import { Stack } from "@deskpro/deskpro-ui";
-import { getTasksByIds } from "../api/api";
+import { getTasksByIds, getWorkflows } from "../api/api";
 
 export const Main = () => {
   const { context } = useDeskproLatestAppContext();
@@ -20,7 +20,7 @@ export const Main = () => {
   const [taskLinketCount, setTaskLinkedCount] = useState<
     Record<string, number>
   >({});
-  const { getLinkedTasks } = useLinkTasks();
+  const { getLinkedTasks, unlinkAllTasks } = useLinkTasks();
   const { getMultipleTasksTicketCount } = useTicketCount();
 
   useInitialisedDeskproAppClient((client) => {
@@ -62,7 +62,24 @@ export const Main = () => {
     (client) => getTasksByIds(client, tasksIds),
     {
       enabled: !!tasksIds.length,
+      onError: (error: { message: string }) => {
+        try {
+          const errorData = JSON.parse(error.message);
+
+          if (errorData.status === 400) {
+            unlinkAllTasks().then(() => {
+              navigate("/redirect");
+            });
+          }
+        } catch (e) {
+          null;
+        }
+      },
     }
+  );
+
+  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
+    getWorkflows(client)
   );
 
   useEffect(() => {
@@ -81,7 +98,7 @@ export const Main = () => {
         return;
       }
 
-      setTaskIds(linkedTasks as string[]);
+      setTaskIds(linkedTasks);
 
       const tasksLinkedCount = await getMultipleTasksTicketCount(linkedTasks);
 
@@ -90,9 +107,22 @@ export const Main = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context]);
 
-  if (!tasksByIdsQuery.isSuccess || !taskLinketCount) return <LoadingSpinner />;
+  const tasks = useMemo(() => {
+    if (!tasksByIdsQuery.isSuccess || !workflowsQuery) return [];
 
-  const tasks = tasksByIdsQuery.data.data;
+    const tasksNoStatus = tasksByIdsQuery.data?.data;
+
+    const workflows = workflowsQuery.data?.data[0];
+
+    return tasksNoStatus?.map((task) => ({
+      ...task,
+      status: workflows?.customStatuses?.find(
+        (status) => status.id === task.customStatusId
+      )?.name,
+    }));
+  }, [tasksByIdsQuery, workflowsQuery]);
+
+  if (!tasksByIdsQuery.isSuccess || !taskLinketCount) return <LoadingSpinner />;
 
   return (
     <Stack vertical style={{ width: "100%" }}>

@@ -88,7 +88,7 @@ export const putColumnKeysNewObj = (data: ITask) => {
   return newObj;
 };
 
-export const addBlankTargetToLinks = (htmlString?: string): string => {
+export const mutateDangerouslySetHTML = (htmlString?: string): string => {
   if (!htmlString) {
     return "-";
   }
@@ -103,6 +103,25 @@ export const addBlankTargetToLinks = (htmlString?: string): string => {
 
   for (let i = 0; i < links.length; i++) {
     links[i].setAttribute("target", "_blank");
+  }
+
+  const images = doc.getElementsByTagName("img");
+
+  for (let i = 0; i < images.length; i++) {
+    images[i].setAttribute("style", "max-width: 100%;");
+  }
+
+  if (doc.getElementsByTagName("*").length === 3) {
+    const urlPattern = /https?:\/\/\S+/g;
+
+    // Replace URLs with anchor tags
+    const replacedText = doc
+      .getElementsByTagName("body")[0]
+      .innerHTML.replace(urlPattern, (match) => {
+        return `<a href="${match}" target="_blank">${match}</a>`;
+      });
+
+    doc.getElementsByTagName("body")[0].innerHTML = replacedText;
   }
 
   return doc.documentElement.outerHTML;

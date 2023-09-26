@@ -3,7 +3,11 @@ import { ICustomFields, ITask } from "../api/types";
 import { CustomTag } from "../components/CustomTag/CustomTag";
 import { IJson } from "../types/json";
 import { formatDate } from "../utils/dateUtils";
-import { getObjectValue, makeFirstLetterUppercase } from "../utils/utils";
+import {
+  mutateDangerouslySetHTML,
+  getObjectValue,
+  makeFirstLetterUppercase,
+} from "../utils/utils";
 
 type CustomFieldTypeField = Record<
   string,
@@ -37,10 +41,15 @@ export const useMapFieldValues = () => {
         case "description":
           value = (field as ITask)[metadataField.name as keyof ITask] ? (
             <div
+              style={{
+                fontSize: "12px",
+                maxWidth: "100%",
+                wordBreak: "break-word",
+              }}
               dangerouslySetInnerHTML={{
-                __html: (
+                __html: mutateDangerouslySetHTML(
                   (field as ITask)[metadataField.name as keyof ITask] as string
-                )?.replaceAll("<a", `<a target="_blank" `),
+                ),
               }}
             />
           ) : (
@@ -55,9 +64,10 @@ export const useMapFieldValues = () => {
           break;
 
         case "text":
-          value = makeFirstLetterUppercase(
-            (field as ITask)[metadataField.name as keyof ITask] as string
-          );
+          value =
+            makeFirstLetterUppercase(
+              (field as ITask)[metadataField.name as keyof ITask] as string
+            ) || "-";
 
           break;
 
