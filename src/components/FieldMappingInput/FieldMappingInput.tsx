@@ -42,7 +42,7 @@ export const FieldMappingInput = forwardRef(
 
     return (
       <Stack vertical style={{ width: "100%" }}>
-        {fields.map((field) => {
+        {fields.map((field, i) => {
           if (field.label === "Type") return <div />;
 
           switch (field.type) {
@@ -59,6 +59,7 @@ export const FieldMappingInput = forwardRef(
                       return value;
                     },
                   })}
+                  key={i}
                   title={field.label}
                   error={!!errors[field.name]}
                   type={field.type === "numeric" ? "number" : "text"}
@@ -73,6 +74,7 @@ export const FieldMappingInput = forwardRef(
                 <Stack
                   vertical
                   gap={4}
+                  key={i}
                   style={{
                     width: "100%",
                     color: theme.colors.grey80,
@@ -115,6 +117,7 @@ export const FieldMappingInput = forwardRef(
               return (
                 <DropdownSelect
                   title={field.label}
+                  key={i}
                   error={!!errors[field.name]}
                   required={field.required}
                   data={dropdownData[field.name]}
@@ -132,6 +135,7 @@ export const FieldMappingInput = forwardRef(
                       borderBottomColor: "red",
                     }
                   }
+                  key={i}
                   value={watch(field.name)}
                   label={field.label}
                   error={!!errors[field.name]}

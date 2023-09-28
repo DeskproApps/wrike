@@ -21,6 +21,7 @@ jest.mock("../../../src/api/api", () => {
           id: "1",
           status: "Active",
           description: "Test Description",
+          customStatusId: "1",
           importance: "High",
           scope: "Test Scope",
           title: "Test Task",
@@ -63,6 +64,20 @@ jest.mock("../../../src/api/api", () => {
     }),
     getUsers: () => ({
       data: [{ firstName: "David", lastName: "Something", id: 1 }],
+    }),
+    getWorkflows: () => ({
+      data: [
+        {
+          id: "1",
+          name: "Test Workflow",
+          customStatuses: [
+            {
+              id: "1",
+              name: "Test Status",
+            },
+          ],
+        },
+      ],
     }),
     getCustomFields: () => ({
       data: [

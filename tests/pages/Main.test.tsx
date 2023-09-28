@@ -18,11 +18,26 @@ jest.mock("../../src/api/api", () => {
         {
           id: "1",
           status: "Active",
+          customStatusId: "1",
           importance: "High",
           dates: {
             due: "2021-09-30T00:00:00Z",
           },
           linked_tickets: 1,
+        },
+      ],
+    }),
+    getWorkflows: () => ({
+      data: [
+        {
+          id: "1",
+          name: "Test Workflow",
+          customStatuses: [
+            {
+              id: "1",
+              name: "Test Status",
+            },
+          ],
         },
       ],
     }),
@@ -33,7 +48,7 @@ describe("Main", () => {
   test("Main page should show all data correctly", async () => {
     const { getByText } = renderPage();
 
-    const status = await waitFor(() => getByText(/Active/i));
+    const status = await waitFor(() => getByText(/Test Status/i));
 
     const importance = await waitFor(() => getByText(/High/i));
 

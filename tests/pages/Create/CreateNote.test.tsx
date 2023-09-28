@@ -15,6 +15,20 @@ const renderPage = () => {
 jest.mock("../../../src/api/api", () => {
   return {
     createNote: jest.fn(),
+    getWorkflows: () => ({
+      data: [
+        {
+          id: "1",
+          name: "Test Workflow",
+          customStatuses: [
+            {
+              id: "1",
+              name: "Test Status",
+            },
+          ],
+        },
+      ],
+    }),
   };
 });
 

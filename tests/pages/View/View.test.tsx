@@ -20,6 +20,7 @@ jest.mock("../../../src/api/api", () => {
           status: "Active",
           description: "Test Description",
           importance: "High",
+          customStatusId: "1",
           scope: "Test Scope",
           title: "Test Task",
           dates: {
@@ -31,6 +32,20 @@ jest.mock("../../../src/api/api", () => {
             {
               id: "1",
               value: "Test Value",
+            },
+          ],
+        },
+      ],
+    }),
+    getWorkflows: () => ({
+      data: [
+        {
+          id: "1",
+          name: "Test Workflow",
+          customStatuses: [
+            {
+              id: "1",
+              name: "Test Status",
             },
           ],
         },
@@ -63,7 +78,7 @@ describe("View", () => {
 
     const importance = await waitFor(() => getByText(/High/i));
 
-    const status = await waitFor(() => getByText(/Active/i));
+    const status = await waitFor(() => getByText(/Test Status/i));
 
     await waitFor(() => {
       [title, importance, status].forEach((el) => {
