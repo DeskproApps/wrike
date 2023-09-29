@@ -1,4 +1,4 @@
-import { IDeskproClient, proxyFetch } from "@deskpro/app-sdk";
+import { IDeskproClient, ProxyResponse, proxyFetch } from "@deskpro/app-sdk";
 import {
   ICustomFields,
   IFolderFromList,
@@ -161,5 +161,5 @@ const installedRequest = async (
   return json;
 };
 
-export const isResponseError = (response: Response) =>
+export const isResponseError = (response: ProxyResponse) =>
   response.status < 200 || response.status >= 400;

@@ -131,15 +131,17 @@ export const FieldMappingInput = forwardRef(
               return (
                 <DateField
                   style={
-                    !!errors?.[field.name] && {
-                      borderBottomColor: "red",
-                    }
+                    errors?.[field.name]
+                      ? {
+                          borderBottomColor: "red",
+                        }
+                      : undefined
                   }
                   key={i}
                   value={watch(field.name)}
                   label={field.label}
                   error={!!errors[field.name]}
-                  onChange={(e: [Date]) =>
+                  onChange={(e: Date[]) =>
                     setValue(field.name, e[0].toISOString().split("T")[0])
                   }
                 />
