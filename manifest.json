@@ -22,7 +22,7 @@
     }
   },
   "entityAssociations": {
-    "linkedTasks": {
+    "linkedWrikeTasks": {
       "entity": "ticket",
       "type": "external_id",
       "title": "Linked Wrike Tasks"
@@ -31,13 +31,11 @@
   "proxy": {
     "whitelist": [
       {
-        "url": ".*",
+        "url": "https://www.wrike.com/.*",
         "methods": [
           "GET",
           "POST",
-          "DELETE",
-          "PUT",
-          "PATCH"
+          "PUT"
         ],
         "timeout": 20
       }

@@ -85,7 +85,7 @@ export const useLinkTasks = () => {
 
       await Promise.all(
         (tasksIds || []).map((id) =>
-          client?.getEntityAssociation("linkedTasks", ticket?.id).set(id)
+          client?.getEntityAssociation("linkedWrikeTasks", ticket?.id).set(id)
         )
       );
 
@@ -102,7 +102,9 @@ export const useLinkTasks = () => {
   const getLinkedTasks = useCallback(async () => {
     if (!client || !ticket) return;
 
-    return await client.getEntityAssociation("linkedTasks", ticket?.id).list();
+    return await client
+      .getEntityAssociation("linkedWrikeTasks", ticket?.id)
+      .list();
   }, [client, ticket]);
 
   const unlinkTask = useCallback(
@@ -110,7 +112,7 @@ export const useLinkTasks = () => {
       if (!client || !ticket) return;
 
       await client
-        .getEntityAssociation("linkedTasks", ticket?.id)
+        .getEntityAssociation("linkedWrikeTasks", ticket?.id)
         .delete(taskId);
 
       await decrementTaskTicketCount(taskId);
@@ -126,7 +128,9 @@ export const useLinkTasks = () => {
 
     await Promise.all(
       (linkedTasks ?? []).map((task) =>
-        client?.getEntityAssociation("linkedTasks", ticket?.id).delete(task)
+        client
+          ?.getEntityAssociation("linkedWrikeTasks", ticket?.id)
+          .delete(task)
       )
     );
 
