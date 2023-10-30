@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/wrike",
   "title": "Wrike",
   "description": "Wrike integration for Deskpro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
