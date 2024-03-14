@@ -1,4 +1,4 @@
-import { IDeskproClient, ProxyResponse, proxyFetch } from "@deskpro/app-sdk";
+import { IDeskproClient, ProxyResponse, proxyFetch, V2ProxyRequestInit } from "@deskpro/app-sdk";
 import {
   ICustomFields,
   IFolderFromList,
@@ -129,7 +129,7 @@ const installedRequest = async (
 ) => {
   const fetch = await proxyFetch(client);
 
-  const options: RequestInit = {
+  const options: V2ProxyRequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",

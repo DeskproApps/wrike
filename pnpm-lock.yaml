@@ -9,11 +9,11 @@ dependencies:
     specifier: 4.3.2
     version: 4.3.2
   '@deskpro/app-sdk':
-    specifier: 3.0.5
-    version: 3.0.5(@babel/core@7.22.11)(@deskpro/deskpro-ui@7.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(typescript@4.9.5)
+    specifier: ^3.0.18
+    version: 3.0.18(@babel/core@7.22.11)(@deskpro/deskpro-ui@7.18.4)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(typescript@4.9.5)
   '@deskpro/deskpro-ui':
-    specifier: ^7.1.0
-    version: 7.4.0(@types/web@0.0.86)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.11)
+    specifier: ^7.18.4
+    version: 7.18.4(@types/web@0.0.86)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.11)
   '@fortawesome/free-solid-svg-icons':
     specifier: ^6.4.2
     version: 6.4.2
@@ -605,8 +605,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@deskpro/app-sdk@3.0.5(@babel/core@7.22.11)(@deskpro/deskpro-ui@7.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(typescript@4.9.5):
-    resolution: {integrity: sha512-0o9NS8Sh7hUnmYqgwvoqO+5I/mxPBBn8Br+hEr0KyT76MmrgkmUJ4966qu/pHtHBkv6lKD97VH6QliZXyK8n1w==}
+  /@deskpro/app-sdk@3.0.18(@babel/core@7.22.11)(@deskpro/deskpro-ui@7.18.4)(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-hjmXu7Jz6rYeckJsVa7Hk4a2VnF2vhknluTpqtcwrphwESe0xIYMv2yMueObt6oPqA3yUAGHhjQ+A4UHNuFCQw==}
     engines: {node: ^16.0.0}
     peerDependencies:
       '@deskpro/deskpro-ui': ^7
@@ -615,7 +615,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@deskpro/deskpro-ui': 7.4.0(@types/web@0.0.86)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.11)
+      '@deskpro/deskpro-ui': 7.18.4(@types/web@0.0.86)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.11)
       '@fortawesome/fontawesome-svg-core': 6.4.2
       '@fortawesome/free-brands-svg-icons': 6.4.2
       '@fortawesome/free-regular-svg-icons': 6.4.2
@@ -647,8 +647,8 @@ packages:
       - typescript
     dev: false
 
-  /@deskpro/deskpro-ui@7.4.0(@types/web@0.0.86)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.11):
-    resolution: {integrity: sha512-hanWyUHGogdrXOn5/dHE8kWEpKBzVBrKSRV4iCQOWcpzSjxmVEq1CqUwrxtM8ifrFIIKY01yIY+cet5/qultjw==}
+  /@deskpro/deskpro-ui@7.18.4(@types/web@0.0.86)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.11):
+    resolution: {integrity: sha512-Muk20cybVB/tGhekxf2swuE3YxHc7Jk1u+SDscuNg6LD59p6s1mYFC1HJPCv1M22CM/KFWe8m/5n5DIules8jg==}
     engines: {node: ^16.0.0}
     peerDependencies:
       '@typescript/lib-dom': npm:@types/web
@@ -3107,7 +3107,7 @@ packages:
       react: 18.2.0
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: false
 
   /framer-motion@6.5.1(react-dom@18.2.0)(react@18.2.0):
@@ -3123,7 +3123,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       style-value-types: 5.0.0
-      tslib: 2.4.1
+      tslib: 2.6.2
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
     dev: false
