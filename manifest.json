@@ -7,12 +7,17 @@
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
-  "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
+  "targets": [
+    {
+      "target": "ticket_sidebar",
+      "entrypoint": "index.html"
+    }
+  ],
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
   "settings": {
     "access_token": {
       "title": "Access Token",
-      "description": "Example backend only setting",
+      "description": "You can get the Access Token by following the Setup guide",
       "type": "string",
       "isRequired": true,
       "isBackendOnly": true
@@ -29,7 +34,11 @@
     "whitelist": [
       {
         "url": "https://www.wrike.com/.*",
-        "methods": ["GET", "POST", "PUT"],
+        "methods": [
+          "GET",
+          "POST",
+          "PUT"
+        ],
         "timeout": 20
       }
     ]
