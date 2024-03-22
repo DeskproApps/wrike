@@ -2,17 +2,12 @@
   "name": "@deskpro-apps/wrike",
   "title": "Wrike",
   "description": "Wrike integration for Deskpro",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/wrike",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
-  "targets": [
-    {
-      "target": "ticket_sidebar",
-      "entrypoint": "index.html"
-    }
-  ],
+  "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
   "settings": {
     "access_token": {
@@ -34,11 +29,7 @@
     "whitelist": [
       {
         "url": "https://www.wrike.com/.*",
-        "methods": [
-          "GET",
-          "POST",
-          "PUT"
-        ],
+        "methods": ["GET", "POST", "PUT"],
         "timeout": 20
       }
     ]
