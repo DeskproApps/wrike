@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/wrike",
   "title": "Wrike",
   "description": "Wrike integration for Deskpro",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/wrike",
   "scope": "agent",
   "isSingleInstall": false,
