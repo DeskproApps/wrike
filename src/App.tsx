@@ -1,27 +1,23 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import {
-  QueryClientProvider,
-  QueryErrorResetBoundary,
-} from "@tanstack/react-query";
+import { Suspense } from "react";
+import { QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { HashRouter, Route, Routes } from "react-router-dom";
+import { LoadingSpinner } from "@deskpro/app-sdk";
+import { query } from "./utils/query";
 import { ErrorFallback } from "./components/ErrorFallback/ErrorFallback";
 import { Main } from "./pages/Main";
-
-import "flatpickr/dist/themes/light.css";
-import "simplebar/dist/simplebar.min.css";
-import "tippy.js/dist/tippy.css";
-
-import { LoadingSpinner } from "@deskpro/app-sdk";
-import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
-import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
-import { Suspense } from "react";
 import { Redirect } from "./components/Redirect/Redirect";
 import { CreateNote } from "./pages/Create/Note";
 import { FindOrCreate } from "./pages/FindOrCreate/FindOrCreate";
 import { ViewTask } from "./pages/View/Task";
-import { query } from "./utils/query";
 import { EditTask } from "./pages/Edit/Task";
+import { VerifySettingsPage } from "./pages/VerifySettingsPage";
+
+import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
+import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
+import "flatpickr/dist/themes/light.css";
+import "simplebar/dist/simplebar.min.css";
+import "tippy.js/dist/tippy.css";
 
 function App() {
   return (
@@ -32,20 +28,13 @@ function App() {
             {({ reset }) => (
               <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
                 <Routes>
-                  <Route path="/">
-                    <Route path="create">
-                      <Route path="note/:taskId" element={<CreateNote />} />
-                    </Route>
-                    <Route path="edit">
-                      <Route path="task/:taskId" element={<EditTask />} />
-                    </Route>
-                    <Route path="/findOrCreate" element={<FindOrCreate />} />
-                    <Route path="/redirect" element={<Redirect />} />
-                    <Route index element={<Main />} />
-                    <Route path="view">
-                      <Route path="task/:taskId" element={<ViewTask />} />
-                    </Route>
-                  </Route>
+                  <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
+                  <Route path="/findOrCreate" element={<FindOrCreate />} />
+                  <Route path="/create/note/:taskId" element={<CreateNote />} />
+                  <Route path="/edit/task/:taskId" element={<EditTask />} />
+                  <Route path="/view/task/:taskId" element={<ViewTask />} />
+                  <Route path="/redirect" element={<Redirect />} />
+                  <Route index element={<Main />} />
                 </Routes>
               </ErrorBoundary>
             )}

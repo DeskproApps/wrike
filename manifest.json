@@ -1,7 +1,7 @@
 {
   "name": "@deskpro-apps/wrike",
   "title": "Wrike",
-  "description": "Wrike integration for Deskpro",
+  "description": "Connect your Wrike items to tickets in Deskpro to make them easy to view and update",
   "version": "1.0.10",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/wrike",
   "scope": "agent",
@@ -15,7 +15,16 @@
       "description": "You can get the Access Token by following the Setup guide",
       "type": "string",
       "isRequired": true,
-      "isBackendOnly": true
+      "isBackendOnly": true,
+      "order": 20
+    },
+    "verify_settings": {
+      "title": "",
+      "type": "app_embedded",
+      "options": { "entrypoint": "#/admin/verify_settings" },
+      "isRequired": false,
+      "isBackendOnly": true,
+      "order": 20
     }
   },
   "entityAssociations": {

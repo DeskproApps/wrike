@@ -1,4 +1,10 @@
-import { IDeskproClient, ProxyResponse, proxyFetch, V2ProxyRequestInit } from "@deskpro/app-sdk";
+import {
+  proxyFetch,
+  ProxyResponse,
+  IDeskproClient,
+  V2ProxyRequestInit,
+  adminGenericProxyFetch,
+} from "@deskpro/app-sdk";
 import {
   ICustomFields,
   IFolderFromList,
@@ -8,7 +14,9 @@ import {
   IWorkflow,
   IWrikeResponse,
   RequestMethod,
+  IAccount,
 } from "./types";
+import type { Settings } from "../types";
 
 export const getCustomFields = async (
   client: IDeskproClient
@@ -119,6 +127,40 @@ export const getFolders = async (client: IDeskproClient) => {
   return {
     data: folderData.data.filter((folder) => folder.title !== "Recycle Bin"),
   };
+};
+
+export const getAccounts = async (
+  client: IDeskproClient,
+  settings: Settings,
+): Promise<IWrikeResponse<IAccount[]>> => {
+  const fetch = await adminGenericProxyFetch(client);
+  const response = await fetch(`https://www.wrike.com/api/v4/account`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${settings?.access_token}`,
+    },
+  });
+
+  if (isResponseError(response)) {
+    throw new Error(
+      JSON.stringify({
+        status: response.status,
+        message: await response.text(),
+      })
+    );
+  }
+
+  const json = await response.json();
+
+  if (json.error) {
+    throw new Error(JSON.stringify({
+      error: json.error,
+      description: json.errorDescription,
+    }));
+  }
+
+  return json;
 };
 
 const installedRequest = async (

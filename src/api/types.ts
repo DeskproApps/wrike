@@ -32,9 +32,19 @@ export interface INote {
   taskId: string;
 }
 
+export interface IAccount {
+  createdDate: string; // "2024-08-05T08:42:17Z"
+  dateFormat: string;
+  firstDayOfWeek: string;
+  id: string;
+  joinedDate: string; // "2024-08-05T08:42:17Z"
+  name: string;
+  workDays: string[];
+}
+
 export interface ICustomFields {
   id: string;
-  accountId: string;
+  accountId: IAccount["id"];
   title: string;
   type: string;
   spaceId: string;
@@ -78,7 +88,7 @@ export interface IUser {
 }
 
 export interface Profile {
-  accountId: string;
+  accountId: IAccount["id"];
   email: string;
   role: string;
   external: boolean;
@@ -95,7 +105,7 @@ export interface IFolderFromList {
 
 export interface ITask {
   id: string;
-  accountId: string;
+  accountId: IAccount["id"];
   title: string;
   description: string;
   briefDescription: string;
@@ -138,7 +148,7 @@ export interface Dates {
 
 export interface ITaskFromList {
   id: string;
-  accountId: string;
+  accountId: IAccount["id"];
   title: string;
   status: string;
   importance: string;
