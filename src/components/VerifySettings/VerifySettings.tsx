@@ -8,7 +8,7 @@ export type Props = {
   isLoading: boolean;
   settings: Settings;
   error: Maybe<string>;
-  accounts: Maybe<Array<IAccount["name"]>>;
+  accounts: Array<IAccount["name"]>;
   onVerifySettings: () => void;
 };
 
@@ -28,13 +28,11 @@ const VerifySettings: FC<Props> = ({
         loading={isLoading}
         disabled={!settings?.access_token || isLoading}
       />
-      {!accounts
-        ? <Invalid type="p1">{error}</Invalid> || ""
-        : (
-          <Secondary>
-            Verified as &lt;{accounts.join(", ")}&gt;
-          </Secondary>
-        )
+      {(accounts.length > 0)
+        ? <Secondary>Verified as &lt;{accounts.join(", ")}&gt;</Secondary>
+        : error
+        ? <Invalid type="p1">{error}</Invalid>
+        : ""
       }
     </Stack>
   );

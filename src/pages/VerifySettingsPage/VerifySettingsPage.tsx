@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { useDeskproAppEvents, useDeskproAppClient } from "@deskpro/app-sdk";
 import { getAccounts } from "../../api/api";
-// import { getError } from "../../utils";
 import { VerifySettings } from "../../components/VerifySettings";
 import type { FC } from "react";
 import type { Maybe, Settings } from "../../types";
@@ -29,7 +28,7 @@ const getError = (err: Maybe<Error>): string => {
 
 const VerifySettingsPage: FC = () => {
   const { client } = useDeskproAppClient();
-  const [accounts, setAccounts] = useState<Maybe<Array<IAccount["name"]>>>(null);
+  const [accounts, setAccounts] = useState<Array<IAccount["name"]>>([]);
   const [settings, setSettings] = useState<Settings>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Maybe<string>>(null);
@@ -41,13 +40,13 @@ const VerifySettingsPage: FC = () => {
 
     setIsLoading(true);
     setError("");
-    setAccounts(null);
+    setAccounts([]);
 
     return getAccounts(client, settings)
       .then((res) => {
         const accounts = (Array.isArray(res.data) && res.data?.length > 0)
           ? res.data.map((account) => account.name)
-          : null;
+          : [];
         setAccounts(accounts);
       })
       .catch((err) => setError(getError(err)))
