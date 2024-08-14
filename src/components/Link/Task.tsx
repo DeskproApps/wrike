@@ -2,6 +2,7 @@ import {
   useDeskproAppEvents,
   useInitialisedDeskproAppClient,
   useQueryWithClient,
+  useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { AnyIcon, Button, Checkbox, Input, Stack } from "@deskpro/deskpro-ui";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +27,7 @@ export const LinkTask = () => {
   const { getLinkedTasks, linkTasks } = useLinkTasks();
   const { getMultipleTasksTicketCount } = useTicketCount();
   const navigate = useNavigate();
+  const { context } = useDeskproLatestAppContext();
 
   const { debouncedValue: debouncedText } = useDebounce(prompt, 300);
 
@@ -50,9 +52,9 @@ export const LinkTask = () => {
 
   const tasksQuery = useQueryWithClient(
     ["getTasks", debouncedText],
-    (client) => getTasksByPrompt(client, debouncedText),
+    (client) => getTasksByPrompt(client, debouncedText, context?.settings),
     {
-      enabled: debouncedText.length > 2,
+      enabled: debouncedText.length > 2 && Boolean(context?.settings),
       onSuccess: async (data) => {
         const linkedTasksFunc = await getLinkedTasks();
 
@@ -76,8 +78,10 @@ export const LinkTask = () => {
     }
   );
 
-  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
-    getWorkflows(client)
+  const workflowsQuery = useQueryWithClient(
+    ["workflows"],
+    (client) => getWorkflows(client, context?.settings),
+    { enabled: Boolean(context?.settings) },
   );
 
   const tasks = useMemo(() => {

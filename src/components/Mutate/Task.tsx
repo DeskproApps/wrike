@@ -2,6 +2,7 @@ import {
   useDeskproAppEvents,
   useInitialisedDeskproAppClient,
   useQueryWithClient,
+  useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { Button, Stack } from "@deskpro/deskpro-ui";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,6 +35,7 @@ const inputs = TaskJson.create;
 
 export const MutateTask = ({ id }: { id?: string }) => {
   const navigate = useNavigate();
+  const { context } = useDeskproLatestAppContext();
   const [schema, setSchema] = useState<ZodTypeAny | null>(null);
   const { linkTasks } = useLinkTasks();
 
@@ -69,41 +71,49 @@ export const MutateTask = ({ id }: { id?: string }) => {
   });
 
   const submitMutation = useQueryMutationWithClient((client, data) => {
+    if (!context?.settings) {
+      return Promise.resolve();
+    }
+
     return isEditMode
-      ? editTask(client, id, data)
-      : createTask(client, watch("folder"), data); //change
+      ? editTask(client, id, data, context?.settings)
+      : createTask(client, watch("folder"), data, context?.settings); //change
   });
 
   const taskQuery = useQueryWithClient(
     ["task", id as string],
-    (client) => getTaskById(client, id as string),
-    {
-      enabled: !!isEditMode,
-    }
+    (client) => getTaskById(client, id as string, context?.settings),
+    { enabled: isEditMode && Boolean(context?.settings) }
   );
 
   const foldersQuery = useQueryWithClient(
     ["folders"],
-    (client) => getFolders(client),
-    {
-      enabled: !isEditMode,
-    }
+    (client) => getFolders(client, context?.settings),
+    { enabled: !isEditMode && Boolean(context?.settings) }
   );
 
-  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
-    getWorkflows(client)
+  const workflowsQuery = useQueryWithClient(
+    ["workflows"],
+    (client) => getWorkflows(client, context?.settings),
+    { enabled: Boolean(context?.settings) },
   );
 
-  const tasksQuery = useQueryWithClient(["tasks"], (client) =>
-    getTasks(client)
+  const tasksQuery = useQueryWithClient(
+    ["tasks"],
+    (client) => getTasks(client, context?.settings),
+    { enabled: Boolean(context?.settings) },
   );
 
-  const usersQuery = useQueryWithClient(["users"], (client) =>
-    getUsers(client)
+  const usersQuery = useQueryWithClient(
+    ["users"],
+    (client) => getUsers(client, context?.settings),
+    { enabled: Boolean(context?.settings) },
   );
 
-  const customFieldsQuery = useQueryWithClient(["customFields"], (client) =>
-    getCustomFields(client)
+  const customFieldsQuery = useQueryWithClient(
+    ["customFields"],
+    (client) => getCustomFields(client, context?.settings),
+    { enabled: Boolean(context?.settings) },
   );
 
   useEffect(() => {
@@ -203,7 +213,7 @@ export const MutateTask = ({ id }: { id?: string }) => {
   const statuses = useMemo(() => {
     if (!workflowsQuery.isSuccess) return [];
 
-    const statusesPath = workflowsQuery.data?.data[0].customStatuses;
+    const statusesPath = workflowsQuery.data?.data[0]?.customStatuses || [];
 
     return statusesPath.map((status) => ({
       key: status.name,

@@ -1,5 +1,14 @@
+import type { Settings as ContextSettings } from "../types";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
+
+export type RequestParams = {
+  endpoint: string,
+  method: RequestMethod,
+  data?: unknown,
+  settings?: ContextSettings,
+};
 
 export type IWrikeResponse<T> = {
   kind: string;
@@ -10,7 +19,7 @@ export interface IWorkflow {
   name: string;
   standard: boolean;
   hidden: boolean;
-  customStatuses: CustomStatus[];
+  customStatuses?: CustomStatus[];
 }
 
 export interface CustomStatus {

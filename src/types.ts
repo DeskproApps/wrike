@@ -1,7 +1,5 @@
-/** Common types */
-export type Maybe<T> = T | undefined | null;
-
 /** Deskpro types */
 export type Settings = {
+  instance_url?: string;
   access_token?: string;
 };

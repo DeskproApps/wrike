@@ -1,9 +1,10 @@
 import {
   useDeskproAppClient,
   useDeskproAppEvents,
+  useDeskproLatestAppContext,
   useInitialisedDeskproAppClient,
 } from "@deskpro/app-sdk";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputWithTitle } from "../../components/InputWithTitle/InputWithTitle";
 import { Button, P8, Stack } from "@deskpro/deskpro-ui";
@@ -11,12 +12,32 @@ import { createNote } from "../../api/api";
 
 export const CreateNote = () => {
   const { client } = useDeskproAppClient();
+  const { context } = useDeskproLatestAppContext();
   const navigate = useNavigate();
   const { taskId } = useParams();
 
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+
+  const onCreate = useCallback(() => {
+    if (!client || !context?.settings || !taskId) {
+      return;
+    }
+
+    setSubmitting(true);
+    setError(null);
+
+    if (note.length === 0) {
+      setSubmitting(false);
+      setError("Note cannot be empty");
+      return;
+    }
+
+    return createNote(client, taskId, note, context.settings)
+      .then(() => navigate(-1))
+      .finally(() => setSubmitting(false));
+  }, [client, context?.settings, navigate, taskId, note]);
 
   useInitialisedDeskproAppClient((client) => {
     client.setTitle("Create Update");
@@ -45,21 +66,7 @@ export const CreateNote = () => {
       <Stack justify="space-between" style={{ width: "100%" }}>
         <Button
           data-testid="button-submit"
-          onClick={async () => {
-            if (!client) return;
-
-            setSubmitting(true);
-
-            if (note.length === 0) {
-              setError("Note cannot be empty");
-
-              return;
-            }
-
-            await createNote(client, taskId as string, note);
-
-            navigate(-1);
-          }}
+          onClick={onCreate}
           loading={submitting}
           text={"Create"}
           disabled={submitting}

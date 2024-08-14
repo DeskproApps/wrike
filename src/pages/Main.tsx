@@ -59,9 +59,9 @@ export const Main = () => {
   });
   const tasksByIdsQuery = useQueryWithClient(
     ["getTasksById"],
-    (client) => getTasksByIds(client, tasksIds),
+    (client) => getTasksByIds(client, tasksIds, context?.settings),
     {
-      enabled: !!tasksIds.length,
+      enabled: !!tasksIds.length && Boolean(context?.settings),
       onError: (error: { message: string }) => {
         try {
           const errorData = JSON.parse(error.message);
@@ -78,8 +78,10 @@ export const Main = () => {
     }
   );
 
-  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
-    getWorkflows(client)
+  const workflowsQuery = useQueryWithClient(
+    ["workflows"],
+    (client) => getWorkflows(client, context?.settings),
+    { enabled: Boolean(context?.settings) }
   );
 
   useEffect(() => {

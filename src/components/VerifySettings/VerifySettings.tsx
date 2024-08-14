@@ -1,13 +1,13 @@
 import { Stack } from "@deskpro/deskpro-ui";
 import { Button, Invalid, Secondary } from "../common";
 import type { FC } from "react";
-import type { Maybe, Settings } from "../../types";
+import type { Settings } from "../../types";
 import type { IAccount } from "../../api/types";
 
 export type Props = {
   isLoading: boolean;
   settings: Settings;
-  error: Maybe<string>;
+  error: string|null;
   accounts: Array<IAccount["name"]>;
   onVerifySettings: () => void;
 };

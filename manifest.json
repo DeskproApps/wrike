@@ -10,6 +10,15 @@
   "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
   "settings": {
+    "instance_url": {
+      "title": "Host",
+      "description": "Enter the \"Host\" value (e.g., https://app-eu.wrike.com or your appropriate instance). Or leave the field blank to default to https://www.wrike.com",
+      "default": "https://www.wrike.com",
+      "type": "string",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 10
+    },
     "access_token": {
       "title": "Access Token",
       "description": "You can get the Access Token by following the Setup guide",
@@ -24,7 +33,7 @@
       "options": { "entrypoint": "#/admin/verify_settings" },
       "isRequired": false,
       "isBackendOnly": true,
-      "order": 20
+      "order": 30
     }
   },
   "entityAssociations": {
@@ -37,7 +46,7 @@
   "proxy": {
     "whitelist": [
       {
-        "url": "https://www.wrike.com/.*",
+        "url": "https://.*",
         "methods": ["GET", "POST", "PUT"],
         "timeout": 20
       }

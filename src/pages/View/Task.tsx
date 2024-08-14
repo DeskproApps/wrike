@@ -3,6 +3,7 @@ import {
   useDeskproAppEvents,
   useInitialisedDeskproAppClient,
   useQueryWithClient,
+  useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { Stack } from "@deskpro/deskpro-ui";
 import { useEffect, useState } from "react";
@@ -21,6 +22,7 @@ import { CustomFieldTask, ITask } from "../../api/types";
 
 export const ViewTask = () => {
   const { taskId } = useParams();
+  const { context } = useDeskproLatestAppContext();
   const { unlinkTask } = useLinkTasks();
   const navigate = useNavigate();
   const [task, setTask] = useState<ITask | null>(null);
@@ -37,6 +39,11 @@ export const ViewTask = () => {
 
     client.registerElement("homeButton", {
       type: "home_button",
+    });
+
+    client.registerElement("menuButton", {
+      type: "menu",
+      items: [{ title: "Unlink task" }]
     });
 
     client.deregisterElement("plusButton");
@@ -74,30 +81,26 @@ export const ViewTask = () => {
 
   const tasksByIdQuery = useQueryWithClient(
     ["getTaskById", taskId as string],
-    (client) => getTaskById(client, taskId as string),
-    {
-      enabled: !!taskId,
-    }
+    (client) => getTaskById(client, taskId as string, context?.settings),
+    { enabled: Boolean(taskId) && Boolean(context?.settings) }
   );
 
   const notesByTaskIdQuery = useQueryWithClient(
     ["notesByTaskId", taskId as string],
-    (client) => getNotesByTaskId(client, taskId as string),
-    {
-      enabled: !!taskId,
-    }
+    (client) => getNotesByTaskId(client, taskId as string, context?.settings),
+    { enabled: Boolean(taskId) && Boolean(context?.settings) }
   );
 
   const customFieldsQuery = useQueryWithClient(
     ["customFields"],
-    (client) => getCustomFields(client),
-    {
-      enabled: !!taskId,
-    }
+    (client) => getCustomFields(client, context?.settings),
+    { enabled: Boolean(taskId) && Boolean(context?.settings) }
   );
 
-  const workflowsQuery = useQueryWithClient(["workflows"], (client) =>
-    getWorkflows(client)
+  const workflowsQuery = useQueryWithClient(
+    ["workflows"],
+    (client) => getWorkflows(client, context?.settings),
+    { enabled: Boolean(context?.settings) },
   );
 
   useEffect(() => {
@@ -110,7 +113,7 @@ export const ViewTask = () => {
     setTask({
       ...task,
       status:
-        workflowsQuery.data?.data[0].customStatuses.find(
+        (workflowsQuery.data?.data[0]?.customStatuses || []).find(
           (e) => e.id === task.customStatusId
         )?.name || "",
       customFields: task.customFields.map((customFieldTask) => {
