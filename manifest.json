@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/wrike",
   "title": "Wrike",
   "description": "Connect your Wrike items to tickets in Deskpro to make them easy to view and update",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/wrike",
   "scope": "agent",
   "isSingleInstall": false,
@@ -45,11 +45,7 @@
   },
   "proxy": {
     "whitelist": [
-      {
-        "url": "https://.*",
-        "methods": ["GET", "POST", "PUT"],
-        "timeout": 20
-      }
+      { "url": "https://.*", "methods": ["GET", "POST", "PUT"], "timeout": 20 }
     ]
   }
 }
