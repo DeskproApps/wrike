@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Avatar, H1, H2, Stack } from "@deskpro/deskpro-ui";
 import styled from "styled-components";
 import { INote } from "../../api/types";
-import { useQueryWithClient } from "@deskpro/app-sdk";
+import { useQueryWithClient, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { getUsersByIds } from "../../api/api";
 import { useMemo } from "react";
 import { mutateDangerouslySetHTML } from "../../utils/utils";
@@ -28,17 +28,17 @@ const HTMLDiv = styled.div`
 
 export const Notes = ({ notes, id }: Props) => {
   const navigate = useNavigate();
+  const { context } = useDeskproLatestAppContext();
 
   const userIdsStr = useMemo(
     () => notes.map((e) => e.authorId).reduce((a, c) => a + c, ""),
     [notes]
   );
 
-  const usersQuery = useQueryWithClient(["users", userIdsStr], (client) =>
-    getUsersByIds(
-      client,
-      notes.map((e) => e.authorId)
-    )
+  const usersQuery = useQueryWithClient(
+    ["users", userIdsStr],
+    (client) => getUsersByIds(client, notes.map((e) => e.authorId), context?.settings),
+    { enabled: Boolean(context?.settings) },
   );
 
   const users = usersQuery.data?.data;

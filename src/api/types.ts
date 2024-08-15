@@ -1,5 +1,14 @@
+import type { Settings as ContextSettings } from "../types";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
+
+export type RequestParams = {
+  endpoint: string,
+  method: RequestMethod,
+  data?: unknown,
+  settings?: ContextSettings,
+};
 
 export type IWrikeResponse<T> = {
   kind: string;
@@ -10,7 +19,7 @@ export interface IWorkflow {
   name: string;
   standard: boolean;
   hidden: boolean;
-  customStatuses: CustomStatus[];
+  customStatuses?: CustomStatus[];
 }
 
 export interface CustomStatus {
@@ -32,9 +41,19 @@ export interface INote {
   taskId: string;
 }
 
+export interface IAccount {
+  createdDate: string; // "2024-08-05T08:42:17Z"
+  dateFormat: string;
+  firstDayOfWeek: string;
+  id: string;
+  joinedDate: string; // "2024-08-05T08:42:17Z"
+  name: string;
+  workDays: string[];
+}
+
 export interface ICustomFields {
   id: string;
-  accountId: string;
+  accountId: IAccount["id"];
   title: string;
   type: string;
   spaceId: string;
@@ -78,7 +97,7 @@ export interface IUser {
 }
 
 export interface Profile {
-  accountId: string;
+  accountId: IAccount["id"];
   email: string;
   role: string;
   external: boolean;
@@ -95,7 +114,7 @@ export interface IFolderFromList {
 
 export interface ITask {
   id: string;
-  accountId: string;
+  accountId: IAccount["id"];
   title: string;
   description: string;
   briefDescription: string;
@@ -138,7 +157,7 @@ export interface Dates {
 
 export interface ITaskFromList {
   id: string;
-  accountId: string;
+  accountId: IAccount["id"];
   title: string;
   status: string;
   importance: string;

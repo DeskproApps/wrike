@@ -2,4 +2,4 @@
 
 # Wrike App
 
-Elevate your project and task management to new heights with Wrike
+Connect your Wrike items to tickets in Deskpro to make them easy to view and update

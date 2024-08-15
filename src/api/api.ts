@@ -1,4 +1,11 @@
-import { IDeskproClient, ProxyResponse, proxyFetch, V2ProxyRequestInit } from "@deskpro/app-sdk";
+import {
+  proxyFetch,
+  ProxyResponse,
+  IDeskproClient,
+  V2ProxyRequestInit,
+  adminGenericProxyFetch,
+} from "@deskpro/app-sdk";
+import { BASE_URL } from "../constants";
 import {
   ICustomFields,
   IFolderFromList,
@@ -7,133 +14,192 @@ import {
   IUser,
   IWorkflow,
   IWrikeResponse,
-  RequestMethod,
+  IAccount,
+  RequestParams,
 } from "./types";
+import type { Settings } from "../types";
 
 export const getCustomFields = async (
-  client: IDeskproClient
+  client: IDeskproClient,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<ICustomFields[]>> =>
-  installedRequest(client, `api/v4/customfields`, "GET");
+  request(client, { endpoint: `api/v4/customfields`, method: "GET", settings });
 
 export const createNote = async (
   client: IDeskproClient,
   taskId: string,
-  comment: string
+  comment: string,
+  settings: RequestParams["settings"],
 ) =>
-  installedRequest(client, `api/v4/tasks/${taskId}/comments`, "POST", {
-    text: comment,
+  request(client, {
+    endpoint: `api/v4/tasks/${taskId}/comments`,
+    method: "POST",
+    data: { text: comment },
+    settings,
   });
 
 export const getNotesByTaskId = async (
   client: IDeskproClient,
-  taskId: string
-) => installedRequest(client, `api/v4/tasks/${taskId}/comments`, "GET");
+  taskId: string,
+  settings: RequestParams["settings"],
+) => request(client, {
+  endpoint: `api/v4/tasks/${taskId}/comments`,
+  method: "GET",
+  settings,
+});
 
 export const editTask = async (
   client: IDeskproClient,
   taskId: string,
-  data: unknown
-) => installedRequest(client, `api/v4/tasks/${taskId}`, "PUT", data);
+  data: unknown,
+  settings: RequestParams["settings"],
+) => request(client, {
+  endpoint: `api/v4/tasks/${taskId}`,
+  method: "PUT",
+  data,
+  settings,
+});
 
 export const createTask = async (
   client: IDeskproClient,
   folderId: string,
-  data: unknown
+  data: unknown,
+  settings: RequestParams["settings"],
 ) => {
-  return installedRequest(
-    client,
-    `api/v4/folders/${folderId}/tasks`,
-    "POST",
-    data
-  );
+  return request(client, {
+    endpoint: `api/v4/folders/${folderId}/tasks`,
+    method: "POST",
+    data,
+    settings,
+  });
 };
 
 export const getUsersByIds = async (
   client: IDeskproClient,
-  ids: string[]
+  ids: string[],
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<IUser[]>> =>
-  installedRequest(client, `api/v4/contacts/${ids.join(",")}`, "GET");
+  request(client, {
+    endpoint: `api/v4/contacts/${ids.join(",")}`,
+    method: "GET",
+    settings,
+  });
 
 export const getUserById = async (
   client: IDeskproClient,
-  id: string
+  id: string,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<IUser[]>> =>
-  installedRequest(client, `api/v4/contacts/${id}`, "GET");
+  request(client, { endpoint: `api/v4/contacts/${id}`, method: "GET", settings });
 
 export const getUsers = async (
-  client: IDeskproClient
+  client: IDeskproClient,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<IUser[]>> =>
-  installedRequest(client, `api/v4/contacts`, "GET");
+  request(client, { endpoint: `api/v4/contacts`, method: "GET", settings });
 
 export const getTasksByPrompt = async (
   client: IDeskproClient,
-  prompt: string
+  prompt: string,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<ITaskFromList[]>> =>
-  installedRequest(
-    client,
-    `api/v4/tasks?title=${encodeURIComponent(
+  request(client, {
+    endpoint: `api/v4/tasks?title=${encodeURIComponent(
       prompt
     )}&descendants=true&pageSize=1000`,
-    "GET"
-  );
+    method: "GET",
+    settings,
+  });
 
 export const getWorkflows = async (
-  client: IDeskproClient
+  client: IDeskproClient,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<IWorkflow[]>> =>
-  installedRequest(client, `api/v4/workflows`, "GET");
+  request(client, { endpoint: `api/v4/workflows`, method: "GET", settings });
 
 export const getTasks = async (
-  client: IDeskproClient
+  client: IDeskproClient,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<ITaskFromList[]>> =>
-  installedRequest(
-    client,
-    `api/v4/tasks?descendants=true&pageSize=1000`,
-    "GET"
-  );
+  request(client, {
+    endpoint: `api/v4/tasks?descendants=true&pageSize=1000`,
+    method: "GET",
+    settings,
+  });
 
 export const getTasksByIds = async (
   client: IDeskproClient,
-  ids: string[]
+  ids: string[],
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<ITaskFromList[]>> =>
-  installedRequest(client, `api/v4/tasks/${ids.join(",")}`, "GET");
+  request(client, {
+    endpoint: `api/v4/tasks/${ids.join(",")}`,
+    method: "GET",
+    settings,
+  });
 
 export const getTaskById = async (
   client: IDeskproClient,
-  taskId: string
+  taskId: string,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<ITask[]>> =>
-  installedRequest(client, `api/v4/tasks/${taskId}`, "GET");
+  request(client, {
+    endpoint: `api/v4/tasks/${taskId}`,
+    method: "GET",
+    settings,
+  });
 
 export const getTasksByFolderId = async (
   client: IDeskproClient,
-  folderId: string
+  folderId: string,
+  settings: RequestParams["settings"],
 ): Promise<IWrikeResponse<ITask[]>> =>
-  installedRequest(client, `api/v4/folders/${folderId}/tasks`, "GET");
+  request(client, {
+    endpoint: `api/v4/folders/${folderId}/tasks`,
+    method: "GET",
+    settings,
+  });
 
-export const getFolders = async (client: IDeskproClient) => {
-  const folderData: IWrikeResponse<IFolderFromList[]> = await installedRequest(
-    client,
-    "api/v4/folders",
-    "GET"
-  );
+export const getFolders = async (
+  client: IDeskproClient,
+  settings: RequestParams["settings"],
+) => {
+  const folderData: IWrikeResponse<IFolderFromList[]> = await request(client, {
+    endpoint: "api/v4/folders",
+    method: "GET",
+    settings,
+  });
 
   return {
     data: folderData.data.filter((folder) => folder.title !== "Recycle Bin"),
   };
 };
 
-const installedRequest = async (
+export const getAccounts = async (
   client: IDeskproClient,
-  endpoint: string,
-  method: RequestMethod,
-  data?: unknown
+  settings: Settings,
+): Promise<IWrikeResponse<IAccount[]>> => {
+  return request(client, {
+    endpoint: "api/v4/account",
+    method: "GET",
+    settings,
+  });
+};
+
+const request = async (
+  client: IDeskproClient,
+  { endpoint, method, data, settings }: RequestParams,
 ) => {
-  const fetch = await proxyFetch(client);
+  const isAdmin = Boolean(settings?.access_token);
+  const url = settings?.instance_url || BASE_URL;
+  const accessToken = settings?.access_token || "__access_token__";
+  const fetch = await (isAdmin ? adminGenericProxyFetch : proxyFetch)(client);
 
   const options: V2ProxyRequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",
-      Authorization: "bearer __access_token__",
+      Authorization: `Bearer ${accessToken}`,
     },
   };
 
@@ -141,7 +207,7 @@ const installedRequest = async (
     options.body = JSON.stringify(data);
   }
 
-  const response = await fetch(`https://www.wrike.com/${endpoint}`, options);
+  const response = await fetch(`${url}/${endpoint}`, options);
 
   if (isResponseError(response)) {
     throw new Error(
