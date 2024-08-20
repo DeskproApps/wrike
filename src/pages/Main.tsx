@@ -17,9 +17,7 @@ export const Main = () => {
   const { context } = useDeskproLatestAppContext();
   const navigate = useNavigate();
   const [tasksIds, setTaskIds] = useState<string[]>([]);
-  const [taskLinketCount, setTaskLinkedCount] = useState<
-    Record<string, number>
-  >({});
+  const [taskLinketCount, setTaskLinkedCount] = useState<Record<string, number>>({});
   const { getLinkedTasks, unlinkAllTasks } = useLinkTasks();
   const { getMultipleTasksTicketCount } = useTicketCount();
 

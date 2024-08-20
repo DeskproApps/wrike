@@ -6,7 +6,7 @@ import {
 } from "@deskpro/app-sdk";
 import { AnyIcon, Button, Checkbox, Input, Stack } from "@deskpro/deskpro-ui";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import useDebounce from "../../hooks/debounce";
 import { useLinkTasks, useTicketCount } from "../../hooks/hooks";
@@ -16,6 +16,8 @@ import { FieldMapping } from "../FieldMapping/FieldMapping";
 import { HorizontalDivider } from "../HorizontalDivider/HorizontalDivider";
 import { LoadingSpinnerCenter } from "../LoadingSpinnerCenter/LoadingSpinnerCenter";
 import { getTasksByPrompt, getWorkflows } from "../../api/api";
+import { ButtonAsLink } from "../common";
+import type { ITask } from "../../api/types";
 
 export const LinkTask = () => {
   const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
@@ -28,6 +30,16 @@ export const LinkTask = () => {
   const { getMultipleTasksTicketCount } = useTicketCount();
   const navigate = useNavigate();
   const { context } = useDeskproLatestAppContext();
+
+  const onSelectTask = useCallback((task: ITask) => {
+    if (selectedTasks.includes(task.id)) {
+      setSelectedTasks(
+        selectedTasks.filter((e) => e !== task.id)
+      );
+    } else {
+      setSelectedTasks([...selectedTasks, task.id]);
+    }
+  }, [selectedTasks]);
 
   const { debouncedValue: debouncedText } = useDebounce(prompt, 300);
 
@@ -140,15 +152,7 @@ export const LinkTask = () => {
                   <Stack style={{ marginTop: "2px" }}>
                     <Checkbox
                       checked={selectedTasks.includes(task.id)}
-                      onChange={() => {
-                        if (selectedTasks.includes(task.id)) {
-                          setSelectedTasks(
-                            selectedTasks.filter((e) => e !== task.id)
-                          );
-                        } else {
-                          setSelectedTasks([...selectedTasks, task.id]);
-                        }
-                      }}
+                      onChange={() => onSelectTask(task as unknown as ITask)}
                     ></Checkbox>
                   </Stack>
                   <Stack style={{ width: "92%" }}>
@@ -162,9 +166,12 @@ export const LinkTask = () => {
                       hasCheckbox={true}
                       metadata={TaskJson.link}
                       idKey={TaskJson.idKey}
-                      internalChildUrl={`/view/task/`}
                       externalChildUrl={TaskJson.externalUrl}
-                      childTitleAccessor={(e) => e.title}
+                      childTitleAccessor={(e) => (
+                        <ButtonAsLink type="button" onClick={() => onSelectTask(task as unknown as ITask)}>
+                          {e.title}
+                        </ButtonAsLink>
+                      ) as unknown as string}
                     />
                   </Stack>
                 </Stack>
