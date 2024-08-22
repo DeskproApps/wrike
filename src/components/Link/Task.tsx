@@ -3,21 +3,21 @@ import {
   useInitialisedDeskproAppClient,
   useQueryWithClient,
   useDeskproLatestAppContext,
+  HorizontalDivider,
 } from "@deskpro/app-sdk";
 import { AnyIcon, Button, Checkbox, Input, Stack } from "@deskpro/deskpro-ui";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import useDebounce from "../../hooks/debounce";
+import { useDebounce } from "@/hooks";
 import { useLinkTasks, useTicketCount } from "../../hooks/hooks";
 import TaskJson from "../../mappings/task.json";
 import { Title } from "../../styles";
 import { FieldMapping } from "../FieldMapping/FieldMapping";
-import { HorizontalDivider } from "../HorizontalDivider/HorizontalDivider";
 import { LoadingSpinnerCenter } from "../LoadingSpinnerCenter/LoadingSpinnerCenter";
-import { getTasksByPrompt, getWorkflows } from "../../api/api";
+import { getTasksByPrompt, getWorkflows } from "@/services/wrike";
 import { ButtonAsLink } from "../common";
-import type { ITask } from "../../api/types";
+import type { ITask } from "@/services/wrike/types";
 
 export const LinkTask = () => {
   const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
@@ -46,17 +46,14 @@ export const LinkTask = () => {
   useInitialisedDeskproAppClient((client) => {
     client.setTitle("Link Task");
 
-    client.registerElement("homeButton", {
-      type: "home_button",
-    });
-
-    client.deregisterElement("plusButton");
+    client.deregisterElement("plus");
+    client.registerElement("home", { type: "home_button" });
   }, []);
 
   useDeskproAppEvents({
     async onElementEvent(id) {
       switch (id) {
-        case "homeButton":
+        case "home":
           navigate("/redirect");
       }
     },
@@ -138,7 +135,7 @@ export const LinkTask = () => {
               onClick={() => setSelectedTasks([])}
             ></Button>
           </Stack>
-          <HorizontalDivider full />
+          <HorizontalDivider />
         </Stack>
         {tasksQuery.isFetching ? (
           <LoadingSpinnerCenter />
