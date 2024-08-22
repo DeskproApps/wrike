@@ -5,7 +5,7 @@ import {
   V2ProxyRequestInit,
   adminGenericProxyFetch,
 } from "@deskpro/app-sdk";
-import { BASE_URL } from "../constants";
+import { BASE_URL, placeholders } from "@/constants";
 import {
   ICustomFields,
   IFolderFromList,
@@ -17,7 +17,7 @@ import {
   IAccount,
   RequestParams,
 } from "./types";
-import type { Settings } from "../types";
+import type { Settings } from "@/types";
 
 export const getCustomFields = async (
   client: IDeskproClient,
@@ -186,13 +186,15 @@ export const getAccounts = async (
   });
 };
 
+export const checkAuthService = getAccounts;
+
 const request = async (
   client: IDeskproClient,
   { endpoint, method, data, settings }: RequestParams,
 ) => {
   const isAdmin = Boolean(settings?.access_token);
   const url = settings?.instance_url || BASE_URL;
-  const accessToken = settings?.access_token || "__access_token__";
+  const accessToken = settings?.access_token || placeholders.ACCESS_TOKEN;
   const fetch = await (isAdmin ? adminGenericProxyFetch : proxyFetch)(client);
 
   const options: V2ProxyRequestInit = {

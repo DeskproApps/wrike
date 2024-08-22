@@ -1,13 +1,16 @@
 import { formatDateSince } from "../../utils/dateUtils";
-import { HorizontalDivider } from "../HorizontalDivider/HorizontalDivider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Avatar, H1, H2, Stack } from "@deskpro/deskpro-ui";
 import styled from "styled-components";
-import { INote } from "../../api/types";
-import { useQueryWithClient, useDeskproLatestAppContext } from "@deskpro/app-sdk";
-import { getUsersByIds } from "../../api/api";
+import type { INote } from "@/services/wrike/types";
+import {
+  HorizontalDivider,
+  useQueryWithClient,
+  useDeskproLatestAppContext,
+} from "@deskpro/app-sdk";
+import { getUsersByIds } from "@/services/wrike";
 import { useMemo } from "react";
 import { mutateDangerouslySetHTML } from "../../utils/utils";
 import { dpNormalize } from "../../styles";
@@ -45,7 +48,7 @@ export const Notes = ({ notes, id }: Props) => {
 
   return (
     <Stack vertical gap={10} style={{ width: "100%" }}>
-      <HorizontalDivider full />
+      <HorizontalDivider />
       <Stack gap={5}>
         <H1>Updates ({notes.length})</H1>
         <FontAwesomeIcon
@@ -99,7 +102,7 @@ export const Notes = ({ notes, id }: Props) => {
                 />
               </Stack>
             </Stack>
-            <HorizontalDivider full={i === notes.length - 1} />
+            <HorizontalDivider />
           </Stack>
         );
       })}

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { putColumnKeysNewObj } from "../utils/utils";
-import { ITask } from "../api/types";
+import { ITask } from "@/services/wrike/types";
 
 export const getMetadataBasedSchema = (
   fields: {
