@@ -7,28 +7,20 @@ import { CreateNote } from "./pages/Create/Note";
 import { FindOrCreate } from "./pages/FindOrCreate/FindOrCreate";
 import { ViewTask } from "./pages/View/Task";
 import { EditTask } from "./pages/Edit/Task";
-import {
-  HomePage,
-  LinkTasksPage,
-  LoadingAppPage,
-  VerifySettingsPage,
-} from "@/pages";
+import { HomePage, LoadingAppPage, VerifySettingsPage } from "@/pages";
 import { isNavigatePayload } from "@/utils";
-import type { EventPayload } from "@/types";
 
 const App = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
 
-  const debounceElementEvent = useDebouncedCallback((_, __, payload: EventPayload) => {
+  const debounceElementEvent = useDebouncedCallback((_, __, payload) => {
     return match(payload.type)
       .with("changePage", () => isNavigatePayload(payload) && navigate(payload.path))
       .run();
-  }, 100);
+  }, 500);
 
   useDeskproAppEvents({
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     onElementEvent: debounceElementEvent,
   }, [client]);
 
@@ -42,7 +34,6 @@ const App = () => {
 
       <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
       <Route path="/home" element={<HomePage />} />
-      <Route path="/tasks/link" element={<LinkTasksPage />} />
       <Route index element={<LoadingAppPage />} />
     </Routes>
   );
