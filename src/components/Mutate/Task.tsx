@@ -10,7 +10,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ZodTypeAny, z } from "zod";
-
 import {
   createTask,
   editTask,
@@ -20,7 +19,7 @@ import {
   getTasks,
   getUsers,
   getWorkflows,
-} from "../../api/api";
+} from "@/services/wrike";
 import { useLinkTasks } from "../../hooks/hooks";
 import { useQueryMutationWithClient } from "../../hooks/useQueryWithClient";
 import TaskJson from "../../mappings/task.json";
@@ -29,7 +28,8 @@ import { DropdownSelect } from "../DropdownSelect/DropdownSelect";
 import { FieldMappingInput } from "../FieldMappingInput/FieldMappingInput";
 import { LoadingSpinnerCenter } from "../LoadingSpinnerCenter/LoadingSpinnerCenter";
 import { IMPORTANCES } from "../../utils/consts";
-import { ITaskFromList, IWrikeResponse } from "../../api/types";
+import type { ITaskFromList, IWrikeResponse } from "@/services/wrike/types";
+import { query } from "../../utils/query";
 
 const inputs = TaskJson.create;
 
@@ -55,14 +55,14 @@ export const MutateTask = ({ id }: { id?: string }) => {
   const [selectedFolder] = watch(["folder"]);
 
   useInitialisedDeskproAppClient((client) => {
-    client.deregisterElement("plusButton");
-
-    client.deregisterElement("editButton");
+    client.deregisterElement("plus");
+    client.deregisterElement("edit");
   });
+
   useDeskproAppEvents({
     async onElementEvent(id) {
       switch (id) {
-        case "homeButton":
+        case "home":
           navigate("/redirect");
 
           break;
@@ -75,9 +75,14 @@ export const MutateTask = ({ id }: { id?: string }) => {
       return Promise.resolve();
     }
 
-    return isEditMode
-      ? editTask(client, id, data, context?.settings)
-      : createTask(client, watch("folder"), data, context?.settings); //change
+    return (async () => {
+      const task = await isEditMode
+        ? editTask(client, id as string, data, context?.settings)
+        : createTask(client, watch("folder"), data, context?.settings); //change
+
+      await query.invalidateQueries();
+      return task;
+    })();
   });
 
   const taskQuery = useQueryWithClient(
@@ -142,7 +147,7 @@ export const MutateTask = ({ id }: { id?: string }) => {
   useEffect(() => {
     if (!submitMutation.isSuccess) return;
 
-    const id = submitMutation.data?.data[0].id;
+    const id = submitMutation.data?.data[0]?.id;
 
     (async () => {
       !isEditMode && (await linkTasks([id as string]));

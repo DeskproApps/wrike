@@ -1,13 +1,21 @@
+import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import copy from "rollup-plugin-copy";
+
+const PORT = parseInt(process.env.VITE_DEV_SERVER_PORT || "3003");
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "",
   plugins: [react()],
   server: {
-    https: false,
+    port: PORT,
+  },
+  resolve:{
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   build: {
     rollupOptions: {

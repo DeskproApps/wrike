@@ -13,12 +13,12 @@ import {
   getNotesByTaskId,
   getTaskById,
   getWorkflows,
-} from "../../api/api";
+} from "@/services/wrike";
 import { FieldMapping } from "../../components/FieldMapping/FieldMapping";
 import { Notes } from "../../components/Notes/Notes";
 import { useLinkTasks, useTicketCount } from "../../hooks/hooks";
 import TaskJson from "../../mappings/task.json";
-import { CustomFieldTask, ITask } from "../../api/types";
+import type { CustomFieldTask, ITask } from "@/services/wrike/types";
 
 export const ViewTask = () => {
   const { taskId } = useParams();
@@ -33,20 +33,13 @@ export const ViewTask = () => {
   useInitialisedDeskproAppClient((client) => {
     client.setTitle("Wrike");
 
-    client.registerElement("editButton", {
-      type: "edit_button",
-    });
-
-    client.registerElement("homeButton", {
-      type: "home_button",
-    });
-
-    client.registerElement("menuButton", {
+    client.deregisterElement("plus");
+    client.registerElement("edit", { type: "edit_button" });
+    client.registerElement("home", { type: "home_button" });
+    client.registerElement("menu", {
       type: "menu",
       items: [{ title: "Unlink task" }]
     });
-
-    client.deregisterElement("plusButton");
   }, []);
 
   useEffect(() => {

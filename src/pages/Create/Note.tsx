@@ -8,7 +8,7 @@ import { useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputWithTitle } from "../../components/InputWithTitle/InputWithTitle";
 import { Button, P8, Stack } from "@deskpro/deskpro-ui";
-import { createNote } from "../../api/api";
+import { createNote } from "@/services/wrike";
 
 export const CreateNote = () => {
   const { client } = useDeskproAppClient();
@@ -42,13 +42,13 @@ export const CreateNote = () => {
   useInitialisedDeskproAppClient((client) => {
     client.setTitle("Create Update");
 
-    client.deregisterElement("editButton");
+    client.deregisterElement("edit");
   });
 
   useDeskproAppEvents({
     async onElementEvent(id) {
       switch (id) {
-        case "homeButton":
+        case "home":
           navigate("/redirect");
       }
     },

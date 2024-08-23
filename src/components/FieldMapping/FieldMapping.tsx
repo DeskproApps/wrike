@@ -1,6 +1,7 @@
 import {
   ExternalIconLink,
   Property,
+  HorizontalDivider,
   useDeskproAppTheme,
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
@@ -9,10 +10,9 @@ import { StyledLink } from "../../styles";
 import { IJson } from "../../types/json";
 import { useMapFieldValues } from "../../hooks/mapFieldValues";
 import { PropertyRow } from "../PropertyRow/PropertyRow";
-import { AppLogo } from "../AppLogo/AppLogo";
-import { HorizontalDivider } from "../HorizontalDivider/HorizontalDivider";
 import { H1, H2, H3, P11, P5, Stack } from "@deskpro/deskpro-ui";
-import { ICustomFields } from "../../api/types";
+import { ICustomFields } from "@/services/wrike/types";
+import { WrikeLogo } from "@/components/common";
 
 const SpaceBetweenFields = ({
   field: field,
@@ -88,7 +88,7 @@ export const FieldMapping = ({
             {externalUrl && (
               <ExternalIconLink
                 href={context?.settings.instance_url + "/" + externalUrl}
-                icon={<AppLogo />}
+                icon={<WrikeLogo />}
               ></ExternalIconLink>
             )}
           </Stack>
@@ -116,7 +116,7 @@ export const FieldMapping = ({
               {externalChildUrl && (
                 <ExternalIconLink
                   href={field.permalink}
-                  icon={<AppLogo />}
+                  icon={<WrikeLogo />}
                 ></ExternalIconLink>
               )}
             </Stack>
@@ -228,7 +228,7 @@ export const FieldMapping = ({
                 );
             }
           })}
-          {(fields.length > 1 || hasCheckbox) && <HorizontalDivider full />}
+          {(fields.length > 1 || hasCheckbox) && <HorizontalDivider />}
         </Stack>
       ))}
     </Stack>

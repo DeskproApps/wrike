@@ -1,4 +1,4 @@
-import type { Settings as ContextSettings } from "../types";
+import type { Settings as ContextSettings } from "@/types";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
