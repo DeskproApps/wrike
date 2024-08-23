@@ -7,7 +7,12 @@ import { CreateNote } from "./pages/Create/Note";
 import { FindOrCreate } from "./pages/FindOrCreate/FindOrCreate";
 import { ViewTask } from "./pages/View/Task";
 import { EditTask } from "./pages/Edit/Task";
-import { HomePage, LoadingAppPage, VerifySettingsPage } from "@/pages";
+import {
+  HomePage,
+  LinkTasksPage,
+  LoadingAppPage,
+  VerifySettingsPage,
+} from "@/pages";
 import { isNavigatePayload } from "@/utils";
 import type { EventPayload } from "@/types";
 
@@ -37,6 +42,7 @@ const App = () => {
 
       <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
       <Route path="/home" element={<HomePage />} />
+      <Route path="/tasks/link" element={<LinkTasksPage />} />
       <Route index element={<LoadingAppPage />} />
     </Routes>
   );
