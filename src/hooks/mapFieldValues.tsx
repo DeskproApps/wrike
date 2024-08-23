@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { ICustomFields, ITask } from "../api/types";
+import type { ICustomFields, ITask } from "@/services/wrike/types";
 import { CustomTag } from "../components/CustomTag/CustomTag";
 import { IJson } from "../types/json";
 import { formatDate } from "../utils/dateUtils";

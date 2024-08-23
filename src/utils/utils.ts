@@ -1,4 +1,4 @@
-import { ITask } from "../api/types";
+import { ITask } from "@/services/wrike/types";
 
 export const parseJsonErrorMessage = (error: string) => {
   try {
