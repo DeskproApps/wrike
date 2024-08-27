@@ -12,6 +12,7 @@ import { FieldMapping } from "../components/FieldMapping/FieldMapping";
 import TaskJson from "../mappings/task.json";
 import { Stack } from "@deskpro/deskpro-ui";
 import { getTasksByIds, getWorkflows } from "../api/api";
+import { Container } from "../components/common";
 
 export const Main = () => {
   const { context } = useDeskproLatestAppContext();
@@ -127,18 +128,20 @@ export const Main = () => {
   if (!tasksByIdsQuery.isSuccess || !taskLinketCount) return <LoadingSpinner />;
 
   return (
-    <Stack vertical style={{ width: "100%" }}>
-      <FieldMapping
-        fields={tasks.map((e) => ({
-          ...e,
-          linked_tickets: taskLinketCount[e.id] || 0,
-        }))}
-        metadata={TaskJson.link}
-        idKey={TaskJson.idKey}
-        internalChildUrl={`/view/task/`}
-        externalChildUrl={TaskJson.externalUrl}
-        childTitleAccessor={(e) => e.title}
-      />
-    </Stack>
+    <Container>
+      <Stack vertical style={{ width: "100%" }}>
+        <FieldMapping
+          fields={tasks.map((e) => ({
+            ...e,
+            linked_tickets: taskLinketCount[e.id] || 0,
+          }))}
+          metadata={TaskJson.link}
+          idKey={TaskJson.idKey}
+          internalChildUrl={`/view/task/`}
+          externalChildUrl={TaskJson.externalUrl}
+          childTitleAccessor={(e) => e.title}
+        />
+      </Stack>
+    </Container>
   );
 };

@@ -20,7 +20,7 @@ const VerifySettings: FC<Props> = ({
   onVerifySettings,
 }) => {
   return (
-    <Stack gap={8} align="baseline" style={{ margin: "0 -8px" }}>
+    <Stack gap={8} align="baseline">
       <Button
         text="Verify Settings"
         intent="secondary"
