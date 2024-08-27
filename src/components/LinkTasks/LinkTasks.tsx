@@ -1,15 +1,21 @@
-import { Container } from "@/components/common";
+import { HorizontalDivider } from "@deskpro/app-sdk";
+import { Container, Navigation } from "@/components/common";
 import { Buttons, Tasks } from "./blocks";
 import type { FC } from "react";
 
 type Props = {
-  //..
+  onNavigateToCreate: () => void;
 };
 
-const LinkTasks: FC<Props> = () => {
+const LinkTasks: FC<Props> = ({ onNavigateToCreate }) => {
   return (
     <>
-      LinkTasks
+      <Container>
+        <Navigation onNavigateToCreate={onNavigateToCreate} />
+        <Buttons/>
+      </Container>
+      <HorizontalDivider/>
+      <Tasks/>
     </>
   );
 };

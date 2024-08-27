@@ -14,8 +14,8 @@ const Navigation: FC<Props> = ({
 }) => (
   <TwoButtonGroup
     selected={onNavigateToCreate ? "one" : "two"}
-    oneLabel="Find Contact"
-    twoLabel="Create Contact"
+    oneLabel="Find Task"
+    twoLabel="Create Task"
     oneIcon={faSearch}
     twoIcon={faPlus}
     oneOnClick={onNavigateToLink || (() => {})}
