@@ -126,7 +126,7 @@ export const LinkTask = () => {
               onClick={() => setSelectedTasks([])}
             ></Button>
           </Stack>
-          <HorizontalDivider full />
+          <HorizontalDivider />
         </Stack>
         {tasksQuery.isFetching ? (
           <LoadingSpinnerCenter />

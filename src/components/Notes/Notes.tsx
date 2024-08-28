@@ -45,7 +45,7 @@ export const Notes = ({ notes, id }: Props) => {
 
   return (
     <Stack vertical gap={10} style={{ width: "100%" }}>
-      <HorizontalDivider full />
+      <HorizontalDivider />
       <Stack gap={5}>
         <H1>Updates ({notes.length})</H1>
         <FontAwesomeIcon
@@ -99,7 +99,7 @@ export const Notes = ({ notes, id }: Props) => {
                 />
               </Stack>
             </Stack>
-            <HorizontalDivider full={i === notes.length - 1} />
+            <HorizontalDivider />
           </Stack>
         );
       })}

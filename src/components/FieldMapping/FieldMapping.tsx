@@ -228,7 +228,7 @@ export const FieldMapping = ({
                 );
             }
           })}
-          {(fields.length > 1 || hasCheckbox) && <HorizontalDivider full />}
+          {(fields.length > 1 || hasCheckbox) && <HorizontalDivider />}
         </Stack>
       ))}
     </Stack>

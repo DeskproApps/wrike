@@ -32,12 +32,6 @@ importers:
       '@tanstack/react-query':
         specifier: ^4.33.0
         version: 4.33.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      iframe-resizer:
-        specifier: ^5.2.3
-        version: 5.2.3
-      polished:
-        specifier: ^4.1.1
-        version: 4.2.2
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -545,18 +539,6 @@ packages:
 
   '@humanwhocodes/object-schema@1.2.1':
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
-
-  '@iframe-resizer/child@5.2.3':
-    resolution: {integrity: sha512-YzwCZkbFMPn7OPmkb9om3/SoEn+BBrPUFfpwWqkuPR5IagWdcRARWBaBhazcTNNIdXDbkCdzA5Y38S4dqnSIiw==}
-
-  '@iframe-resizer/core@5.2.3':
-    resolution: {integrity: sha512-xvE+d0gQatCqKEayPgvPVqXHqpNuqdjsgvnAxPP9mmgxEfmvGK0VVMvSnt4QtixK5Hxhl6129p+BkyPotXietQ==}
-
-  '@iframe-resizer/jquery@5.2.3':
-    resolution: {integrity: sha512-6hqeqcN0gfqLGWg3V7oM8nqXoNZji4NWhp/2nQsl6jxVlSpIBs3ov5rLgS/Jh6JqRA//emepBFsUryB1xvrSKA==}
-
-  '@iframe-resizer/parent@5.2.3':
-    resolution: {integrity: sha512-ERiGbuoBnsLUT2QJMkFf224dPTF4rkGQVwDvviVNljMZJCHc0cK9nV3rk86KcqeFozzQe2bItVt9tI6s7tucAA==}
 
   '@istanbuljs/load-nyc-config@1.1.0':
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}
@@ -1851,9 +1833,6 @@ packages:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
 
-  iframe-resizer@5.2.3:
-    resolution: {integrity: sha512-PdHPVFLJ668j5FindSa8VkokEHkezJ8rCxi3RHNqE/NDsv7jWtSvhQ9FvgU2n/eDRviF2uMy/EZ4lFv2cSUo+Q==}
-
   ignore@4.0.6:
     resolution: {integrity: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==}
     engines: {node: '>= 4'}
@@ -2491,10 +2470,6 @@ packages:
   pkg-dir@4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
-
-  polished@4.2.2:
-    resolution: {integrity: sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==}
-    engines: {node: '>=10'}
 
   popmotion@11.0.3:
     resolution: {integrity: sha512-Y55FLdj3UxkR7Vl3s7Qr4e9m0onSnP8W7d/xQLsoJM40vs6UKHFdygs6SWryasTZYqugMjm3BepCF4CWXDiHgA==}
@@ -3605,18 +3580,6 @@ snapshots:
       - supports-color
 
   '@humanwhocodes/object-schema@1.2.1': {}
-
-  '@iframe-resizer/child@5.2.3': {}
-
-  '@iframe-resizer/core@5.2.3': {}
-
-  '@iframe-resizer/jquery@5.2.3':
-    dependencies:
-      '@iframe-resizer/core': 5.2.3
-
-  '@iframe-resizer/parent@5.2.3':
-    dependencies:
-      '@iframe-resizer/core': 5.2.3
 
   '@istanbuljs/load-nyc-config@1.1.0':
     dependencies:
@@ -5141,12 +5104,6 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
-  iframe-resizer@5.2.3:
-    dependencies:
-      '@iframe-resizer/child': 5.2.3
-      '@iframe-resizer/jquery': 5.2.3
-      '@iframe-resizer/parent': 5.2.3
-
   ignore@4.0.6: {}
 
   ignore@5.2.4: {}
@@ -6002,10 +5959,6 @@ snapshots:
   pkg-dir@4.2.0:
     dependencies:
       find-up: 4.1.0
-
-  polished@4.2.2:
-    dependencies:
-      '@babel/runtime': 7.22.11
 
   popmotion@11.0.3:
     dependencies:
