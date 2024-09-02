@@ -1,7 +1,7 @@
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 
 import { AnyIcon, Button, H1, H2, Stack } from "@deskpro/deskpro-ui";
-import { parseJsonErrorMessage } from "../../utils/utils";
+import { parseJsonErrorMessage } from "@/utils/utils";
 
 export const ErrorFallback = ({
   error,

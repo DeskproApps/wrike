@@ -1,9 +1,9 @@
 import { useState, useCallback } from "react";
 import { useDeskproAppEvents, useDeskproAppClient } from "@deskpro/app-sdk";
 import { getAccounts } from "@/services/wrike";
-import { VerifySettings } from "../../components/VerifySettings";
+import { VerifySettings } from "@/components/VerifySettings";
 import type { FC } from "react";
-import type { Settings } from "../../types";
+import type { Settings } from "@/types";
 import type { IAccount } from "@/services/wrike/types";
 
 const getError = (err: Error): string => {

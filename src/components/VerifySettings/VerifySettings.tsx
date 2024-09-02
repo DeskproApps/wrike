@@ -1,5 +1,5 @@
 import { Stack } from "@deskpro/deskpro-ui";
-import { Button, Invalid, Secondary } from "../common";
+import { Button, Invalid, Secondary } from "@/components/common";
 import type { FC } from "react";
 import type { Settings } from "@/types";
 import type { IAccount } from "@/services/wrike/types";
@@ -20,7 +20,7 @@ const VerifySettings: FC<Props> = ({
   onVerifySettings,
 }) => {
   return (
-    <Stack gap={8} align="baseline" style={{ margin: "0 -8px" }}>
+    <Stack gap={8} align="baseline">
       <Button
         text="Verify Settings"
         intent="secondary"

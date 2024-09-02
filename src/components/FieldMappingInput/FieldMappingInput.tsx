@@ -6,11 +6,10 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form/dist/types";
-
-import { DropdownData, FieldMappingInputs } from "../../types/types";
-import { DateField } from "../DateField/DateField";
-import { DropdownSelect } from "../DropdownSelect/DropdownSelect";
-import { InputWithTitleRegister } from "../InputWithTitle/InputWithTitleRegister";
+import { DropdownData, FieldMappingInputs } from "@/types/types";
+import { DateField } from "@/components/DateField/DateField";
+import { DropdownSelect } from "@/components/DropdownSelect/DropdownSelect";
+import { InputWithTitleRegister } from "@/components/InputWithTitle/InputWithTitleRegister";
 import { H1, Stack, TextArea } from "@deskpro/deskpro-ui";
 import { useDeskproAppTheme } from "@deskpro/app-sdk";
 

@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import type { ICustomFields, ITask } from "@/services/wrike/types";
-import { CustomTag } from "../components/CustomTag/CustomTag";
-import { IJson } from "../types/json";
-import { formatDate } from "../utils/dateUtils";
+import { CustomTag } from "@/components/CustomTag/CustomTag";
+import { IJson } from "@/types/json";
+import { formatDate } from "@/utils/dateUtils";
 import {
   mutateDangerouslySetHTML,
   getObjectValue,

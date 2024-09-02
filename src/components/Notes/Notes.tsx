@@ -12,8 +12,8 @@ import {
 } from "@deskpro/app-sdk";
 import { getUsersByIds } from "@/services/wrike";
 import { useMemo } from "react";
-import { mutateDangerouslySetHTML } from "../../utils/utils";
-import { dpNormalize } from "../../styles";
+import { mutateDangerouslySetHTML } from "@/utils/utils";
+import { dpNormalize } from "@/styles";
 
 type Props = {
   notes: INote[];

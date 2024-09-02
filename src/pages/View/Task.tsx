@@ -14,11 +14,12 @@ import {
   getTaskById,
   getWorkflows,
 } from "@/services/wrike";
-import { FieldMapping } from "../../components/FieldMapping/FieldMapping";
-import { Notes } from "../../components/Notes/Notes";
-import { useLinkTasks, useTicketCount } from "../../hooks/hooks";
-import TaskJson from "../../mappings/task.json";
+import { FieldMapping } from "@/components/FieldMapping/FieldMapping";
+import { Notes } from "@/components/Notes/Notes";
+import { useLinkTasks, useTicketCount } from "@/hooks/hooks";
+import TaskJson from "@/mappings/task.json";
 import type { CustomFieldTask, ITask } from "@/services/wrike/types";
+import { Container } from "@/components/common";
 
 export const ViewTask = () => {
   const { taskId } = useParams();
@@ -125,20 +126,22 @@ export const ViewTask = () => {
   if (!task || !notesByTaskIdQuery.isSuccess) return <LoadingSpinner />;
 
   return (
-    <Stack vertical gap={10}>
-      <FieldMapping
-        fields={[
-          {
-            ...task,
-            linked_tickets: taskLinkedCount || 0,
-          },
-        ]}
-        metadata={TaskJson.view}
-        childTitleAccessor={(e) => e.title}
-        idKey={TaskJson.idKey}
-        externalChildUrl={TaskJson.externalUrl}
-      />
-      <Notes id={taskId as string} notes={notes}></Notes>
-    </Stack>
+    <Container>
+      <Stack vertical gap={10}>
+        <FieldMapping
+          fields={[
+            {
+              ...task,
+              linked_tickets: taskLinkedCount || 0,
+            },
+          ]}
+          metadata={TaskJson.view}
+          childTitleAccessor={(e) => e.title}
+          idKey={TaskJson.idKey}
+          externalChildUrl={TaskJson.externalUrl}
+        />
+        <Notes id={taskId as string} notes={notes}></Notes>
+      </Stack>
+    </Container>
   );
 };
