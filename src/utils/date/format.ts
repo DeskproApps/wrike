@@ -1,4 +1,4 @@
-import { LOCALE } from "../../constants";
+import { LOCALE } from "@/constants";
 import type { DateTime } from "@/types";
 
 type Options = {

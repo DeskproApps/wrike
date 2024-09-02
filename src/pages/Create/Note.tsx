@@ -6,9 +6,10 @@ import {
 } from "@deskpro/app-sdk";
 import { useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { InputWithTitle } from "../../components/InputWithTitle/InputWithTitle";
+import { InputWithTitle } from "@/components/InputWithTitle/InputWithTitle";
 import { Button, P8, Stack } from "@deskpro/deskpro-ui";
 import { createNote } from "@/services/wrike";
+import { Container } from "@/components/common";
 
 export const CreateNote = () => {
   const { client } = useDeskproAppClient();
@@ -55,25 +56,27 @@ export const CreateNote = () => {
   });
 
   return (
-    <Stack style={{ width: "100%" }} vertical gap={8}>
-      <InputWithTitle
-        title="New update"
-        setValue={(e) => setNote(e.target.value)}
-        data-testid="note-input"
-        value={note}
-        required={true}
-      />
-      <Stack justify="space-between" style={{ width: "100%" }}>
-        <Button
-          data-testid="button-submit"
-          onClick={onCreate}
-          loading={submitting}
-          text={"Create"}
-          disabled={submitting}
+    <Container>
+      <Stack style={{ width: "100%" }} vertical gap={8}>
+        <InputWithTitle
+          title="New update"
+          setValue={(e) => setNote(e.target.value)}
+          data-testid="note-input"
+          value={note}
+          required={true}
         />
-        <Button onClick={() => navigate(-1)} text="Cancel" intent="secondary" />
+        <Stack justify="space-between" style={{ width: "100%" }}>
+          <Button
+            data-testid="button-submit"
+            onClick={onCreate}
+            loading={submitting}
+            text={"Create"}
+            disabled={submitting}
+            />
+          <Button onClick={() => navigate(-1)} text="Cancel" intent="secondary" />
+        </Stack>
+        {error && <P8 color="red">{error}</P8>}
       </Stack>
-      {error && <P8 color="red">{error}</P8>}
-    </Stack>
+    </Container>
   );
 };

@@ -2,11 +2,11 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { match } from "ts-pattern";
 import { useDebouncedCallback } from "use-debounce";
 import { useDeskproAppEvents, useDeskproAppClient } from "@deskpro/app-sdk";
-import { Redirect } from "./components/Redirect/Redirect";
-import { CreateNote } from "./pages/Create/Note";
-import { FindOrCreate } from "./pages/FindOrCreate/FindOrCreate";
-import { ViewTask } from "./pages/View/Task";
-import { EditTask } from "./pages/Edit/Task";
+import { Redirect } from "@/components/Redirect/Redirect";
+import { CreateNote } from "@/pages/Create/Note";
+import { FindOrCreate } from "@/pages/FindOrCreate/FindOrCreate";
+import { ViewTask } from "@/pages/View/Task";
+import { EditTask } from "@/pages/Edit/Task";
 import { HomePage, LoadingAppPage, VerifySettingsPage } from "@/pages";
 import { isNavigatePayload } from "@/utils";
 

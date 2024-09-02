@@ -10,13 +10,13 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDebounce } from "@/hooks";
-import { useLinkTasks, useTicketCount } from "../../hooks/hooks";
-import TaskJson from "../../mappings/task.json";
-import { Title } from "../../styles";
-import { FieldMapping } from "../FieldMapping/FieldMapping";
-import { LoadingSpinnerCenter } from "../LoadingSpinnerCenter/LoadingSpinnerCenter";
+import { useLinkTasks, useTicketCount } from "@/hooks/hooks";
+import TaskJson from "@/mappings/task.json";
+import { Title } from "@/styles";
+import { FieldMapping } from "@/components/FieldMapping/FieldMapping";
+import { LoadingSpinnerCenter } from "@/components/LoadingSpinnerCenter/LoadingSpinnerCenter";
 import { getTasksByPrompt, getWorkflows } from "@/services/wrike";
-import { ButtonAsLink } from "../common";
+import { ButtonAsLink } from "@/components/common";
 import type { ITask } from "@/services/wrike/types";
 
 export const LinkTask = () => {

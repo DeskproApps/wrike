@@ -20,16 +20,16 @@ import {
   getUsers,
   getWorkflows,
 } from "@/services/wrike";
-import { useLinkTasks } from "../../hooks/hooks";
-import { useQueryMutationWithClient } from "../../hooks/useQueryWithClient";
-import TaskJson from "../../mappings/task.json";
-import { getTaskSchema } from "../../schemas";
-import { DropdownSelect } from "../DropdownSelect/DropdownSelect";
-import { FieldMappingInput } from "../FieldMappingInput/FieldMappingInput";
-import { LoadingSpinnerCenter } from "../LoadingSpinnerCenter/LoadingSpinnerCenter";
-import { IMPORTANCES } from "../../utils/consts";
+import { useLinkTasks } from "@/hooks/hooks";
+import { useQueryMutationWithClient } from "@/hooks/useQueryWithClient";
+import TaskJson from "@/mappings/task.json";
+import { getTaskSchema } from "@/schemas";
+import { DropdownSelect } from "@/components/DropdownSelect/DropdownSelect";
+import { FieldMappingInput } from "@/components/FieldMappingInput/FieldMappingInput";
+import { LoadingSpinnerCenter } from "@/components/LoadingSpinnerCenter/LoadingSpinnerCenter";
+import { IMPORTANCES } from "@/utils/consts";
 import type { ITaskFromList, IWrikeResponse } from "@/services/wrike/types";
-import { query } from "../../utils/query";
+import { query } from "@/utils/query";
 
 const inputs = TaskJson.create;
 

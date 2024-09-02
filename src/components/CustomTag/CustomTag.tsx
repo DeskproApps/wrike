@@ -1,6 +1,6 @@
 import { useDeskproAppTheme } from "@deskpro/app-sdk";
 import { RoundedLabelTag } from "@deskpro/deskpro-ui";
-import { makeFirstLetterUppercase } from "../../utils/utils";
+import { makeFirstLetterUppercase } from "@/utils/utils";
 
 type Props = {
   title: string | number;

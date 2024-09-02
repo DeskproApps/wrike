@@ -6,10 +6,10 @@ import {
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { ReactElement } from "react";
-import { StyledLink } from "../../styles";
-import { IJson } from "../../types/json";
-import { useMapFieldValues } from "../../hooks/mapFieldValues";
-import { PropertyRow } from "../PropertyRow/PropertyRow";
+import { StyledLink } from "@/styles";
+import { IJson } from "@/types/json";
+import { useMapFieldValues } from "@/hooks/mapFieldValues";
+import { PropertyRow } from "@/components/PropertyRow/PropertyRow";
 import { H1, H2, H3, P11, P5, Stack } from "@deskpro/deskpro-ui";
 import { ICustomFields } from "@/services/wrike/types";
 import { WrikeLogo } from "@/components/common";
