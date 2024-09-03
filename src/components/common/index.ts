@@ -6,3 +6,4 @@ export { NotFound } from "./NotFound";
 export { TaskItem } from "./TaskItem";
 export { DeskproTickets } from "./DeskproTickets";
 export { Navigation } from "./Navigation";
+export { Card } from "./Card";
