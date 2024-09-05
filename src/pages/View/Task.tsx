@@ -55,19 +55,14 @@ export const ViewTask = () => {
   useDeskproAppEvents({
     async onElementEvent(id) {
       switch (id) {
-        case "menuButton":
+        case "menu":
           await unlinkTask(taskId as string);
-
           navigate("/redirect");
-
           break;
-
-        case "editButton":
+        case "edit":
           navigate("/edit/task/" + taskId);
-
           break;
-
-        case "homeButton":
+        case "home":
           navigate("/redirect");
       }
     },

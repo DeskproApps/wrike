@@ -14,6 +14,7 @@ import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
 import "flatpickr/dist/themes/light.css";
 import "simplebar/dist/simplebar.min.css";
 import "tippy.js/dist/tippy.css";
+import "./main.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(

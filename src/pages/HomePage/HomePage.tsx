@@ -27,7 +27,7 @@ const HomePage = () => {
     registerElement("refresh", { type: "refresh_button" });
     registerElement("plus", {
       type: "plus_button",
-      payload: { type: "changePage", path: "/findOrCreate" },
+      payload: { type: "changePage", path: "/tasks/link" },
     });
   }, []);
 
