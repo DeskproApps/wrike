@@ -28,19 +28,19 @@ const useTask: UseTask = (taskId) => {
   );
 
   const notesByTaskIdQuery = useQueryWithClient(
-    ["notesByTaskId", taskId as ITask["id"]],
+    [QueryKey.NOTES, taskId as ITask["id"]],
     (client) => getNotesByTaskId(client, taskId as ITask["id"], context?.settings),
     { enabled: Boolean(taskId) && Boolean(context?.settings) }
   );
 
   const customFieldsQuery = useQueryWithClient(
-    ["customFields"],
+    [QueryKey.CUSTOM_FIELDS],
     (client) => getCustomFields(client, context?.settings),
     { enabled: Boolean(taskId) && Boolean(context?.settings) }
   );
 
   const workflowsQuery = useQueryWithClient(
-    ["workflows"],
+    [QueryKey.WORKFLOWS],
     (client) => getWorkflows(client, context?.settings),
     { enabled: Boolean(context?.settings) },
   );
@@ -75,6 +75,7 @@ const useTask: UseTask = (taskId) => {
 
   return {
     isLoading: Boolean(taskId) && [
+      users,
       tasksByIdQuery,
       notesByTaskIdQuery,
       customFieldsQuery,

@@ -18,8 +18,6 @@ import "simplebar/dist/simplebar.min.css";
 import "tippy.js/dist/tippy.css";
 import "./main.css";
 
-import "iframe-resizer/js/iframeResizer.contentWindow.js";
-
 TimeAgo.addDefaultLocale(en);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);

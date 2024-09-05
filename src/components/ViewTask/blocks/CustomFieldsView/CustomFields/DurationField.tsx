@@ -1,4 +1,5 @@
 import { P5 } from "@deskpro/deskpro-ui";
+import { NoValue } from "./NoValue";
 import type { FC } from "react";
 import type { CustomFieldType } from "@/types";
 
@@ -14,6 +15,12 @@ const DurationField: FC<Props> = ({ value }) => {
 
   if (minutes) {
     duration.push(`${minutes}m`);
+  }
+
+  if (!value.value) {
+    return (
+      <NoValue/>
+    );
   }
 
   return (

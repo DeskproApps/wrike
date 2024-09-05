@@ -17,4 +17,7 @@ export const QueryKey = {
   TASKS: "tasks",
   TASK: "task",
   CONTACTS: "contacts",
+  CUSTOM_FIELDS: "custom_fields",
+  NOTES: "notes",
+  WORKFLOWS: "workflows",
 };

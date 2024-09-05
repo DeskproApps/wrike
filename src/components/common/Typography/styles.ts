@@ -26,9 +26,9 @@ export const dpNormalize = css`
   a {
     color: ${({ theme }) => theme.colors.cyan100};
     cursor: pointer;
-  }
 
-  a:hover, a:visited, a:active {
-    color: ${({ theme }) => theme.colors.cyan80};
+    &:hover, &:visited, &:active {
+      color: ${({ theme }) => theme.colors.cyan80};
+    }
   }
 `;

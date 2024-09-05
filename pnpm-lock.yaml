@@ -32,9 +32,6 @@ importers:
       '@tanstack/react-query':
         specifier: ^4.33.0
         version: 4.33.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      iframe-resizer:
-        specifier: ^5.2.6
-        version: 5.2.6
       javascript-time-ago:
         specifier: ^2.5.11
         version: 2.5.11
@@ -571,18 +568,6 @@ packages:
 
   '@humanwhocodes/object-schema@1.2.1':
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
-
-  '@iframe-resizer/child@5.2.6':
-    resolution: {integrity: sha512-Dl9tlkgG5qOcXjQo2H5Cs3cs4n+bh+0xXpISagBmH5hs4nrKNXTFGYuxM1bGYKvMQu8yTMIMrPgywsFo0LRtWg==}
-
-  '@iframe-resizer/core@5.2.6':
-    resolution: {integrity: sha512-lKt25OAYfZIak2HAfvfg4jT24P9Ap++uru8tujmkcn7aZFTHOMHPv9zxvG6OgzHCAI26EvMbRv9OpX8Ng3BV9w==}
-
-  '@iframe-resizer/jquery@5.2.6':
-    resolution: {integrity: sha512-76NxIpvK+QNuUCanSel6HjGPERQoHqJkufcbZTbr9c1f5kCcqBMKc2Cpk+U/g/Qiee0ECD/hAYZJ8u6GaR7LaA==}
-
-  '@iframe-resizer/parent@5.2.6':
-    resolution: {integrity: sha512-Z+jGWDjIRTvq7HgGYEKupP+UWkrA5LyPF4p3SGDlG99yIl3cK+/7paPS/sasAiIPxrgtRSarAzLj/NR1u2A3bA==}
 
   '@istanbuljs/load-nyc-config@1.1.0':
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}
@@ -1876,9 +1861,6 @@ packages:
   iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
-
-  iframe-resizer@5.2.6:
-    resolution: {integrity: sha512-z87YH1m3c78ffCp8ekueNrCfXgD88ChcPJNh+34z7pZfk4RKTsQrwbOrJHhJo+OSAp6XQMCWodGkLDiO4vn8Ag==}
 
   ignore@4.0.6:
     resolution: {integrity: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==}
@@ -3669,18 +3651,6 @@ snapshots:
 
   '@humanwhocodes/object-schema@1.2.1': {}
 
-  '@iframe-resizer/child@5.2.6': {}
-
-  '@iframe-resizer/core@5.2.6': {}
-
-  '@iframe-resizer/jquery@5.2.6':
-    dependencies:
-      '@iframe-resizer/core': 5.2.6
-
-  '@iframe-resizer/parent@5.2.6':
-    dependencies:
-      '@iframe-resizer/core': 5.2.6
-
   '@istanbuljs/load-nyc-config@1.1.0':
     dependencies:
       camelcase: 5.3.1
@@ -5203,12 +5173,6 @@ snapshots:
   iconv-lite@0.6.3:
     dependencies:
       safer-buffer: 2.1.2
-
-  iframe-resizer@5.2.6:
-    dependencies:
-      '@iframe-resizer/child': 5.2.6
-      '@iframe-resizer/jquery': 5.2.6
-      '@iframe-resizer/parent': 5.2.6
 
   ignore@4.0.6: {}
 
