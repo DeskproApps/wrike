@@ -20,7 +20,7 @@ const format = (
   rawDate?: DateTime,
   options: Options = {},
 ): string|null => {
-  if (!rawDate || typeof rawDate !== "string") {
+  if (typeof rawDate !== "string" || !rawDate) {
     return null;
   }
 

@@ -11,7 +11,7 @@ import { IJson } from "@/types/json";
 import { useMapFieldValues } from "@/hooks/mapFieldValues";
 import { PropertyRow } from "@/components/PropertyRow/PropertyRow";
 import { H1, H2, H3, P11, P5, Stack } from "@deskpro/deskpro-ui";
-import { ICustomFields } from "@/services/wrike/types";
+import { ICustomField } from "@/services/wrike/types";
 import { WrikeLogo } from "@/components/common";
 
 const SpaceBetweenFields = ({
@@ -131,7 +131,7 @@ export const FieldMapping = ({
                 <FieldMapping
                   fields={[
                     field.customFields.reduce(
-                      (a: Record<string, string>, c: ICustomFields) => ({
+                      (a: Record<string, string>, c: ICustomField) => ({
                         ...a,
                         [c.title]: {
                           value: c.value,
@@ -141,7 +141,7 @@ export const FieldMapping = ({
                       {}
                     ),
                   ]}
-                  metadata={(field.customFields as ICustomFields[]).map((e) => [
+                  metadata={(field.customFields as ICustomField[]).map((e) => [
                     {
                       name: e.title,
                       label: e.title,

@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import type { ICustomFields, ITask } from "@/services/wrike/types";
+import type { ICustomField, ITask } from "@/services/wrike/types";
 import { CustomTag } from "@/components/CustomTag/CustomTag";
 import { IJson } from "@/types/json";
 import { formatDate } from "@/utils/dateUtils";
@@ -11,7 +11,7 @@ import {
 
 type CustomFieldTypeField = Record<
   string,
-  { value: string; settings: ICustomFields["settings"] }
+  { value: string; settings: ICustomField["settings"] }
 >;
 
 export const useMapFieldValues = () => {
@@ -80,8 +80,8 @@ export const useMapFieldValues = () => {
 
         case "Currency_customField":
           value = (() => {
-            const data = (field as unknown as Record<string, ICustomFields>)[
-              metadataField.name as unknown as keyof ICustomFields
+            const data = (field as unknown as Record<string, ICustomField>)[
+              metadataField.name as unknown as keyof ICustomField
             ];
 
             return new Intl.NumberFormat("en-GB", {

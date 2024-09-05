@@ -51,7 +51,7 @@ export interface IAccount {
   workDays: string[];
 }
 
-export interface ICustomFields {
+export interface ICustomField {
   id: string;
   accountId: IAccount["id"];
   title: string;
@@ -94,6 +94,7 @@ export interface IUser {
   title: string;
   companyName: string;
   phone: string;
+  primaryEmail: string;
 }
 
 export interface Profile {

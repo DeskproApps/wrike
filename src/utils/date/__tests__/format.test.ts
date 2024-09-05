@@ -18,11 +18,11 @@ describe("utils", () => {
       });
 
       test("should return undefined if it's not a date", () => {
-        expect(format("20210907T155000Z")).toBeUndefined();
+        expect(format("20210907T155000Z")).toBeNull();
       });
 
       test.each([undefined, null, "", 0, true, false, {}])("wrong value: %p", (payload) => {
-        expect(format(payload as never)).toBeUndefined();
+        expect(format(payload as never)).toBeNull();
       });
     });
   });

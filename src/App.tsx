@@ -5,10 +5,10 @@ import { useDeskproAppEvents, useDeskproAppClient } from "@deskpro/app-sdk";
 import { Redirect } from "./components/Redirect/Redirect";
 import { CreateNote } from "./pages/Create/Note";
 import { FindOrCreate } from "./pages/FindOrCreate/FindOrCreate";
-import { ViewTask } from "./pages/View/Task";
 import { EditTask } from "./pages/Edit/Task";
 import {
   HomePage,
+  ViewTaskPage,
   LinkTasksPage,
   LoadingAppPage,
   VerifySettingsPage,
@@ -34,12 +34,12 @@ const App = () => {
       <Route path="/findOrCreate" element={<FindOrCreate />} />
       <Route path="/create/note/:taskId" element={<CreateNote />} />
       <Route path="/edit/task/:taskId" element={<EditTask />} />
-      <Route path="/view/task/:taskId" element={<ViewTask />} />
       <Route path="/redirect" element={<Redirect />} />
 
       <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/tasks/link" element={<LinkTasksPage />} />
+      <Route path="/tasks/:taskId" element={<ViewTaskPage />} />
       <Route index element={<LoadingAppPage />} />
     </Routes>
   );
