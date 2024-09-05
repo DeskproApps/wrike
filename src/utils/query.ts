@@ -15,4 +15,9 @@ export const query = new QueryClient({
 export const QueryKey = {
   LINKED_TASKS: "linked_tasks",
   TASKS: "tasks",
+  TASK: "task",
+  CONTACTS: "contacts",
+  CUSTOM_FIELDS: "custom_fields",
+  NOTES: "notes",
+  WORKFLOWS: "workflows",
 };

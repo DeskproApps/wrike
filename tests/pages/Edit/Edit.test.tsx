@@ -1,6 +1,6 @@
 import { lightTheme, ThemeProvider } from "@deskpro/deskpro-ui";
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react/";
-import * as Api from "../../../src/api/api";
+import * as Api from "../../../src/services/wrike";
 import React from "react";
 import { MutateTask } from "../../../src/components/Mutate/Task";
 
@@ -12,7 +12,7 @@ const renderPage = () => {
   );
 };
 
-jest.mock("../../../src/api/api", () => {
+jest.mock("../../../src/services/wrike", () => {
   return {
     getTaskById: () => ({
       data: [

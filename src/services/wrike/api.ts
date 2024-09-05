@@ -7,7 +7,7 @@ import {
 } from "@deskpro/app-sdk";
 import { BASE_URL, placeholders } from "@/constants";
 import {
-  ICustomFields,
+  ICustomField,
   IFolderFromList,
   ITask,
   ITaskFromList,
@@ -16,13 +16,14 @@ import {
   IWrikeResponse,
   IAccount,
   RequestParams,
+  INote,
 } from "./types";
 import type { Settings } from "@/types";
 
 export const getCustomFields = async (
   client: IDeskproClient,
   settings: RequestParams["settings"],
-): Promise<IWrikeResponse<ICustomFields[]>> =>
+): Promise<IWrikeResponse<ICustomField[]>> =>
   request(client, { endpoint: `api/v4/customfields`, method: "GET", settings });
 
 export const createNote = async (
@@ -42,7 +43,7 @@ export const getNotesByTaskId = async (
   client: IDeskproClient,
   taskId: string,
   settings: RequestParams["settings"],
-) => request(client, {
+): Promise<IWrikeResponse<INote[]>> => request(client, {
   endpoint: `api/v4/tasks/${taskId}/comments`,
   method: "GET",
   settings,

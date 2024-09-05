@@ -19,8 +19,8 @@ describe("Navigation", () => {
 
   test("render", async () => {
     const { findByRole } = renderNavigation();
-    const findButton = await findByRole("button", { name: /Find Contact/i });
-    const createButton = await findByRole("button", { name: /Create Contact/i });
+    const findButton = await findByRole("button", { name: /Find Task/i });
+    const createButton = await findByRole("button", { name: /Create Task/i });
 
     expect(findButton).toBeInTheDocument();
     expect(createButton).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe("Navigation", () => {
   test("should navigate to create profile", async () => {
     const mockOnNavigateToCreate = jest.fn();
     const { findByRole } = renderNavigation({ onNavigateToCreate: mockOnNavigateToCreate });
-    const createButton = await findByRole("button", { name: /Create Contact/i });
+    const createButton = await findByRole("button", { name: /Create Task/i });
 
     await userEvent.click(createButton as Element);
 
@@ -39,7 +39,7 @@ describe("Navigation", () => {
   test("should navigate to find profile", async () => {
     const mockOnNavigateToLink = jest.fn();
     const { findByRole } = renderNavigation({ onNavigateToLink: mockOnNavigateToLink });
-    const findButton = await findByRole("button", { name: /Find Contact/i });
+    const findButton = await findByRole("button", { name: /Find Task/i });
 
     await userEvent.click(findButton as Element);
 

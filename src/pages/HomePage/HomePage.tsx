@@ -16,7 +16,7 @@ const HomePage = () => {
   const { tasks, isLoading } = useTasks();
 
   const onNavigateToTask = useCallback((task: ITaskFromList) => {
-    navigate(`/view/task/${task.id}`);
+    navigate(`/tasks/${task.id}`);
   }, [navigate]);
 
   useSetTitle();

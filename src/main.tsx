@@ -1,6 +1,8 @@
 import { Suspense, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
 import { QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { Scrollbar } from "@deskpro/deskpro-ui";
@@ -15,6 +17,8 @@ import "flatpickr/dist/themes/light.css";
 import "simplebar/dist/simplebar.min.css";
 import "tippy.js/dist/tippy.css";
 import "./main.css";
+
+TimeAgo.addDefaultLocale(en);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(

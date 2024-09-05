@@ -1,5 +1,13 @@
 import type { To } from "react-router-dom";
 import type { Context } from "@deskpro/app-sdk";
+import type {
+  IUser,
+  INote,
+  ITask,
+  CustomStatus,
+  ICustomField,
+  CustomFieldTask,
+} from "@/services/wrike/types";
 
 /** Common types */
 
@@ -29,3 +37,17 @@ export type NavigateToChangePage = { type: "changePage", path: To };
 export type EventPayload =
   | NavigateToChangePage
 ;
+
+export type CustomFieldType = {
+  meta: ICustomField
+  value: CustomFieldTask,
+};
+
+export type TaskType = Partial<Omit<ITask, "status"|"customFields"> & {
+  status: CustomStatus["name"]|undefined;
+  customFields: CustomFieldType[];
+}>;
+
+export type NoteType = INote & {
+  author?: IUser;
+};

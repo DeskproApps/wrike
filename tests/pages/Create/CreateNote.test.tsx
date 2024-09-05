@@ -1,6 +1,6 @@
 import { lightTheme, ThemeProvider } from "@deskpro/deskpro-ui";
 import { cleanup, fireEvent, render, waitFor, act } from "@testing-library/react/";
-import { createNote, getWorkflows } from "../../../src/api/api";
+import { createNote, getWorkflows } from "../../../src/services/wrike";
 import React from "react";
 import { CreateNote } from "../../../src/pages/Create/Note";
 
@@ -27,7 +27,7 @@ const mockWorkflows = {
   ],
 };
 
-jest.mock("../../../src/api/api");
+jest.mock("../../../src/services/wrike");
 
 describe("Create Note", () => {
   afterEach(() => {
