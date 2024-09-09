@@ -73,6 +73,7 @@ export interface Settings {
   options?: Option[];
   optionColorsEnabled?: boolean;
   allowOtherValues?: boolean;
+  contacts?: string[];
 }
 
 export interface Option {

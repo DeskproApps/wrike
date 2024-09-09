@@ -22,7 +22,7 @@ const LinkTasksPage: FC = () => {
 
   const onChangeSearchQuery = useDebouncedCallback(setSearchQuery, 500);
 
-  const onNavigateToCreate = useCallback(() => navigate("/findOrCreate"), [navigate]);
+  const onNavigateToCreate = useCallback(() => navigate("/tasks/create"), [navigate]);
 
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 

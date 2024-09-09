@@ -1,22 +1,19 @@
 import {
   useDeskproAppClient,
-  useDeskproAppEvents,
   useDeskproLatestAppContext,
-  useInitialisedDeskproAppClient,
 } from "@deskpro/app-sdk";
 import { useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { InputWithTitle } from "@/components/InputWithTitle/InputWithTitle";
-import { Button, P8, Stack } from "@deskpro/deskpro-ui";
+import { Stack } from "@deskpro/deskpro-ui";
 import { createNote } from "@/services/wrike";
-import { Container } from "@/components/common";
+import { useSetTitle, useRegisterElements } from "@/hooks";
+import { Input, Label, Button, Container, ErrorBlock } from "@/components/common";
 
 export const CreateNote = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext();
   const navigate = useNavigate();
   const { taskId } = useParams();
-
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -36,46 +33,43 @@ export const CreateNote = () => {
     }
 
     return createNote(client, taskId, note, context.settings)
-      .then(() => navigate(-1))
+      .then(() => navigate(`/tasks/${taskId}`))
       .finally(() => setSubmitting(false));
   }, [client, context?.settings, navigate, taskId, note]);
 
-  useInitialisedDeskproAppClient((client) => {
-    client.setTitle("Create Update");
+  const onCancel = useCallback(() => {
+    navigate(`/tasks/${taskId}`);
+  }, [navigate, taskId]);
 
-    client.deregisterElement("edit");
-  });
+  useSetTitle("Create Update");
 
-  useDeskproAppEvents({
-    async onElementEvent(id) {
-      switch (id) {
-        case "home":
-          navigate("/redirect");
-      }
-    },
-  });
+  useRegisterElements(({ registerElement }) => {
+    registerElement("refresh", { type: "refresh_button" });
+    registerElement("home", {
+      type: "home_button",
+      payload: { type: "changePage", path: "/home" },
+    });
+  }, []);
 
   return (
     <Container>
-      <Stack style={{ width: "100%" }} vertical gap={8}>
-        <InputWithTitle
-          title="New update"
-          setValue={(e) => setNote(e.target.value)}
-          data-testid="note-input"
+      {error && <ErrorBlock texts={[error]} />}
+
+      <Label label="New update" required>
+        <Input
           value={note}
-          required={true}
+          onChange={(e) => setNote(e.target.value)}
         />
-        <Stack justify="space-between" style={{ width: "100%" }}>
-          <Button
-            data-testid="button-submit"
-            onClick={onCreate}
-            loading={submitting}
-            text={"Create"}
-            disabled={submitting}
-            />
-          <Button onClick={() => navigate(-1)} text="Cancel" intent="secondary" />
-        </Stack>
-        {error && <P8 color="red">{error}</P8>}
+      </Label>
+
+      <Stack justify="space-between">
+        <Button
+          text="Create"
+          onClick={onCreate}
+          loading={submitting}
+          disabled={submitting}
+        />
+        <Button type="button" text="Cancel" intent="tertiary" onClick={onCancel}/>
       </Stack>
     </Container>
   );

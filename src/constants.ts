@@ -6,6 +6,8 @@ export const APP_PREFIX = "wrike";
 
 export const ENTITY = "linkedWrikeTasks";
 
+export const DEFAULT_ERROR = "There was an error!";
+
 export const placeholders = {
   ACCESS_TOKEN: "__access_token__",
 };
@@ -25,3 +27,5 @@ export const CustomFieldsMap = {
   DropDown: "DropDown",
   Multiple: "Multiple",
 };
+
+export const IMPORTANCES = ["High", "Normal", "Low"];

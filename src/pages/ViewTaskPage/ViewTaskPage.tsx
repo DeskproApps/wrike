@@ -33,7 +33,7 @@ const ViewTaskPage: FC = () => {
       type: "edit_button",
       payload: {
         type: "changePage",
-        path: `/edit/task/${task.id}`,
+        path: `/tasks/${task.id}/edit`,
       },
     });
   }, [task]);

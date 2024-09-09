@@ -9,3 +9,7 @@ export { Navigation } from "./Navigation";
 export { Card } from "./Card";
 export { Tag, Tags } from "./Tag";
 export { Comment } from "./Comment";
+export { Label } from "./Label";
+export { Input } from "./Input";
+export { TextArea } from "./TextArea";
+export { ErrorBlock } from "./ErrorBlock";
