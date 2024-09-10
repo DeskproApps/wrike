@@ -20,4 +20,5 @@ export const QueryKey = {
   CUSTOM_FIELDS: "custom_fields",
   NOTES: "notes",
   WORKFLOWS: "workflows",
+  FOLDERS: "folders",
 };

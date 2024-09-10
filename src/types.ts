@@ -1,4 +1,5 @@
 import type { To } from "react-router-dom";
+import type { DropdownValueType } from "@deskpro/deskpro-ui";
 import type { Context } from "@deskpro/app-sdk";
 import type {
   IUser,
@@ -10,6 +11,7 @@ import type {
 } from "@/services/wrike/types";
 
 /** Common types */
+export type Option<Value = unknown> = Omit<DropdownValueType<Value>, "subItems">;
 
 /** Format: yyyy-MM-dd'T'HH:mm:ss ('T'HH:mm:ss is optional) */
 export type DateTime = string;

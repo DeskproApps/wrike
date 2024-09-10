@@ -66,7 +66,7 @@ export const createTask = async (
   folderId: string,
   data: unknown,
   settings: RequestParams["settings"],
-) => {
+): Promise<IWrikeResponse<ITaskFromList[]>> => {
   return request(client, {
     endpoint: `api/v4/folders/${folderId}/tasks`,
     method: "POST",

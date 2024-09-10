@@ -75,7 +75,6 @@ const useTask: UseTask = (taskId) => {
 
   return {
     isLoading: Boolean(taskId) && [
-      users,
       tasksByIdQuery,
       notesByTaskIdQuery,
       customFieldsQuery,

@@ -2,15 +2,14 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { match } from "ts-pattern";
 import { useDebouncedCallback } from "use-debounce";
 import { useDeskproAppEvents, useDeskproAppClient } from "@deskpro/app-sdk";
-import { Redirect } from "./components/Redirect/Redirect";
 import { CreateNote } from "./pages/Create/Note";
-import { FindOrCreate } from "./pages/FindOrCreate/FindOrCreate";
-import { EditTask } from "./pages/Edit/Task";
 import {
   HomePage,
   ViewTaskPage,
+  EditTaskPage,
   LinkTasksPage,
   LoadingAppPage,
+  CreateTaskPage,
   VerifySettingsPage,
 } from "@/pages";
 import { isNavigatePayload } from "@/utils";
@@ -31,15 +30,13 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/findOrCreate" element={<FindOrCreate />} />
-      <Route path="/create/note/:taskId" element={<CreateNote />} />
-      <Route path="/edit/task/:taskId" element={<EditTask />} />
-      <Route path="/redirect" element={<Redirect />} />
-
       <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/tasks/link" element={<LinkTasksPage />} />
+      <Route path="/tasks/create" element={<CreateTaskPage />} />
       <Route path="/tasks/:taskId" element={<ViewTaskPage />} />
+      <Route path="/tasks/:taskId/edit" element={<EditTaskPage />} />
+      <Route path="/create/note/:taskId" element={<CreateNote />} />
       <Route index element={<LoadingAppPage />} />
     </Routes>
   );
