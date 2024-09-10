@@ -23,8 +23,7 @@ const useLoadingApp: UseLoadingApp = () => {
 
     checkAuthService(client, settings)
       .then(() => getEntityListService(client, ticketId))
-      // .then((entityIds) => navigate(entityIds?.length ? "/home" : "/tasks/link"))
-      .then(() => navigate("/tasks/IEAGJJFWKRMLJ433/edit"))
+      .then((entityIds) => navigate(entityIds?.length ? "/home" : "/tasks/link"))
       .catch(asyncErrorHandler)
   }, [navigate, ticketId, settings, asyncErrorHandler]);
 };

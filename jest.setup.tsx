@@ -1,6 +1,9 @@
 import "regenerator-runtime/runtime";
 import "@testing-library/jest-dom";
+// for tests in Jest, because these observers arn't available in the Node environment
 import "intersection-observer";
+// todo: check after the removal `iframe-resizer` if it is still needed
+// for tests in Jest, because these observers arn't available in the Node environment
 import ResizeObserver from "resize-observer-polyfill";
 import { useQuery } from "@tanstack/react-query";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
