@@ -7,3 +7,5 @@ export { getFullName } from "./getFullName";
 export { getOption } from "./getOption";
 export { getError } from "./getError";
 export { toHTML, toMarkdown } from "./markdown";
+export { parseJsonErrorMessage } from "./parseJsonErrorMessage";
+export { isUnlinkPayload } from "./isUnlinkPayload";

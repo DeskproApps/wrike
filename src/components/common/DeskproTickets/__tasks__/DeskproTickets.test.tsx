@@ -1,9 +1,9 @@
 import { cleanup, waitFor } from "@testing-library/react";
 import { DeskproTickets } from "../DeskproTickets";
-import { getEntityAssociationCountService } from "../../../../services/deskpro";
+import { getEntityAssociationCountService } from "@/services/deskpro";
 import { render } from "@deskpro/app-testing-utils";
 
-jest.mock("../../../../services/deskpro/getEntityAssociationCountService");
+jest.mock("@/services/deskpro/getEntityAssociationCountService");
 
 describe("DeskproTickets", () => {
   afterEach(() => {

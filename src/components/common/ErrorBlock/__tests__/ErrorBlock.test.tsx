@@ -4,7 +4,7 @@ import { ErrorBlock } from "../ErrorBlock";
 import type { Props } from "../ErrorBlock";
 
 const renderErrorBlock = (props?: Partial<Props>) => render((
-  <ErrorBlock texts={[props?.texts || "Some error"]} />
+  <ErrorBlock texts={props?.texts || ["Some error"]} />
 ), { wrappers: { theme: true } });
 
 describe("AdminCallback", () => {
@@ -14,7 +14,14 @@ describe("AdminCallback", () => {
   });
 
   test("render", async () => {
-    const { getByText } = renderErrorBlock({ texts: ["Some error"]});
+    const { getByText } = renderErrorBlock();
     expect(getByText("Some error")).toBeInTheDocument();
+  });
+
+  test("should show two errors", async () => {
+    const { getByText } = renderErrorBlock({ texts: ["one error", "two error"]});
+
+    expect(getByText("one error")).toBeInTheDocument();
+    expect(getByText("two error")).toBeInTheDocument();
   });
 });

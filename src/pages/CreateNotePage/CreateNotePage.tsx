@@ -9,7 +9,7 @@ import { createNote } from "@/services/wrike";
 import { useSetTitle, useRegisterElements } from "@/hooks";
 import { Input, Label, Button, Container, ErrorBlock } from "@/components/common";
 
-export const CreateNote = () => {
+const CreateNotePage = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext();
   const navigate = useNavigate();
@@ -74,3 +74,5 @@ export const CreateNote = () => {
     </Container>
   );
 };
+
+export { CreateNotePage };

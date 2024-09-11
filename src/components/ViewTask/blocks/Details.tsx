@@ -4,7 +4,7 @@ import { format } from "@/utils/date";
 import type { FC } from "react";
 import type { TaskType } from "@/types";
 
-type Props = {
+export type Props = {
   task: TaskType;
 };
 

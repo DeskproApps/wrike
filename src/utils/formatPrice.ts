@@ -18,7 +18,9 @@ const formatPrice = (price?: string|number, options?: Options): string => {
     maximumFractionDigits: options?.fraction ?? 2,
   });
 
-  return formatter.format(Number(price || 0));
+  const parsedPrice = Number(price || 0);
+
+  return Number.isNaN(parsedPrice) ? "-" : formatter.format(Number(price || 0));
 };
 
 export { formatPrice };

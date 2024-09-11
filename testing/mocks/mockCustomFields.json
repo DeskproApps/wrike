@@ -1,0 +1,286 @@
+{
+  "kind": "customfields",
+  "data": [
+    {
+      "id": "IEAGJJFWJUAGXMGF",
+      "accountId": "IEAGJJFW",
+      "title": "Impact",
+      "type": "DropDown",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "values": [
+          "Low",
+          "Medium",
+          "High"
+        ],
+        "options": [
+          {
+            "value": "Low",
+            "color": "Green"
+          },
+          {
+            "value": "Medium",
+            "color": "Yellow"
+          },
+          {
+            "value": "High",
+            "color": "Red"
+          }
+        ],
+        "optionColorsEnabled": true,
+        "allowOtherValues": false,
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXMGG",
+      "accountId": "IEAGJJFW",
+      "title": "Budget",
+      "type": "Currency",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "decimalPlaces": 2,
+        "useThousandsSeparator": true,
+        "currency": "USD",
+        "aggregation": "Sum",
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM64",
+      "accountId": "IEAGJJFW",
+      "title": "Text field",
+      "type": "Text",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM65",
+      "accountId": "IEAGJJFW",
+      "title": "Number field",
+      "type": "Numeric",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "decimalPlaces": 0,
+        "useThousandsSeparator": false,
+        "aggregation": "Sum",
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM7C",
+      "accountId": "IEAGJJFW",
+      "title": "Single select field",
+      "type": "DropDown",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "values": [
+          "one",
+          "two",
+          "three"
+        ],
+        "options": [
+          {
+            "value": "one"
+          },
+          {
+            "value": "two"
+          },
+          {
+            "value": "three"
+          }
+        ],
+        "optionColorsEnabled": false,
+        "allowOtherValues": true,
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM7S",
+      "accountId": "IEAGJJFW",
+      "title": "Multiple select field",
+      "type": "Multiple",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "values": [
+          "one",
+          "two",
+          "three",
+          "four",
+          "five"
+        ],
+        "options": [
+          {
+            "value": "one"
+          },
+          {
+            "value": "two"
+          },
+          {
+            "value": "three"
+          },
+          {
+            "value": "four"
+          },
+          {
+            "value": "five"
+          }
+        ],
+        "optionColorsEnabled": false,
+        "allowOtherValues": true,
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM7U",
+      "accountId": "IEAGJJFW",
+      "title": "Date field",
+      "type": "Date",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "readOnly": false,
+        "allowTime": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM7V",
+      "accountId": "IEAGJJFW",
+      "title": "Duration field",
+      "type": "Duration",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "aggregation": "Sum",
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM7W",
+      "accountId": "IEAGJJFW",
+      "title": "Checkbox field",
+      "type": "Checkbox",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "readOnly": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM7B",
+      "accountId": "IEAGJJFW",
+      "title": "Percent field",
+      "type": "Percentage",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "decimalPlaces": 2,
+        "aggregation": "Sum",
+        "readOnly": false,
+        "allowTime": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM67",
+      "accountId": "IEAGJJFW",
+      "title": "Currency field",
+      "type": "Currency",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "decimalPlaces": 2,
+        "useThousandsSeparator": true,
+        "currency": "UAH",
+        "aggregation": "Sum",
+        "readOnly": false,
+        "allowTime": false
+      }
+    },
+    {
+      "id": "IEAGJJFWJUAGXM7T",
+      "accountId": "IEAGJJFW",
+      "title": "People field",
+      "type": "Contacts",
+      "spaceId": "IEAGJJFWI5MLJ426",
+      "sharedIds": [],
+      "sharing": {},
+      "settings": {
+        "inheritanceType": "All",
+        "applicableEntityTypes": [
+          "WorkItem"
+        ],
+        "contacts": [
+          "KUATMOGX",
+          "IEAGJJFWJEASM4KA",
+          "IEAGJJFWJEASM4KC",
+          "IEAGJJFWJEASM4KD"
+        ],
+        "readOnly": false,
+        "allowTime": false
+      }
+    }
+  ]
+}

@@ -16,11 +16,11 @@ const StyledErrorBlock = styled(P5)`
 `;
 
 const ErrorBlock: FC<Props> = ({ texts }) => (
-  <div>
+  <>
     {texts.map((msg, idx) => (
       <StyledErrorBlock key={idx}>{msg || DEFAULT_ERROR}</StyledErrorBlock>)
     )}
-  </div>
+  </>
 );
 
 export { ErrorBlock };

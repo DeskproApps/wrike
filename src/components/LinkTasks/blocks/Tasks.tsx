@@ -5,7 +5,7 @@ import { Card, NotFound, TaskItem, Container } from "@/components/common";
 import type { FC } from "react";
 import type { ITaskFromList } from "@/services/wrike/types";
 
-type Props = {
+export type Props = {
   isLoading: boolean;
   tasks: ITaskFromList[];
   selectedTasks: ITaskFromList[];

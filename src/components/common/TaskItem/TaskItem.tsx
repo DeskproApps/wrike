@@ -5,7 +5,7 @@ import { WrikeLogo, ButtonAsLink, DeskproTickets } from "@/components/common";
 import type { FC } from "react";
 import type { ITaskFromList } from "@/services/wrike/types";
 
-type Props = {
+export type Props = {
   task: ITaskFromList;
   onClickTitle?: () => void,
 };

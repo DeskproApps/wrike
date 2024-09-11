@@ -3,7 +3,7 @@ import { Button } from "@/components/common";
 import type { FC } from "react";
 import type { ITaskFromList } from "@/services/wrike/types";
 
-type Props = {
+export type Props = {
   isSubmitting: boolean,
   onCancel: () => void,
   selectedTasks: ITaskFromList[],
