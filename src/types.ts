@@ -36,8 +36,11 @@ export type TicketContext = Context<TicketData, Settings>;
 
 export type NavigateToChangePage = { type: "changePage", path: To };
 
+export type UnlinkPayload = { type: "unlink", task: TaskType };
+
 export type EventPayload =
   | NavigateToChangePage
+  | UnlinkPayload
 ;
 
 export type CustomFieldType = {

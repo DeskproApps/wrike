@@ -1,0 +1,44 @@
+{
+  "kind": "contacts",
+  "data": [
+    {
+      "id": "IEAGJJFWJEASM4KC",
+      "type": "Invitation",
+      "profiles": [
+        {
+          "accountId": "IEAGJJFW",
+          "email": "ivan.vyhovsky@cossacks.org",
+          "role": "User",
+          "external": false
+        }
+      ],
+      "deleted": false,
+      "me": false
+    },
+    {
+      "id": "KUATMOGX",
+      "firstName": "Pylyp",
+      "lastName": "Orlyk",
+      "type": "Person",
+      "profiles": [
+        {
+          "accountId": "IEAGJJFW",
+          "email": "contact@zaporizhianhost.ua",
+          "role": "User",
+          "external": false,
+          "admin": false,
+          "owner": true
+        }
+      ],
+      "avatarUrl": "https://www.wrike.com/avatars//7D/6A/Box_ffba68c8_80-79_v1.png",
+      "timezone": "US/Pacific",
+      "locale": "en",
+      "deleted": false,
+      "me": true,
+      "title": "Empty",
+      "companyName": "Zaporizhian Host",
+      "phone": "+380 0504567892",
+      "primaryEmail": "pylyp.orlyk@zaporizhian.org"
+    }
+  ]
+}

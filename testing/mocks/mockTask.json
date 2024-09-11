@@ -1,0 +1,106 @@
+{
+  "kind": "tasks",
+  "data": [
+    {
+      "id": "IEAGJJFWKRMLJ433",
+      "accountId": "IEAGJJFW",
+      "title": "first task",
+      "description": "<h3>Add a description for the task here</h3><br />You can:<br /><ul><li>Use <b>formatting tools</b> like <b>text colors</b> and highlights</li><li>Attach <b>files</b> using drag and drop</li></ul><br /><img src=\"https://storage.www.wrike.com/filemeta/oriented/F532111204.A6595766\" /><br />",
+      "briefDescription": "Add a description for the task here You can: • Use formatting tools like text colors and highlights• Attach files using drag...",
+      "parentIds": [
+        "IEAGJJFWI5MLJ43V"
+      ],
+      "superParentIds": [],
+      "sharedIds": [
+        "KUATMOGX",
+        "KX7XV7IP",
+        "KUATMAGA"
+      ],
+      "responsibleIds": [
+        "KUATMOGX"
+      ],
+      "status": "Active",
+      "importance": "High",
+      "createdDate": "2024-09-06T09:51:04Z",
+      "updatedDate": "2024-09-10T08:11:58Z",
+      "dates": {
+        "type": "Planned",
+        "duration": 960,
+        "start": "2024-09-05T09:00:00",
+        "due": "2024-09-06T17:00:00"
+      },
+      "scope": "WsTask",
+      "authorIds": [
+        "KUATMOGX"
+      ],
+      "customStatusId": "IEAGJJFWJMFEXYCW",
+      "hasAttachments": true,
+      "permalink": "https://www.wrike.com/open.htm?id=1488253819",
+      "priority": "09af90007fffffffffff8ff0",
+      "followedByMe": true,
+      "followerIds": [
+        "KUATMOGX"
+      ],
+      "superTaskIds": [],
+      "subTaskIds": [
+        "IEAGJJFWKRMLJ44F",
+        "IEAGJJFWKRMLJ437"
+      ],
+      "dependencyIds": [
+        "IEAGJJFWIVMLJ433KNMLJ43Z",
+        "IEAGJJFWIVMLJ433KNMLJ44F"
+      ],
+      "metadata": [],
+      "customFields": [
+        {
+          "id": "IEAGJJFWJUAGXMGF",
+          "value": "Low"
+        },
+        {
+          "id": "IEAGJJFWJUAGXMGG",
+          "value": "5000"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM7B",
+          "value": "79"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM7T",
+          "value": "KUATMOGX,IEAGJJFWJEASM4KC"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM7V",
+          "value": "02:25"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM67",
+          "value": "100500"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM7S",
+          "value": "[\"one\",\"three\",\"five\"]"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM64",
+          "value": "Text field Text field Text field Text field Text field"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM7W",
+          "value": "true"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM65",
+          "value": "500100"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM7C",
+          "value": "two"
+        },
+        {
+          "id": "IEAGJJFWJUAGXM7U",
+          "value": "2024-09-11"
+        }
+      ]
+    }
+  ]
+}

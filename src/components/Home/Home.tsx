@@ -4,7 +4,7 @@ import { Container, NotFound, TaskItem } from "@/components/common";
 import type { FC } from "react";
 import type { ITaskFromList } from "@/services/wrike/types";
 
-type Props = {
+export type Props = {
   tasks: ITaskFromList[];
   onNavigateToTask: (task: ITaskFromList) => void;
 };

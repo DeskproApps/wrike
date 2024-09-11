@@ -33,7 +33,7 @@ const useTasks: UseTasks = () => {
   );
 
   return {
-    isLoading: [linkedIds, tasks].some(({ isLoading }) => isLoading),
+    isLoading: [linkedIds, tasks].some(({ isLoading }) => isLoading) && !linkedIds,
     tasks: tasks.data?.data ?? [],
   };
 };

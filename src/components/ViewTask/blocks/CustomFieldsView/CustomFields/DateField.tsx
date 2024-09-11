@@ -7,15 +7,9 @@ import type { CustomFieldType } from "@/types";
 type Props = CustomFieldType;
 
 const DateField: FC<Props> = ({ value }) => {
-  if (!value.value) {
-    return (
-      <NoValue/>
-    );
-  }
+  const date = format(value.value);
 
-  return (
-    <P5>{format(value.value)}</P5>
-  )
+  return date ? <P5>{date}</P5> : <NoValue/>;
 };
 
 export { DateField };

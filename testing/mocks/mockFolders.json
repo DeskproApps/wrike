@@ -1,0 +1,46 @@
+{
+  "kind": "folderTree",
+  "data": [
+    {
+      "id": "IEAGJJFWI7777777",
+      "title": "Root",
+      "childIds": [
+        "IEAGJJFWI5MLJWDF",
+        "IEAGJJFWI5MLJ426"
+      ],
+      "scope": "WsRoot"
+    },
+    {
+      "id": "IEAGJJFWI7777776",
+      "title": "Recycle Bin",
+      "childIds": [],
+      "scope": "RbRoot"
+    },
+    {
+      "id": "IEAGJJFWI5MLJ426",
+      "title": "First space",
+      "childIds": [
+        "IEAGJJFWI5MLJ43V"
+      ],
+      "scope": "WsFolder"
+    },
+    {
+      "id": "IEAGJJFWI5MLJ43V",
+      "title": "Sich",
+      "childIds": [],
+      "scope": "WsFolder",
+      "project": {
+        "authorId": "KUATMOGX",
+        "ownerIds": [],
+        "customStatusId": "IEAGJJFWJMFEXYD6",
+        "createdDate": "2024-09-06T09:51:04Z"
+      }
+    },
+    {
+      "id": "IEAGJJFWI5MLJWDF",
+      "title": "Personal",
+      "childIds": [],
+      "scope": "WsFolder"
+    }
+  ]
+}
