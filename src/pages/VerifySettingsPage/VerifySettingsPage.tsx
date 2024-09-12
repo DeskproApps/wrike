@@ -1,10 +1,10 @@
 import { useState, useCallback } from "react";
 import { useDeskproAppEvents, useDeskproAppClient } from "@deskpro/app-sdk";
-import { getAccounts } from "../../api/api";
-import { VerifySettings } from "../../components/VerifySettings";
+import { getAccounts } from "@/services/wrike";
+import { VerifySettings } from "@/components/VerifySettings";
 import type { FC } from "react";
-import type { Settings } from "../../types";
-import type { IAccount } from "../../api/types";
+import type { Settings } from "@/types";
+import type { IAccount } from "@/services/wrike/types";
 
 const getError = (err: Error): string => {
   const defaultError = "Failed to connect to Wrike, settings seem to be invalid";

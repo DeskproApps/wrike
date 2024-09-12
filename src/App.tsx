@@ -1,48 +1,54 @@
-import { Suspense } from "react";
-import { QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-query";
-import { ErrorBoundary } from "react-error-boundary";
-import { HashRouter, Route, Routes } from "react-router-dom";
-import { LoadingSpinner } from "@deskpro/app-sdk";
-import { query } from "./utils/query";
-import { ErrorFallback } from "./components/ErrorFallback/ErrorFallback";
-import { Main } from "./pages/Main";
-import { Redirect } from "./components/Redirect/Redirect";
-import { CreateNote } from "./pages/Create/Note";
-import { FindOrCreate } from "./pages/FindOrCreate/FindOrCreate";
-import { ViewTask } from "./pages/View/Task";
-import { EditTask } from "./pages/Edit/Task";
-import { VerifySettingsPage } from "./pages/VerifySettingsPage";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { match } from "ts-pattern";
+import { useDebouncedCallback } from "use-debounce";
+import { useDeskproAppEvents, useDeskproAppClient, LoadingSpinner } from "@deskpro/app-sdk";
+import { useUnlinkTask } from "@/hooks";
+import { isNavigatePayload, isUnlinkPayload } from "@/utils";
+import {
+  HomePage,
+  ViewTaskPage,
+  EditTaskPage,
+  LinkTasksPage,
+  LoadingAppPage,
+  CreateTaskPage,
+  CreateNotePage,
+  VerifySettingsPage,
+} from "@/pages";
 
-import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
-import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
-import "flatpickr/dist/themes/light.css";
-import "simplebar/dist/simplebar.min.css";
-import "tippy.js/dist/tippy.css";
+const App = () => {
+  const navigate = useNavigate();
+  const { client } = useDeskproAppClient();
+  const { unlink, isLoading } = useUnlinkTask();
 
-function App() {
+  const debounceElementEvent = useDebouncedCallback((_, __, payload) => {
+    return match(payload?.type)
+      .with("changePage", () => isNavigatePayload(payload) && navigate(payload.path))
+      .with("unlink", () => isUnlinkPayload(payload) && unlink(payload.task))
+      .run();
+  }, 500);
+
+  useDeskproAppEvents({
+    onElementEvent: debounceElementEvent,
+  }, [client]);
+
+  if (!client || isLoading) {
+    return (
+      <LoadingSpinner/>
+    );
+  }
+
   return (
-    <HashRouter>
-      <QueryClientProvider client={query}>
-        <Suspense fallback={<LoadingSpinner />}>
-          <QueryErrorResetBoundary>
-            {({ reset }) => (
-              <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
-                <Routes>
-                  <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
-                  <Route path="/findOrCreate" element={<FindOrCreate />} />
-                  <Route path="/create/note/:taskId" element={<CreateNote />} />
-                  <Route path="/edit/task/:taskId" element={<EditTask />} />
-                  <Route path="/view/task/:taskId" element={<ViewTask />} />
-                  <Route path="/redirect" element={<Redirect />} />
-                  <Route index element={<Main />} />
-                </Routes>
-              </ErrorBoundary>
-            )}
-          </QueryErrorResetBoundary>
-        </Suspense>
-      </QueryClientProvider>
-    </HashRouter>
+    <Routes>
+      <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/tasks/link" element={<LinkTasksPage />} />
+      <Route path="/tasks/create" element={<CreateTaskPage />} />
+      <Route path="/tasks/:taskId" element={<ViewTaskPage />} />
+      <Route path="/tasks/:taskId/edit" element={<EditTaskPage />} />
+      <Route path="/create/note/:taskId" element={<CreateNotePage />} />
+      <Route index element={<LoadingAppPage />} />
+    </Routes>
   );
 }
 
-export default App;
+export { App };

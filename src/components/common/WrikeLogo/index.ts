@@ -1,0 +1,1 @@
+export { WrikeLogo } from "./WrikeLogo";

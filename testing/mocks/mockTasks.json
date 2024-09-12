@@ -1,0 +1,78 @@
+{
+  "kind": "tasks",
+  "data": [
+    {
+      "id": "IEAGJJFWKRMLJ44L",
+      "accountId": "IEAGJJFW",
+      "title": "third task",
+      "status": "Active",
+      "importance": "Normal",
+      "createdDate": "2024-09-06T09:51:05Z",
+      "updatedDate": "2024-09-06T09:54:09Z",
+      "dates": {
+        "type": "Planned",
+        "duration": 960,
+        "start": "2024-09-11T09:00:00",
+        "due": "2024-09-12T17:00:00"
+      },
+      "scope": "WsTask",
+      "customStatusId": "IEAGJJFWJMFEXYCM",
+      "permalink": "https://www.wrike.com/open.htm?id=1488253835",
+      "priority": "09af90007fffffffffff8f58"
+    },
+    {
+      "id": "IEAGJJFWKRMMIWFB",
+      "accountId": "IEAGJJFW",
+      "title": "four task",
+      "status": "Active",
+      "importance": "Normal",
+      "createdDate": "2024-09-09T12:17:45Z",
+      "updatedDate": "2024-09-09T12:18:14Z",
+      "dates": {
+        "type": "Backlog"
+      },
+      "scope": "WsTask",
+      "customStatusId": "IEAGJJFWJMFEXYCC",
+      "permalink": "https://www.wrike.com/open.htm?id=1489262753",
+      "priority": "09c4dc00800000000000b000"
+    },
+    {
+      "id": "IEAGJJFWKRMLJ43Z",
+      "accountId": "IEAGJJFW",
+      "title": "second task",
+      "status": "Active",
+      "importance": "Normal",
+      "createdDate": "2024-09-06T09:51:04Z",
+      "updatedDate": "2024-09-10T08:10:30Z",
+      "dates": {
+        "type": "Planned",
+        "duration": 960,
+        "start": "2024-09-09T09:00:00",
+        "due": "2024-09-10T17:00:00"
+      },
+      "scope": "WsTask",
+      "customStatusId": "IEAGJJFWJMFEXYCM",
+      "permalink": "https://www.wrike.com/open.htm?id=1488253817",
+      "priority": "09af90007fffffffffff8fa4"
+    },
+    {
+      "id": "IEAGJJFWKRMLJ433",
+      "accountId": "IEAGJJFW",
+      "title": "first task",
+      "status": "Active",
+      "importance": "High",
+      "createdDate": "2024-09-06T09:51:04Z",
+      "updatedDate": "2024-09-10T08:11:58Z",
+      "dates": {
+        "type": "Planned",
+        "duration": 960,
+        "start": "2024-09-05T09:00:00",
+        "due": "2024-09-06T17:00:00"
+      },
+      "scope": "WsTask",
+      "customStatusId": "IEAGJJFWJMFEXYCW",
+      "permalink": "https://www.wrike.com/open.htm?id=1488253819",
+      "priority": "09af90007fffffffffff8ff0"
+    }
+  ]
+}

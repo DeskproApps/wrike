@@ -1,0 +1,22 @@
+{
+  "kind": "accounts",
+  "data": [
+    {
+      "id": "IEAGJJFW",
+      "name": "Zaporizhian Host",
+      "dateFormat": "MM/dd/yyyy",
+      "firstDayOfWeek": "Sun",
+      "workDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "rootFolderId": "IEAGJJFWI7777777",
+      "recycleBinId": "IEAGJJFWI7777776",
+      "createdDate": "2024-09-06T09:49:47Z",
+      "joinedDate": "2024-09-06T09:49:47Z"
+    }
+  ]
+}
