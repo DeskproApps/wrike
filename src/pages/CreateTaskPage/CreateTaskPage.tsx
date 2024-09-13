@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDeskproAppClient, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { setEntityService } from "@/services/deskpro";
 import { createTask } from "@/services/wrike";
-import { useSetTitle, useRegisterElements, useAsyncError } from "@/hooks";
+import { useSetTitle, useRegisterElements, useAsyncError, useLinkedNote } from "@/hooks";
 import { getError } from "@/utils";
 import { CreateTask } from "@/components";
 import type { FC } from "react";
@@ -14,6 +14,7 @@ const CreateTaskPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext();
   const { asyncErrorHandler } = useAsyncError();
+  const { addLinkNote } = useLinkedNote();
   const [error, setError] = useState<string|string[]|null>(null);
   const ticketId = context?.data?.ticket.id;
 
@@ -31,7 +32,10 @@ const CreateTaskPage: FC = () => {
     return createTask(client, folder, values, context.settings)
       .then((res) => {
         const task = res.data[0];
-        return setEntityService(client, ticketId, task.id);
+        return Promise.all([
+          setEntityService(client, ticketId, task.id),
+          addLinkNote(task),
+        ]);
       })
       .then(() => navigate("/home"))
       .catch((err) => {
@@ -42,7 +46,7 @@ const CreateTaskPage: FC = () => {
           asyncErrorHandler(err);
         }
       });
-  }, [client, context?.settings, navigate, asyncErrorHandler, ticketId]);
+  }, [client, context?.settings, navigate, asyncErrorHandler, ticketId, addLinkNote]);
 
   useSetTitle("Link Tasks");
 

@@ -20,6 +20,7 @@ export type DateTime = string;
 export type Settings = {
   instance_url?: string;
   access_token?: string;
+  add_comment_when_linking?: boolean;
 };
 
 export type DPTicket = {

@@ -4,3 +4,4 @@ export { useAsyncError } from "./useAsyncError";
 export { useRegisterElements } from "./useRegisterElements";
 export { useTask } from "./useTask";
 export { useUnlinkTask } from "./useUnlinkTask";
+export { useLinkedNote } from "./useLinkedNote";

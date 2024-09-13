@@ -12,7 +12,8 @@ import { TextDecoder, TextEncoder } from "util";
 import * as React from "react";
 import { lightTheme } from "@deskpro/deskpro-ui";
 import { mockClient, mockTicketContext } from "@deskpro/app-testing-utils";
-import type { IDeskproClient } from "@deskpro/app-sdk";
+import type { IDeskproClient, DeskproAppEventHooks } from "@deskpro/app-sdk";
+import type { TicketContext } from "./src/types";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
@@ -28,25 +29,31 @@ global.React = React;
 //@ts-ignore
 global.ResizeObserver = ResizeObserver;
 
+let currentContext = mockTicketContext as TicketContext;
+
+export const setCurrentContext = (context: TicketContext) => {
+  currentContext = context;
+};
+
 jest.mock("@deskpro/app-sdk", () => ({
   ...jest.requireActual("@deskpro/app-sdk"),
   useDeskproAppClient: () => ({ client: mockClient }),
   useDeskproAppEvents: (
-    hooks: { [key: string]: (param: Record<string, unknown>) => void },
-    deps: [] = []
+    hooks: DeskproAppEventHooks,
+    deps = []
   ) => {
     React.useEffect(() => {
-      !!hooks.onChange && hooks.onChange(mockTicketContext);
-      !!hooks.onShow && hooks.onShow(mockTicketContext);
-      !!hooks.onReady && hooks.onReady(mockTicketContext);
-      !!hooks.onAdminSettingsChange && hooks.onAdminSettingsChange(mockTicketContext.settings);
+      !!hooks.onChange && hooks.onChange(currentContext);
+      !!hooks.onShow && hooks.onShow(currentContext);
+      !!hooks.onReady && hooks.onReady(currentContext);
+      !!hooks.onAdminSettingsChange && hooks.onAdminSettingsChange(currentContext.settings);
       /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, deps);
   },
   useInitialisedDeskproAppClient: (callback: (param: typeof mockClient) => void) => {
     callback(mockClient);
   },
-  useDeskproLatestAppContext: () => ({ context: mockTicketContext }),
+  useDeskproLatestAppContext: () => ({ context: currentContext }),
   useDeskproAppTheme: () => ({ theme: lightTheme }),
   proxyFetch: async () => fetch,
   LoadingSpinner: () => <>Loading...</>,
