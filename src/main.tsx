@@ -7,6 +7,7 @@ import { QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-qu
 import { ErrorBoundary } from "react-error-boundary";
 import { Scrollbar } from "@deskpro/deskpro-ui";
 import { DeskproAppProvider, LoadingSpinner } from "@deskpro/app-sdk";
+import { ReplyBoxProvider } from "@/hooks";
 import { query } from "@/utils/query";
 import { App } from "@/App";
 import { ErrorFallback } from "@/components/ErrorFallback/ErrorFallback";
@@ -31,7 +32,9 @@ root.render(
               <QueryErrorResetBoundary>
                 {({ reset }) => (
                   <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
-                    <App />
+                    <ReplyBoxProvider>
+                      <App />
+                    </ReplyBoxProvider>
                   </ErrorBoundary>
                 )}
               </QueryErrorResetBoundary>
