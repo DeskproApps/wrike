@@ -7,13 +7,13 @@ import {
   useRegisterElements,
 } from "@/hooks";
 import { Home } from "@/components";
-import { useTasks } from "./hooks";
+import { useLinkedTasks } from "@/hooks";
 import type { ITaskFromList } from "@/services/wrike/types";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const { tasks, isLoading } = useTasks();
+  const { tasks, isLoading } = useLinkedTasks();
 
   const onNavigateToTask = useCallback((task: ITaskFromList) => {
     navigate(`/tasks/${task.id}`);

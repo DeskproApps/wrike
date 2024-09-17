@@ -9,12 +9,12 @@ import { QueryKey } from "@/utils/query";
 import type { DPTicket } from "@/types";
 import type { ITaskFromList } from "@/services/wrike/types";
 
-type UseTasks = () => {
+type UseLinkedTasks = () => {
   isLoading: boolean;
   tasks: ITaskFromList[];
 };
 
-const useTasks: UseTasks = () => {
+const useLinkedTasks: UseLinkedTasks = () => {
   const { context } = useDeskproLatestAppContext();
   const ticketId = context?.data?.ticket.id;
 
@@ -38,4 +38,4 @@ const useTasks: UseTasks = () => {
   };
 };
 
-export { useTasks };
+export { useLinkedTasks };
