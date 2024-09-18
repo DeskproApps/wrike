@@ -29,5 +29,3 @@ export const CustomFieldsMap = {
 };
 
 export const IMPORTANCES = ["High", "Normal", "Low"];
-
-export const STATUSES = ["Active", "Completed", "Deferred", "Cancelled"];
