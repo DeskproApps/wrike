@@ -3,18 +3,21 @@ import styled from "styled-components";
 import { Button as ButtonUI } from "@deskpro/deskpro-ui";
 import type { ThemeColors, ButtonProps } from "@deskpro/deskpro-ui";
 
+type ButtonAsLinkProps = { color?: keyof ThemeColors, align?: "left"|"center"|"right" };
+
 export const Button: FC<ButtonProps> = styled(ButtonUI)`
   min-width: 72px;
   justify-content: center;
 `;
 
-export const ButtonAsLink = styled.button<{ color?: keyof ThemeColors }>`
+export const ButtonAsLink = styled.button<ButtonAsLinkProps>`
   display: inline;
   background: none;
   border: none;
   padding: 0;
   font: inherit;
   cursor: pointer;
+  text-align: ${({ align }) => align ?? "left" };
   color: ${({ theme, color = "cyan100" }) => theme.colors[color]};
 
   :hover,
