@@ -4,18 +4,20 @@ import {
   getTaskById,
   getWorkflows,
   getUsersByIds,
+  getTasksByIds,
   getCustomFields,
   getNotesByTaskId,
 } from "@/services/wrike";
 import { enhanceTask, enhanceNote } from "@/utils";
 import { QueryKey } from "@/utils/query";
-import type { ITask, INote, IUser } from "@/services/wrike/types";
+import type { ITask, ITaskFromList, INote, IUser } from "@/services/wrike/types";
 import type { TaskType } from "@/types";
 
 type UseTask = (taskId?: ITask["id"]) => {
   isLoading: boolean;
   notes: INote[];
   task: TaskType;
+  subItems: ITaskFromList[];
 };
 
 const useTask: UseTask = (taskId) => {
@@ -24,7 +26,15 @@ const useTask: UseTask = (taskId) => {
   const tasksByIdQuery = useQueryWithClient(
     [QueryKey.TASK, taskId as ITask["id"]],
     (client) => getTaskById(client, taskId as ITask["id"], context?.settings),
-    { enabled: Boolean(taskId) && Boolean(context?.settings) }
+    { enabled: Boolean(taskId) && Boolean(context?.settings) },
+  );
+
+  const subTaskIds = tasksByIdQuery.data?.data[0]?.subTaskIds ?? [];
+
+  const subTask = useQueryWithClient(
+    [QueryKey.TASK, ...subTaskIds as Array<ITask["id"]>],
+    (client) => getTasksByIds(client, subTaskIds, context?.settings),
+    { enabled: (subTaskIds.length > 0) && Boolean(context?.settings) },
   );
 
   const notesByTaskIdQuery = useQueryWithClient(
@@ -78,10 +88,12 @@ const useTask: UseTask = (taskId) => {
       tasksByIdQuery,
       notesByTaskIdQuery,
       customFieldsQuery,
-      workflowsQuery
+      workflowsQuery,
+      subTask,
     ].some(({ isLoading }) => isLoading),
     task,
     notes,
+    subItems: subTask.data?.data ?? [],
   };
 }
 

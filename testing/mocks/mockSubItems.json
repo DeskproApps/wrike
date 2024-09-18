@@ -1,0 +1,160 @@
+{
+  "kind": "tasks",
+  "data": [
+    {
+      "id": "IEAGJJFWKRMS2J4T",
+      "accountId": "IEAGJJFW",
+      "title": "Third subitem",
+      "description": "",
+      "briefDescription": "",
+      "parentIds": [
+        "IEAGJJFWI7777777"
+      ],
+      "superParentIds": [
+        "IEAGJJFWI5MLJ43V"
+      ],
+      "sharedIds": [
+        "KUATMOGX",
+        "KX7XV7IP",
+        "KUATMAGA"
+      ],
+      "responsibleIds": [
+        "KUATMAGA"
+      ],
+      "status": "Active",
+      "importance": "Normal",
+      "createdDate": "2024-09-18T11:17:13Z",
+      "updatedDate": "2024-09-18T11:17:19Z",
+      "dates": {
+        "type": "Backlog"
+      },
+      "scope": "WsTask",
+      "authorIds": [
+        "KUATMOGX"
+      ],
+      "customStatusId": "IEAGJJFWJMFEXYCC",
+      "hasAttachments": false,
+      "permalink": "https://www.wrike.com/open.htm?id=1496131475",
+      "priority": "09af90007fffffffffff8ae0",
+      "followedByMe": true,
+      "followerIds": [
+        "KUATMAGA",
+        "KUATMOGX"
+      ],
+      "superTaskIds": [
+        "IEAGJJFWKRMLJ433"
+      ],
+      "subTaskIds": [],
+      "dependencyIds": [],
+      "metadata": [],
+      "customFields": []
+    },
+    {
+      "id": "IEAGJJFWKRMLJ437",
+      "accountId": "IEAGJJFW",
+      "title": "Another subitem",
+      "description": "",
+      "briefDescription": "",
+      "parentIds": [
+        "IEAGJJFWI7777777"
+      ],
+      "superParentIds": [
+        "IEAGJJFWI5MLJ43V"
+      ],
+      "sharedIds": [
+        "KUATMOGX",
+        "KX7XV7IP",
+        "KUATMAGA"
+      ],
+      "responsibleIds": [
+        "KUATMOGX"
+      ],
+      "status": "Active",
+      "importance": "Normal",
+      "createdDate": "2024-09-06T09:51:04Z",
+      "updatedDate": "2024-09-06T09:53:51Z",
+      "dates": {
+        "type": "Planned",
+        "duration": 480,
+        "start": "2024-09-06T09:00:00",
+        "due": "2024-09-06T17:00:00"
+      },
+      "scope": "WsTask",
+      "authorIds": [
+        "KUATMOGX"
+      ],
+      "customStatusId": "IEAGJJFWJMFEXYCC",
+      "hasAttachments": false,
+      "permalink": "https://www.wrike.com/open.htm?id=1488253823",
+      "priority": "09af90007fffffffffff8ee0",
+      "followedByMe": true,
+      "followerIds": [
+        "KUATMOGX"
+      ],
+      "superTaskIds": [
+        "IEAGJJFWKRMLJ433"
+      ],
+      "subTaskIds": [],
+      "dependencyIds": [
+        "IEAGJJFWIVMLJ437KNMLJ43Z",
+        "IEAGJJFWIVMLJ44FKNMLJ437"
+      ],
+      "metadata": [],
+      "customFields": []
+    },
+    {
+      "id": "IEAGJJFWKRMLJ44F",
+      "accountId": "IEAGJJFW",
+      "title": "Subitem one",
+      "description": "",
+      "briefDescription": "",
+      "parentIds": [
+        "IEAGJJFWI7777777"
+      ],
+      "superParentIds": [
+        "IEAGJJFWI5MLJ43V"
+      ],
+      "sharedIds": [
+        "KUATMOGX",
+        "KX7XV7IP",
+        "KUATMAGA"
+      ],
+      "responsibleIds": [
+        "KUATMOGX"
+      ],
+      "status": "Completed",
+      "importance": "Normal",
+      "createdDate": "2024-09-06T09:51:05Z",
+      "updatedDate": "2024-09-06T09:51:05Z",
+      "completedDate": "2024-09-06T09:51:05Z",
+      "dates": {
+        "type": "Planned",
+        "duration": 480,
+        "start": "2024-09-05T09:00:00",
+        "due": "2024-09-05T17:00:00"
+      },
+      "scope": "WsTask",
+      "authorIds": [
+        "KUATMOGX"
+      ],
+      "customStatusId": "IEAGJJFWJMFEXYCD",
+      "hasAttachments": false,
+      "permalink": "https://www.wrike.com/open.htm?id=1488253829",
+      "priority": "09af90007fffffffffff8ef0",
+      "followedByMe": true,
+      "followerIds": [
+        "KUATMOGX"
+      ],
+      "superTaskIds": [
+        "IEAGJJFWKRMLJ433"
+      ],
+      "subTaskIds": [],
+      "dependencyIds": [
+        "IEAGJJFWIVMLJ44FKNMLJ437",
+        "IEAGJJFWIVMLJ433KNMLJ44F"
+      ],
+      "metadata": [],
+      "customFields": []
+    }
+  ]
+}

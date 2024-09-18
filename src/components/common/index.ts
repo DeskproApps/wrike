@@ -13,3 +13,4 @@ export { Label } from "./Label";
 export { Input } from "./Input";
 export { TextArea } from "./TextArea";
 export { ErrorBlock } from "./ErrorBlock";
+export { SubItem } from "./SubItem";

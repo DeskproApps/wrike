@@ -39,7 +39,7 @@
       "title": "Leave a comment on the task in Wrike when it is linked to a ticket in Deskpro",
       "description": "",
       "type": "boolean",
-      "default": true,
+      "default": false,
       "isRequired": false,
       "isBackendOnly": false,
       "order": 40

@@ -8,7 +8,7 @@ import type { FC } from "react";
 const ViewTaskPage: FC = () => {
   const navigate = useNavigate();
   const { taskId } = useParams();
-  const { task, notes, isLoading } = useTask(taskId);
+  const { task, notes, subItems, isLoading } = useTask(taskId);
 
   const onNavigateToAddNote = useCallback(() => {
     navigate(`/create/note/${taskId}`);
@@ -48,6 +48,7 @@ const ViewTaskPage: FC = () => {
     <ViewTask
       task={task}
       notes={notes}
+      subItems={subItems}
       onNavigateToAddNote={onNavigateToAddNote}
     />
   );
