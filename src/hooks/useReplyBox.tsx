@@ -86,6 +86,14 @@ const registerReplyBoxEmailsAdditionsTargetAction = (
     return client.deregisterTargetAction(`${APP_PREFIX}ReplyBoxEmailAdditions`);
   }
 
+  /**
+   * @todo Maybe it might to be optimized. Could this be expensive if we get a lot of taskIds? Instead, can we wait for one to finish before getting the next?
+   * const results = [];
+   * for (const taskId of taskIds) {
+   *   results.push(await client.getState<{ selected: boolean }>(emailKey(ticketId, taskId)))
+   * }
+   * return results;
+   */
   return Promise
     .all(taskIds.map((taskId: ITaskFromList["id"]) => {
       return client.getState<{ selected: boolean }>(emailKey(ticketId, taskId))

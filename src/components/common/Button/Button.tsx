@@ -17,7 +17,7 @@ export const ButtonAsLink = styled.button<ButtonAsLinkProps>`
   padding: 0;
   font: inherit;
   cursor: pointer;
-  text-align: ${({ align }) => align || "left" };
+  text-align: ${({ align }) => align ?? "left" };
   color: ${({ theme, color = "cyan100" }) => theme.colors[color]};
 
   :hover,
