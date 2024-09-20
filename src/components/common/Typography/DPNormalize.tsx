@@ -8,14 +8,16 @@ type Props = {
   text?: string,
 };
 
-const Text = styled(P5)`
+const Container = styled.div`
   width: 100%;
 
-  ${dpNormalize}
+  ${dpNormalize};
 `;
 
 const DPNormalize: FC<Props> = ({ text }) => (
-  <Text dangerouslySetInnerHTML={{ __html: addBlankTargetToLinks(text) || "-" }} />
+  <Container>
+    <P5 dangerouslySetInnerHTML={{ __html: addBlankTargetToLinks(text) || "-" }} />
+  </Container>
 );
 
 export { DPNormalize };

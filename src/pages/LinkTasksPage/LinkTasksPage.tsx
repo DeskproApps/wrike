@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 import { useDeskproAppClient, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { setEntityService } from "@/services/deskpro";
-import { useSetTitle, useRegisterElements, useAsyncError } from "@/hooks";
+import {
+  useSetTitle,
+  useReplyBox,
+  useLinkedNote,
+  useAsyncError,
+  useRegisterElements,
+} from "@/hooks";
 import { LinkTasks } from "@/components";
 import { useSearch } from "./hooks";
 import type { FC } from "react";
@@ -14,6 +20,8 @@ const LinkTasksPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext();
   const { asyncErrorHandler } = useAsyncError();
+  const { addLinkNote } = useLinkedNote();
+  const { setSelectionState } = useReplyBox();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [selectedTasks, setSelectedTasks] = useState<ITaskFromList[]>([]);
@@ -47,12 +55,15 @@ const LinkTasksPage: FC = () => {
 
     setIsSubmitting(true);
     Promise.all([
-      ...selectedTasks.map((task) => setEntityService(client, ticketId, task.id))
+      ...selectedTasks.map((task) => setEntityService(client, ticketId, task.id)),
+      ...selectedTasks.map((task) => addLinkNote(task)),
+      ...selectedTasks.map((task) => setSelectionState(task.id, true, "email")),
+      ...selectedTasks.map((task) => setSelectionState(task.id, true, "note")),
     ])
       .then(() => navigate("/home"))
       .catch(asyncErrorHandler)
       .finally(() => setIsSubmitting(false));
-  }, [client, context, ticketId, selectedTasks, navigate, asyncErrorHandler]);
+  }, [client, context, ticketId, selectedTasks, navigate, asyncErrorHandler, addLinkNote, setSelectionState]);
 
   useSetTitle("Link Tasks");
 
