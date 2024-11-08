@@ -72,7 +72,7 @@
   },
   "proxy": {
     "whitelist": [
-      { "url": "https://.*", "methods": ["GET", "POST", "PUT"], "timeout": 20 }
+      { "url": "__instance_url__.*", "methods": ["GET", "POST", "PUT"], "timeout": 20 }
     ]
   }
 }
