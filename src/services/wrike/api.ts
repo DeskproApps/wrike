@@ -1,8 +1,6 @@
 import {
   proxyFetch,
-  ProxyResponse,
   IDeskproClient,
-  V2ProxyRequestInit,
   adminGenericProxyFetch,
 } from "@deskpro/app-sdk";
 import { BASE_URL, placeholders } from "@/constants";
@@ -198,7 +196,7 @@ const request = async (
   const accessToken = settings?.access_token || placeholders.ACCESS_TOKEN;
   const fetch = await (isAdmin ? adminGenericProxyFetch : proxyFetch)(client);
 
-  const options: V2ProxyRequestInit = {
+  const options: RequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",
@@ -230,5 +228,5 @@ const request = async (
   return json;
 };
 
-export const isResponseError = (response: ProxyResponse) =>
+export const isResponseError = (response: Response) =>
   response.status < 200 || response.status >= 400;
