@@ -21,6 +21,9 @@ const VerifySettings: FC<Props> = ({
 }) => {
   return (
     <Stack gap={8} align="baseline">
+      <pre>
+        {JSON.stringify(settings, null, 2)}
+      </pre>
       <Button
         text="Verify Settings"
         intent="secondary"
