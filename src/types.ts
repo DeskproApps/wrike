@@ -21,8 +21,8 @@ export type Settings = {
   instance_url?: string;
   access_token?: string;
   add_comment_when_linking?: boolean;
-  default_comment_on_ticket_note: boolean;
-  default_comment_on_ticket_reply: boolean;
+  default_comment_on_ticket_note?: boolean;
+  default_comment_on_ticket_reply?: boolean;
 };
 
 export type DPTicket = {
