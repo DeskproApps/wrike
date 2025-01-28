@@ -21,9 +21,16 @@ const getError = (err: Error): string => {
 };
 
 const VerifySettingsPage: FC = () => {
+  const initialSettings: Settings = {
+    instance_url: '',
+    access_token: '',
+    default_comment_on_ticket_note: true,
+    default_comment_on_ticket_reply: true
+  };
+
   const { client } = useDeskproAppClient();
   const [accounts, setAccounts] = useState<Array<IAccount["name"]>>([]);
-  const [settings, setSettings] = useState<Settings>({});
+  const [settings, setSettings] = useState<Settings>(initialSettings);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string|null>(null);
 
