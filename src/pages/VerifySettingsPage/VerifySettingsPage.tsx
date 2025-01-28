@@ -53,7 +53,13 @@ const VerifySettingsPage: FC = () => {
   }, [client, settings]);
 
   useDeskproAppEvents({
-    onAdminSettingsChange: setSettings,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onAdminSettingsChange: (newSettings: Record<string, any>) => {
+      setSettings(oldSettings => ({
+        ...oldSettings,
+        ...newSettings
+      }));
+    }
   }, [client]);
 
   return (
