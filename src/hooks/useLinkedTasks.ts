@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import {
   useQueryWithClient,
   useDeskproLatestAppContext,
@@ -24,7 +23,7 @@ const useLinkedTasks: UseLinkedTasks = () => {
     { enabled: Boolean(ticketId) },
   );
 
-  const taskIds = useMemo(() => linkedIds.data || [], [linkedIds.data]);
+  const taskIds = linkedIds.data || [];
 
   const tasks = useQueryWithClient(
     [QueryKey.TASKS, ...taskIds],
