@@ -6,12 +6,13 @@ import {
 import { getEntityListService } from "@/services/deskpro";
 import { checkAuthService } from "@/services/wrike";
 import { useAsyncError } from "@/hooks";
+import { Settings } from "@/types";
 
 type UseLoadingApp = () => void;
 
 const useLoadingApp: UseLoadingApp = () => {
   const navigate = useNavigate();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const ticketId = context?.data?.ticket.id;
   const settings = context?.settings;

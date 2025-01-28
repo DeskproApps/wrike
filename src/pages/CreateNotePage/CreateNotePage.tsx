@@ -8,10 +8,11 @@ import { Stack } from "@deskpro/deskpro-ui";
 import { createNote } from "@/services/wrike";
 import { useSetTitle, useRegisterElements } from "@/hooks";
 import { Input, Label, Button, Container, ErrorBlock } from "@/components/common";
+import { Settings } from "@/types";
 
 const CreateNotePage = () => {
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const navigate = useNavigate();
   const { taskId } = useParams();
   const [submitting, setSubmitting] = useState<boolean>(false);
