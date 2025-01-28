@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useDeskproAppClient, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { createNote } from "@/services/wrike";
-import type { TaskType } from "@/types";
+import type { Settings, TaskType } from "@/types";
 import type { ITaskFromList, INote } from "@/services/wrike/types";
 
 export type Result = {
@@ -24,7 +24,7 @@ const getUnlinkedMessage = (ticketId: string, link?: string): string => {
 
 const useLinkedNote = (): Result => {
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<{ticket: {id: string; permalinkUrl: string}}, Settings>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const settings = context?.settings;
@@ -33,9 +33,9 @@ const useLinkedNote = (): Result => {
   const permalink = context?.data?.ticket.permalinkUrl;
 
   const addLinkNote = useCallback((task: ITaskFromList|TaskType) => {
-    if (!client || !isEnable || !settings || !task?.id) {
+    if (!client || !isEnable || !settings || !task?.id || !ticketId) {
       return Promise.resolve(null);
-    }
+    };
 
     setIsLoading(true);
 
@@ -48,9 +48,9 @@ const useLinkedNote = (): Result => {
   }, [client, isEnable, ticketId, permalink, settings]);
 
   const addUnlinkNote = useCallback((task: ITaskFromList|TaskType) => {
-    if (!client || !isEnable || !settings || !task?.id) {
+    if (!client || !isEnable || !settings || !task?.id || !ticketId) {
       return Promise.resolve(null);
-    }
+    };
 
     setIsLoading(true)
     return createNote(

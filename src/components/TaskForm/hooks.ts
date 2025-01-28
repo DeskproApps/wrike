@@ -8,7 +8,7 @@ import { getUsers, getCustomFields, getFolders } from "@/services/wrike";
 import { IMPORTANCES } from "@/constants";
 import { QueryKey } from "@/utils/query";
 import { getOption, getFullName } from "@/utils";
-import type { Option } from "@/types";
+import type { Option, Settings } from "@/types";
 import type { IUser, ICustomField, IFolderFromList } from "@/services/wrike/types";
 
 type UseFormDeps = () => {
@@ -20,7 +20,7 @@ type UseFormDeps = () => {
 };
 
 const useFormDeps: UseFormDeps = () => {
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
 
   const folders = useQueryWithClient(
     [QueryKey.FOLDERS],

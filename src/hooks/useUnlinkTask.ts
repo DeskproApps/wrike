@@ -8,7 +8,7 @@ import { deleteEntityService } from "@/services/deskpro";
 import { useAsyncError } from "./useAsyncError";
 import { useLinkedNote } from "./useLinkedNote";
 import { useReplyBox } from "./useReplyBox";
-import type { TaskType } from "@/types";
+import type { Settings, TaskType } from "@/types";
 
 export type Result = {
   isLoading: boolean,
@@ -18,7 +18,7 @@ export type Result = {
 const useUnlinkTask = (): Result => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const { addUnlinkNote } = useLinkedNote();
   const { deleteSelectionState } = useReplyBox();
