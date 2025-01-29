@@ -17,12 +17,13 @@ import { query } from "@/utils/query";
 import { EditTask } from "@/components";
 import type { FC } from "react";
 import type { IFolderFromList } from "@/services/wrike/types";
+import { Settings } from "@/types";
 
 const EditTaskPage: FC = () => {
   const { taskId } = useParams();
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const { task, isLoading } = useTask(taskId);
   const [error, setError] = useState<string|null>(null);

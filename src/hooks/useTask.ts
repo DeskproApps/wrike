@@ -11,7 +11,7 @@ import {
 import { enhanceTask, enhanceNote } from "@/utils";
 import { QueryKey } from "@/utils/query";
 import type { ITask, ITaskFromList, INote, IUser } from "@/services/wrike/types";
-import type { TaskType } from "@/types";
+import type { Settings, TaskType } from "@/types";
 
 type UseTask = (taskId?: ITask["id"]) => {
   isLoading: boolean;
@@ -21,7 +21,7 @@ type UseTask = (taskId?: ITask["id"]) => {
 };
 
 const useTask: UseTask = (taskId) => {
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
 
   const tasksByIdQuery = useQueryWithClient(
     [QueryKey.TASK, taskId as ITask["id"]],

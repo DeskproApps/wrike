@@ -5,12 +5,12 @@ import { getFullName } from "@/utils";
 import { QueryKey } from "@/utils/query";
 import { NoValue } from "./NoValue";
 import type { FC } from "react";
-import type { CustomFieldType } from "@/types";
+import type { CustomFieldType, Settings } from "@/types";
 
 type Props = CustomFieldType;
 
 const ContactsField: FC<Props> = ({ value }) => {
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const ids = `${value.value}`.split(",").filter(Boolean);
 
   const { data } = useQueryWithClient(

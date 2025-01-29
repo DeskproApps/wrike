@@ -11,9 +11,10 @@ import { getFullName, getOption } from "@/utils";
 import type { FC } from "react";
 import type { IUser } from "@/services/wrike/types";
 import type { CustomFieldProps } from "../../types";
+import { Settings } from "@/types";
 
 const ContactsFC: FC<CustomFieldProps> = ({ field, formControl }) => {
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const contactIds = Array.isArray(field.settings.contacts) ? field.settings.contacts : [];
 
   const users = useQueryWithClient(

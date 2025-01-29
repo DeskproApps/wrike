@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import {
   useQueryWithClient,
   useDeskproLatestAppContext,
@@ -6,7 +5,7 @@ import {
 import { getEntityListService } from "@/services/deskpro";
 import { getTasksByIds } from "@/services/wrike";
 import { QueryKey } from "@/utils/query";
-import type { DPTicket } from "@/types";
+import type { DPTicket, Settings } from "@/types";
 import type { ITaskFromList } from "@/services/wrike/types";
 
 type UseLinkedTasks = () => {
@@ -15,7 +14,7 @@ type UseLinkedTasks = () => {
 };
 
 const useLinkedTasks: UseLinkedTasks = () => {
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
   const ticketId = context?.data?.ticket.id;
 
   const linkedIds = useQueryWithClient(
@@ -24,7 +23,7 @@ const useLinkedTasks: UseLinkedTasks = () => {
     { enabled: Boolean(ticketId) },
   );
 
-  const taskIds = useMemo(() => linkedIds.data || [], [linkedIds.data]);
+  const taskIds = linkedIds.data || [];
 
   const tasks = useQueryWithClient(
     [QueryKey.TASKS, ...taskIds],

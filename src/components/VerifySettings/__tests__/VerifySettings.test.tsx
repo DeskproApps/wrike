@@ -4,10 +4,13 @@ import { render } from "@deskpro/app-testing-utils";
 import { mockAccounts } from "@/testing";
 import { VerifySettings } from "../VerifySettings";
 import type { Props } from "../VerifySettings";
+import { Settings } from "@/types";
 
-const mockSettings = {
+const mockSettings: Settings = {
   instance_url: "",
   access_token: "thisIsAccessToken",
+  default_comment_on_ticket_note: true,
+  default_comment_on_ticket_reply: true
 };
 
 const mockAccountNames = mockAccounts["data"].map(({ name }) => name);

@@ -16,7 +16,7 @@ import { APP_PREFIX } from "@/constants";
 import type { FC, PropsWithChildren } from "react";
 import type { IDeskproClient, GetStateResponse, TargetAction } from "@deskpro/app-sdk";
 import type { ITaskFromList } from "@/services/wrike/types";
-import type { TicketData } from "@/types";
+import type { Settings, TicketData } from "@/types";
 
 export type ReplyBoxType = "note" | "email";
 
@@ -122,7 +122,7 @@ const ReplyBoxContext = createContext<ReturnUseReplyBox>({
 const useReplyBox = () => useContext<ReturnUseReplyBox>(ReplyBoxContext);
 
 const ReplyBoxProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
   const { client } = useDeskproAppClient();
   const { tasks } = useLinkedTasks();
   const tasksMap = tasks.reduce<Record<ITaskFromList["id"], ITaskFromList>>((acc, task) => {

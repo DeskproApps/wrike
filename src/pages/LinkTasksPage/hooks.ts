@@ -5,6 +5,7 @@ import {
 import { getTasksByPrompt } from "@/services/wrike";
 import { QueryKey } from "@/utils/query";
 import type { ITaskFromList } from "@/services/wrike/types";
+import { Settings } from "@/types";
 
 type UseSearch = (q: string) => {
   isLoading: boolean;
@@ -12,7 +13,7 @@ type UseSearch = (q: string) => {
 };
 
 const useSearch: UseSearch = (q: string) => {
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
 
   const searchTasks = useQueryWithClient(
     [QueryKey.TASKS, q],

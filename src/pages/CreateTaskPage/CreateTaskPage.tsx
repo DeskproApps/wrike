@@ -8,11 +8,12 @@ import { getError } from "@/utils";
 import { CreateTask } from "@/components";
 import type { FC } from "react";
 import type { IFolderFromList } from "@/services/wrike/types";
+import { Settings } from "@/types";
 
 const CreateTaskPage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const { addLinkNote } = useLinkedNote();
   const [error, setError] = useState<string|string[]|null>(null);

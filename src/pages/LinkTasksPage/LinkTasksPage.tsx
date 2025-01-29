@@ -14,11 +14,12 @@ import { LinkTasks } from "@/components";
 import { useSearch } from "./hooks";
 import type { FC } from "react";
 import type { ITaskFromList } from "@/services/wrike/types";
+import { Settings } from "@/types";
 
 const LinkTasksPage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const { addLinkNote } = useLinkedNote();
   const { setSelectionState } = useReplyBox();
