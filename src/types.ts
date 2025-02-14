@@ -18,6 +18,7 @@ export type DateTime = string;
 
 /** Deskpro types */
 export type Settings = {
+  use_deskpro_saas?: string;
   instance_url?: string;
   access_token?: string;
   add_comment_when_linking?: boolean;

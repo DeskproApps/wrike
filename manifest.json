@@ -10,6 +10,13 @@
   "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
   "settings": {
+    "use_deskpro_saas": {
+      "title": "Use Deskpro SaaS",
+      "type": "boolean",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 5
+    },
     "instance_url": {
       "title": "Host",
       "description": "Enter the \"Host\" value (e.g., https://app-eu.wrike.com or your appropriate instance). Or leave the field blank to default to https://www.wrike.com",
@@ -23,8 +30,9 @@
       "title": "Access Token",
       "description": "You can get the Access Token by following the Setup guide",
       "type": "string",
-      "isRequired": true,
+      "isRequired": false,
       "isBackendOnly": true,
+      "condition": "settings.use_deskpro_saas != true",
       "order": 20
     },
     "verify_settings": {
@@ -33,6 +41,7 @@
       "options": { "entrypoint": "#/admin/verify_settings", "height": "30px" },
       "isRequired": false,
       "isBackendOnly": true,
+      "condition": "settings.use_deskpro_saas != true",
       "order": 30
     },
     "add_comment_when_linking": {
