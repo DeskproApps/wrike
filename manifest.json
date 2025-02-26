@@ -11,11 +11,21 @@
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
   "settings": {
     "use_deskpro_saas": {
-      "title": "Use Deskpro SaaS",
+      "title": "One-Click Installation",
       "type": "boolean",
       "isRequired": false,
       "isBackendOnly": false,
-      "order": 5
+      "default": true,
+      "order": 1
+    },
+    "use_access_token": {
+      "title": "Use Access Token",
+      "type": "boolean",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "default": false,
+      "condition": "settings.use_deskpro_saas != true",
+      "order": 2
     },
     "instance_url": {
       "title": "Host",
@@ -24,7 +34,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": false,
-      "order": 10
+      "order": 3
     },
     "access_token": {
       "title": "Access Token",
@@ -33,7 +43,34 @@
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_deskpro_saas != true",
-      "order": 20
+      "order": 4
+    },
+    "client_id": {
+      "title": "Client ID",
+      "type": "string",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "condition": "settings.use_deskpro_saas != true",
+      "order": 5
+    },
+    "client_secret": {
+      "title": "Client Secret",
+      "type": "string",
+      "isRequired": false,
+      "isBackendOnly": true,
+      "condition": "settings.use_deskpro_saas != true",
+      "order": 6
+    },
+    "callback_url": {
+      "title": "Callback URL",
+      "type": "app_embedded",
+      "options": {
+        "entrypoint": "#/admin/callback"
+      },
+      "isRequired": false,
+      "isBackendOnly": true,
+      "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
+      "order": 7
     },
     "verify_settings": {
       "title": "",
@@ -42,7 +79,7 @@
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_deskpro_saas != true",
-      "order": 30
+      "order": 8
     },
     "add_comment_when_linking": {
       "title": "Leave a comment on the task in Wrike when it is linked to a ticket in Deskpro",
@@ -51,7 +88,7 @@
       "default": false,
       "isRequired": false,
       "isBackendOnly": false,
-      "order": 40
+      "order": 9
     },
     "default_comment_on_ticket_reply": {
       "title": "Ticket reply as comment",
@@ -60,7 +97,7 @@
       "default": false,
       "isRequired": false,
       "isBackendOnly": false,
-      "order": 50
+      "order": 10
     },
     "default_comment_on_ticket_note": {
       "title": "Ticket note as comment",
@@ -69,7 +106,7 @@
       "default": false,
       "isRequired": false,
       "isBackendOnly": false,
-      "order": 60
+      "order": 11
     }
   },
   "entityAssociations": {

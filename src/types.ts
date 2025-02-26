@@ -19,8 +19,10 @@ export type DateTime = string;
 /** Deskpro types */
 export type Settings = {
   use_deskpro_saas?: string;
+  use_access_token?: boolean;
   instance_url?: string;
   access_token?: string;
+  client_id?: string;
   add_comment_when_linking?: boolean;
   default_comment_on_ticket_note?: boolean;
   default_comment_on_ticket_reply?: boolean;
