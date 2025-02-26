@@ -6,3 +6,4 @@ export { ViewTaskPage } from "./ViewTaskPage";
 export { CreateTaskPage } from "./CreateTaskPage";
 export { EditTaskPage } from "./EditTaskPage";
 export { CreateNotePage } from "./CreateNotePage";
+export { AdminCallbackPage } from './AdminCallbackPage';

@@ -13,6 +13,7 @@ import {
   CreateTaskPage,
   CreateNotePage,
   VerifySettingsPage,
+  AdminCallbackPage,
 } from "@/pages";
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
+      <Route path='/admin/callback' element={<AdminCallbackPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/tasks/link" element={<LinkTasksPage />} />
       <Route path="/tasks/create" element={<CreateTaskPage />} />
