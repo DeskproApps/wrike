@@ -7,3 +7,4 @@ export { CreateTaskPage } from "./CreateTaskPage";
 export { EditTaskPage } from "./EditTaskPage";
 export { CreateNotePage } from "./CreateNotePage";
 export { AdminCallbackPage } from './AdminCallbackPage';
+export { LogInPage } from './LogInPage';
