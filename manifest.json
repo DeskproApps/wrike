@@ -46,13 +46,22 @@
       "condition": "settings.use_deskpro_saas != true",
       "order": 4
     },
+    "verify_settings": {
+      "title": "",
+      "type": "app_embedded",
+      "options": { "entrypoint": "#/admin/verify_settings", "height": "30px" },
+      "isRequired": false,
+      "isBackendOnly": true,
+      "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
+      "order": 5
+    },
     "client_id": {
       "title": "Client ID",
       "type": "string",
       "isRequired": false,
       "isBackendOnly": false,
       "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
-      "order": 5
+      "order": 6
     },
     "client_secret": {
       "title": "Client Secret",
@@ -60,23 +69,15 @@
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
-      "order": 6
+      "order": 7
     },
     "callback_url": {
       "title": "Callback URL",
       "type": "app_embedded",
       "options": {
-        "entrypoint": "#/admin/callback"
+        "entrypoint": "#/admin/callback",
+        "height": "100px"
       },
-      "isRequired": false,
-      "isBackendOnly": true,
-      "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
-      "order": 7
-    },
-    "verify_settings": {
-      "title": "",
-      "type": "app_embedded",
-      "options": { "entrypoint": "#/admin/verify_settings", "height": "30px" },
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
