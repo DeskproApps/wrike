@@ -2,6 +2,7 @@ import {
   useQueryWithClient,
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
+import { useLocation } from 'react-router-dom';
 import { getEntityListService } from "@/services/deskpro";
 import { getTasksByIds } from "@/services/wrike";
 import { QueryKey } from "@/utils/query";
@@ -15,12 +16,15 @@ type UseLinkedTasks = () => {
 
 const useLinkedTasks: UseLinkedTasks = () => {
   const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
+  const location = useLocation();
   const ticketId = context?.data?.ticket.id;
+
+  const isOnLogInPage = location.pathname === '/login';
 
   const linkedIds = useQueryWithClient(
     [QueryKey.LINKED_TASKS, ticketId as DPTicket["id"]],
     (client) => getEntityListService(client, ticketId as DPTicket["id"]),
-    { enabled: Boolean(ticketId) },
+    { enabled: Boolean(ticketId) && !isOnLogInPage },
   );
 
   const taskIds = linkedIds.data || [];
@@ -28,7 +32,7 @@ const useLinkedTasks: UseLinkedTasks = () => {
   const tasks = useQueryWithClient(
     [QueryKey.TASKS, ...taskIds],
     (client) => getTasksByIds(client, taskIds, context?.settings),
-    { enabled: taskIds.length > 0 && Boolean(context?.settings) }
+    { enabled: taskIds.length > 0 && Boolean(context?.settings) && !isOnLogInPage }
   );
 
   return {

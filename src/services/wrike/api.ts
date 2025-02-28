@@ -203,7 +203,7 @@ const request = async (
   } else {
     const oAuthTokenState = await client.getUserState(OAUTH_ACCESS_TOKEN_PATH);
 
-    token = oAuthTokenState[0].data;
+    token = oAuthTokenState[0]?.data;
   };
 
   const options: RequestInit = {
