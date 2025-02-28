@@ -9,6 +9,7 @@
   "hasDevMode": true,
   "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
+  "secrets": "X2MCoQ9MzC5eSJJZFvncM77u0hLxm3rveTF0fo3AajXQ44Q1UcZ2Fg22Q3Z1GMdG7mAibL31Rlto0snd3z9aDSpuBi5kAkzm2Il/ICXY+jrCegKfZNZ6fZPzEOdvaPCwvoefCtRuXaFLkhZHC2T2m1J3J97hBAPEeV6vO7mvCJh711PDAK6pMqubROEOqa/x78zz0tcmO5VxfE1bsXDULseiSVcacA9cTbZCRh9LaSmZbpNA+4SnMVo/ZWjWLeZx+W9rnIRK/FqjfhFf6pW2rg+wpQt5TtpeQtOZBjWla2bRXSnJluJFHeh4LjYynlOjQmG6Du+ykX6n0Q35UXMH+pPf4t3ztyUUDVrgrvUmDNU2EIhxeaMo8yU1hJy7vRk6OpC/XayU9/S43mitV3jHWpEE2pkHx0qDAXEjQo2n7/tk60Fl/bgndtS1hvqvQV19lieNrgjhXpXVWT6B8jiqaBQk3CCyYeyxz6ODjv8EeYrga+3kPcYH+PF9xEhKCoCvTRif3wwTmKOAAEuYmWGxiraUMS+/WgSr8LRTO/Qel0SsMpYAILaeY9V94gdvpPdjuZD1ujgsxiVn5vPgMm4xqg+XGSQ/iB5QalCex5QdIry1GbgL8/ZS37MUN8PybN+AKLe+76zJ1ip7Oo7BJgPfl6j+zpqj42OIn0Is/C2FvI7lPDZ0f+PVMVUnERPvDPq/ROcWlvLgnbMDHcGtlBGvHxpzSOas4gKzfNh/mHxSiInMLi8SPwUcXwFRJQnEQ1dIXkHk+xBrCyKYFiYG0eO1p0BoheRKsaIyBIgk7oRhL4mB9KbTCAbZr7roX1D/98wfrqraPn6IvuCHuMj4jNKRu1D8bLwg34P/oq73Fy6KZPEazi1laFvzNJgnPj04SMiaXgLg0Ons0ISr0AEnx4KMpJRSmHv5+NG0qTHxw+4714TYbMiB1ifcEM7qR4pifXHMLntzxVcGnTuWptTSHeFbNfoYJ4DnbSJz34CZ8PLdY68XPCRgNI/pr9m5jvg7PmvChoiWSssfH0s8ogpiaWOOVzcnvxfoxE1fNx8ne/4n4L391btMLzLowq8ZCMuQqRFswcIlmtrSp14f3z05cZKEKg==",
   "settings": {
     "use_deskpro_saas": {
       "title": "One-Click Installation",
@@ -50,7 +51,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": false,
-      "condition": "settings.use_deskpro_saas != true",
+      "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
       "order": 5
     },
     "client_secret": {
@@ -58,7 +59,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_deskpro_saas != true",
+      "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
       "order": 6
     },
     "callback_url": {
@@ -78,7 +79,7 @@
       "options": { "entrypoint": "#/admin/verify_settings", "height": "30px" },
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_deskpro_saas != true",
+      "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
       "order": 8
     },
     "add_comment_when_linking": {
