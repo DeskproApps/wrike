@@ -195,10 +195,10 @@ const request = async (
   const fetch = await (isAdmin ? adminGenericProxyFetch : proxyFetch)(client);
   const url = settings?.instance_url || BASE_URL;
 
-  const logInTypeState = await client.getUserState(LOG_IN_TYPE_STATE);
+  const logInTypeState = settings?.use_access_token ? logInTypes.ACCESS_TOKEN : logInTypes.OAUTH2;
   let token;
 
-  if (logInTypeState[0]?.data === logInTypes.ACCESS_TOKEN) {
+  if (logInTypeState === logInTypes.ACCESS_TOKEN) {
     token = settings?.access_token || placeholders.ACCESS_TOKEN;
   } else {
     const oAuthTokenState = await client.getUserState(OAUTH_ACCESS_TOKEN_PATH);
