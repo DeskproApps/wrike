@@ -3,7 +3,7 @@ import {
   IDeskproClient,
   adminGenericProxyFetch,
 } from "@deskpro/app-sdk";
-import { BASE_URL, LOG_IN_TYPE_STATE, logInTypes, OAUTH_ACCESS_TOKEN_PATH, placeholders } from '@/constants';
+import { BASE_URL, logInTypes, OAUTH_ACCESS_TOKEN_PATH, placeholders } from '@/constants';
 import {
   ICustomField,
   IFolderFromList,
