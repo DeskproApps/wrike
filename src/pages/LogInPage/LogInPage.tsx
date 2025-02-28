@@ -8,6 +8,7 @@ import { Settings } from '@/types';
 import { getTokens } from '@/services/wrike/getTokens';
 import setAccessToken from '@/services/deskpro/setAccessToken';
 import setRefreshToken from '@/services/deskpro/setRefreshToken';
+import { useAsyncError } from '@/hooks';
 
 function LogInPage() {
     const { context } = useDeskproLatestAppContext<unknown, Settings>();
@@ -15,6 +16,7 @@ function LogInPage() {
     const callbackURLRef = useRef('');
     const [authorisationURL, setAuthorisationURL] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const { asyncErrorHandler } = useAsyncError();
 
     useInitialisedDeskproAppClient(async client => {
         if (context?.settings.use_deskpro_saas === undefined) return;
@@ -28,8 +30,14 @@ function LogInPage() {
             ({ callbackUrl, state }) => {
                 callbackURLRef.current = callbackUrl;
 
+                if (!context?.settings.client_id) {
+                    asyncErrorHandler(new Error('Client ID is not defined'));
+
+                    return '';
+                };
+
                 return `https://login.wrike.com/oauth2/authorize/v4?${createSearchParams([
-                    ['client_id', context?.settings.client_id!],
+                    ['client_id', context.settings.client_id],
                     ['state', state],
                     ['response_type', 'code'],
                     ['redirect_uri', callbackUrl]
@@ -59,7 +67,7 @@ function LogInPage() {
 
             navigate('/');
         } catch (error) {
-
+            asyncErrorHandler(error instanceof Error ? error : new Error('error logging in with OAuth2'));
         } finally {
             setIsLoading(false);
         };
