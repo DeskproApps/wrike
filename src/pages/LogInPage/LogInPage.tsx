@@ -19,12 +19,16 @@ function LogInPage() {
     const { asyncErrorHandler } = useAsyncError();
 
     useInitialisedDeskproAppClient(async client => {
-        if (context?.settings.use_deskpro_saas === undefined) return;
+        if (context?.settings.use_deskpro_saas === undefined) {
+            return;
+        };
 
         const clientID = context.settings.client_id;
         const mode = context?.settings.use_deskpro_saas ? 'global' : 'local';
 
-        if (mode === 'local' && typeof clientID !== 'string') return;
+        if (mode === 'local' && typeof clientID !== 'string') {
+            return;
+        };
 
         const oauth2 = mode === 'global' ? await client.startOauth2Global(GLOBAL_CLIENT_ID) : await client.startOauth2Local(
             ({ callbackUrl, state }) => {
@@ -45,15 +49,13 @@ function LogInPage() {
             },
             /code=(?<code>[^&]+)/,
             async code => {
-                const { access_token } = await getTokens({
+                const data = await getTokens({
                     client,
                     code,
                     redirectURI: callbackURLRef.current
                 });
 
-                return {
-                    data: { access_token }
-                };
+                return { data };
             }
         );
 
