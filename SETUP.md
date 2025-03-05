@@ -10,7 +10,19 @@ On the Apps & Integrations page, click on the "API" section on the top left, giv
 
 [![](/docs/assets/setup/create_new.png)](/docs/assets/setup/create_new.png)
 
-On the bottom, on the "Permanent Access Token" section, click on "Create token", insert your password, and copy/paste the token that appears on the screen on the Deskpro Wrike App Settings.
+## OAuth2
+
+After creating the app, copy the 'client ID' and 'client secret' to a safe location.
+
+You will need to paste these into the fields on the app settings, as well as copy the 'callback URL' into the 'Redirect URI' field.
+
+[![](/docs/assets/setup/oauth.png)](/docs/assets/setup/oauth.png)
+
+Once this is done, click on install and you are ready to go!
+
+## Access Token
+
+To use an access token, on the bottom, on the "Permanent Access Token" section, click on "Create token", insert your password, and copy/paste the token that appears on the screen on the Deskpro Wrike App Settings.
 
 [![](/docs/assets/setup/access_token.png)](/docs/assets/setup/access_token.png)
 

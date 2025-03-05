@@ -8,8 +8,22 @@ export const ENTITY = "linkedWrikeTasks";
 
 export const DEFAULT_ERROR = "There was an error!";
 
+export const LOG_IN_TYPE_STATE = 'wrikeLogInType';
+
+export const logInTypes = {
+  ACCESS_TOKEN: 'accessToken',
+  OAUTH2: 'oauth2'
+};
+
+export const GLOBAL_CLIENT_ID = 'ovqq4PBQ';
+
+export const OAUTH2_ACCESS_TOKEN_PATH = 'oauth2/access_token';
+
+export const OAUTH2_REFRESH_TOKEN_PATH = 'oauth2/refresh_token';
+
 export const placeholders = {
   ACCESS_TOKEN: "__access_token__",
+  OAUTH: `[user[${OAUTH2_ACCESS_TOKEN_PATH}]]`
 };
 
 /** Wrike */

@@ -3,7 +3,7 @@ import {
   IDeskproClient,
   adminGenericProxyFetch,
 } from "@deskpro/app-sdk";
-import { BASE_URL, placeholders } from "@/constants";
+import { BASE_URL, logInTypes, placeholders } from '@/constants';
 import {
   ICustomField,
   IFolderFromList,
@@ -192,15 +192,23 @@ const request = async (
   { endpoint, method, data, settings }: RequestParams,
 ) => {
   const isAdmin = Boolean(settings?.access_token);
-  const url = settings?.instance_url || BASE_URL;
-  const accessToken = settings?.access_token || placeholders.ACCESS_TOKEN;
   const fetch = await (isAdmin ? adminGenericProxyFetch : proxyFetch)(client);
+  const url = settings?.instance_url || BASE_URL;
+
+  const logInTypeState = settings?.use_access_token ? logInTypes.ACCESS_TOKEN : logInTypes.OAUTH2;
+  let token;
+
+  if (logInTypeState === logInTypes.ACCESS_TOKEN) {
+    token = settings?.access_token || placeholders.ACCESS_TOKEN;
+  } else {
+    token = placeholders.OAUTH;
+  };
 
   const options: RequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`
     },
   };
 
