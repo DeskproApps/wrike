@@ -3,7 +3,7 @@ import {
   IDeskproClient,
   adminGenericProxyFetch,
 } from "@deskpro/app-sdk";
-import { BASE_URL, logInTypes, OAUTH_ACCESS_TOKEN_PATH, placeholders } from '@/constants';
+import { BASE_URL, logInTypes, placeholders } from '@/constants';
 import {
   ICustomField,
   IFolderFromList,
@@ -201,9 +201,7 @@ const request = async (
   if (logInTypeState === logInTypes.ACCESS_TOKEN) {
     token = settings?.access_token || placeholders.ACCESS_TOKEN;
   } else {
-    const oAuthTokenState = await client.getUserState(OAUTH_ACCESS_TOKEN_PATH);
-
-    token = oAuthTokenState[0]?.data;
+    token = placeholders.OAUTH;
   };
 
   const options: RequestInit = {

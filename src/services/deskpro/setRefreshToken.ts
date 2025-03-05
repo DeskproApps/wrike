@@ -1,5 +1,5 @@
 import { IDeskproClient } from '@deskpro/app-sdk';
-import { OAUTH_REFRESH_TOKEN_PATH } from '@/constants';
+import { OAUTH2_REFRESH_TOKEN_PATH } from '@/constants';
 
 interface SetRefreshToken {
     client: IDeskproClient;
@@ -7,7 +7,7 @@ interface SetRefreshToken {
 };
 
 function setRefreshToken({ client, token }: SetRefreshToken) {
-    return client.setUserState(OAUTH_REFRESH_TOKEN_PATH, token);
+    return client.setUserState(OAUTH2_REFRESH_TOKEN_PATH, token, {backend: true});
 };
 
 export default setRefreshToken;
