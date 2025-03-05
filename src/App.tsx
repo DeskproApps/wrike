@@ -43,7 +43,7 @@ const App = () => {
     <Routes>
       <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
       <Route path='/admin/callback' element={<AdminCallbackPage />} />
-      <Route path='/logIn' element={<LogInPage />} />
+      <Route path='/log_in' element={<LogInPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/tasks/link" element={<LinkTasksPage />} />
       <Route path="/tasks/create" element={<CreateTaskPage />} />

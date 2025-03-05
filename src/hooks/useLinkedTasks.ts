@@ -19,7 +19,7 @@ const useLinkedTasks: UseLinkedTasks = () => {
   const location = useLocation();
   const ticketId = context?.data?.ticket.id;
 
-  const isOnLogInPage = location.pathname === '/login';
+  const isOnLogInPage = location.pathname === '/log_in';
 
   const linkedIds = useQueryWithClient(
     [QueryKey.LINKED_TASKS, ticketId as DPTicket["id"]],

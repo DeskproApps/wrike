@@ -31,7 +31,7 @@ const useLoadingApp: UseLoadingApp = () => {
       .catch(error => {
         asyncErrorHandler(error);
 
-        navigate('/login');
+        navigate('/log_in');
       });
   }, [navigate, ticketId, settings, asyncErrorHandler]);
 };
