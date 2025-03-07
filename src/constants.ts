@@ -15,7 +15,7 @@ export const logInTypes = {
   OAUTH2: 'oauth2'
 };
 
-export const GLOBAL_CLIENT_ID = 'ovqq4PBQ';
+export const GLOBAL_CLIENT_ID = '8U2Rv3l2';
 
 export const OAUTH2_ACCESS_TOKEN_PATH = 'oauth2/access_token';
 
