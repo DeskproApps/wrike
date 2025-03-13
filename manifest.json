@@ -2,17 +2,12 @@
   "name": "@deskpro-apps/wrike",
   "title": "Wrike",
   "description": "Connect your Wrike items to tickets in Deskpro to make them easy to view and update",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/wrike",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
-  "targets": [
-    {
-      "target": "ticket_sidebar",
-      "entrypoint": "index.html"
-    }
-  ],
+  "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
   "secrets": "J3Azec4jEVxbc6tUOk3mmLcWneiyvFD5uc2HHa56Wi4+ayKWzk1iOYcD4BJsboUwOAZt2kwB+rn7e2rNsptIOGd0RyeeLp8PRRQAvsJnrODCHV5OXTxng8pbnja1OBnWK5E46bpdRGyRQbpvvwSUsp8fDBJSygHw5cjBVlcxWpQ9qtmLuSjsuCjs3Ay3FSn/cfkSceDerRbb6RuVJyYqs/ULWC/3NtX3GG6kuHckwTju9CF7PeGK+rbOIEYY8R4DXy/fwGjcsNfxTqU8xUesixRskOizsdjGSrup2Uqzx1kasj1EWaYgdvxKSZ5dW4KTOPD/Svpq8oQ4rIofwVy4kfPlUjgxFnfvOtoQsnJKuFrvOVOt0d/lBob5GIa5Z9KBtFx6GP2Iz0yjIsnpvbUig4hmEMk6khmnk/bCmQf5ffLwz9zAPpYZPaRMaQ1in/nKYzg/2hGVII6GRs3HkDvEXthAsuqhqLcTliVVH/K6wZ1Pg0zfM6naG8xXGHacy1IWS2T1iHKNDHMsAZ0mNiHeYbR1rnepuhbrHVff555D4aYcl3uJ6i1Z/1+F0UolR2FalV+LYLjOWe3v0Y/x0U4avCLsKq8TSpHbg6sPaLQYrdRTFIkN46ftSlS29o22Jsi4j9mJE+/C2yfrGP/8KTf77VFAkKNXcffNR9wCG9KS0P20E2Tz1u15eO/hwPigvf9P0oDeIBIIyHmyuTTut8mfVqBC8V9Y8eNMSy3pl2FV1odeu4CQsOa+pRGBWn247BgJAx0FEg9Ui8dvmkVnQran6l9XIXoE0k8bhOJNUVBK7QN+2eSOlRrUxx5qrYNR3SANVUE97xrQ6WvUutxxPDh5STQK3hBnGP1tiivdMrOaL2f2hHPQ7RNrXsgQYDeM599d5jX9k3u3vfr2LvUUt7xB9rk/rIWiSzAEjypueA0TffAC0QQZb4GTLr2pxGT/4F8UItYEn+ztKQ/6D6gldFvE+QkIidWKKKk6dRSHaaSlNXjKhuTCG7NV8U78Q8vGfm5oolXb26pADAgJipG8CxgNZgo49fKR0VAkOLxj4fyt4CLlMT57fZC8dQRy5kNPUDU9ZEYZTtkPbY1n5i8xzezhNw==",
   "settings": {
@@ -54,10 +49,7 @@
     "verify_settings": {
       "title": "",
       "type": "app_embedded",
-      "options": {
-        "entrypoint": "#/admin/verify_settings",
-        "height": "30px"
-      },
+      "options": { "entrypoint": "#/admin/verify_settings", "height": "30px" },
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
@@ -82,10 +74,7 @@
     "callback_url": {
       "title": "Callback URL",
       "type": "app_embedded",
-      "options": {
-        "entrypoint": "#/admin/callback",
-        "height": "100px"
-      },
+      "options": { "entrypoint": "#/admin/callback", "height": "100px" },
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_deskpro_saas != true && settings.use_access_token != true",
@@ -130,19 +119,12 @@
     "whitelist": [
       {
         "url": "__instance_url__/.*",
-        "methods": [
-          "GET",
-          "POST",
-          "PUT"
-        ],
+        "methods": ["GET", "POST", "PUT"],
         "timeout": 20
       },
       {
         "url": "https://login.wrike.com/oauth2/.*",
-        "methods": [
-          "GET",
-          "POST"
-        ],
+        "methods": ["GET", "POST"],
         "timeout": 20
       }
     ]
