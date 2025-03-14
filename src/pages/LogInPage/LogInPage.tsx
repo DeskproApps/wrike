@@ -34,14 +34,8 @@ function LogInPage() {
             ({ callbackUrl, state }) => {
                 callbackURLRef.current = callbackUrl;
 
-                if (!context?.settings.client_id) {
-                    asyncErrorHandler(new Error('Client ID is not defined'));
-
-                    return '';
-                };
-
                 return `https://login.wrike.com/oauth2/authorize/v4?${createSearchParams([
-                    ['client_id', context.settings.client_id],
+                    ['client_id', clientID ?? ''],
                     ['state', state],
                     ['response_type', 'code'],
                     ['redirect_uri', callbackUrl]
@@ -62,12 +56,12 @@ function LogInPage() {
         setAuthorisationURL(oauth2.authorizationUrl);
 
         try {
-            const pollResult = await oauth2.poll();
+                const pollResult = await oauth2.poll();
 
-            await setAccessToken({ client, token: pollResult.data.access_token });
-            pollResult.data.refresh_token && await setRefreshToken({ client, token: pollResult.data.refresh_token });
-
-            navigate('/');
+                await setAccessToken({ client, token: pollResult.data.access_token });
+                pollResult.data.refresh_token && await setRefreshToken({ client, token: pollResult.data.refresh_token });
+    
+                navigate('/');
         } catch (error) {
             asyncErrorHandler(error instanceof Error ? error : new Error('error logging in with OAuth2'));
         } finally {
