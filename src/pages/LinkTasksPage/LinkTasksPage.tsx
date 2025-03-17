@@ -14,12 +14,12 @@ import { LinkTasks } from "@/components";
 import { useSearch } from "./hooks";
 import type { FC } from "react";
 import type { ITaskFromList } from "@/services/wrike/types";
-import { Settings } from "@/types";
+import { Settings, TicketData } from '@/types';
 
 const LinkTasksPage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
+  const { context } = useDeskproLatestAppContext<TicketData, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const { addLinkNote } = useLinkedNote();
   const { setSelectionState } = useReplyBox();
@@ -69,10 +69,23 @@ const LinkTasksPage: FC = () => {
   useSetTitle("Link Tasks");
 
   useRegisterElements(({ registerElement }) => {
+    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+
     registerElement("refresh", { type: "refresh_button" });
     registerElement("home", {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
+    });
+    isUsingOAuth2 && registerElement('menu', {
+      type: 'menu',
+      items: [
+        {
+          title: 'Log Out',
+          payload: {
+            type: 'logOut'
+          }
+        }
+      ]
     });
   });
 

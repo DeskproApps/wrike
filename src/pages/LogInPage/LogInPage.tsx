@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import { IOAuth2, Title, useDeskproLatestAppContext, useInitialisedDeskproAppClient } from '@deskpro/app-sdk';
+import { IOAuth2, Title, useDeskproElements, useDeskproLatestAppContext, useInitialisedDeskproAppClient } from '@deskpro/app-sdk';
 import { AnchorButton } from '@deskpro/deskpro-ui';
 import { Container } from '@/components/common';
 import { GLOBAL_CLIENT_ID } from '@/constants';
@@ -19,6 +19,10 @@ function LogInPage() {
     const { asyncErrorHandler } = useAsyncError();
     const [isPolling, setIsPolling] = useState(false);
     const [oAuth2Context, setOAuth2Context] = useState<IOAuth2 | null>(null);
+
+    useDeskproElements(({ clearElements }) => {
+        clearElements();
+    });
 
     useInitialisedDeskproAppClient(async client => {
         if (context?.settings.use_deskpro_saas === undefined) {
@@ -89,7 +93,7 @@ function LogInPage() {
         setIsLoading(true);
         setIsPolling(true);
         window.open(authorisationURL, '_blank');
-      }, [setIsLoading, authorisationURL]);
+    }, [setIsLoading, authorisationURL]);
 
     return (
         <Container>

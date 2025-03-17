@@ -1,11 +1,13 @@
 import { useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { LoadingSpinner } from "@deskpro/app-sdk";
+import { LoadingSpinner, useDeskproLatestAppContext } from '@deskpro/app-sdk';
 import { useTask, useSetTitle, useRegisterElements } from "@/hooks";
 import { ViewTask } from "@/components";
 import type { FC } from "react";
+import { Settings } from '@/types';
 
 const ViewTaskPage: FC = () => {
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const navigate = useNavigate();
   const { taskId } = useParams();
   const { task, notes, subItems, isLoading } = useTask(taskId);
@@ -17,6 +19,8 @@ const ViewTaskPage: FC = () => {
   useSetTitle();
 
   useRegisterElements(({ registerElement }) => {
+    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+
     registerElement("refresh", { type: "refresh_button" });
     registerElement("home", {
       type: "home_button",
@@ -24,10 +28,16 @@ const ViewTaskPage: FC = () => {
     });
     registerElement("menu", {
       type: "menu",
-      items: [{
-        title: "Unlink task",
-        payload: { type: "unlink", task },
-      }],
+      items: [
+        {
+          title: "Unlink task",
+          payload: { type: "unlink", task },
+        },
+        ...(isUsingOAuth2 ? [{
+          title: 'Log Out',
+          payload: { type: 'logOut' },
+        }] : [])
+      ],
     });
     task?.id && registerElement("edit", {
       type: "edit_button",
