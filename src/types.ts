@@ -44,10 +44,12 @@ export type NavigateToChangePage = { type: "changePage", path: To };
 
 export type UnlinkPayload = { type: "unlink", task: TaskType };
 
+export type LogOutPayload = {type: 'logOut'};
+
 export type EventPayload =
   | NavigateToChangePage
   | UnlinkPayload
-;
+  | LogOutPayload;
 
 export type CustomFieldType = {
   meta: ICustomField

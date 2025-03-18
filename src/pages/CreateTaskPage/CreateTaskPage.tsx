@@ -52,10 +52,23 @@ const CreateTaskPage: FC = () => {
   useSetTitle("Link Tasks");
 
   useRegisterElements(({ registerElement }) => {
+    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+
     registerElement("refresh", { type: "refresh_button" });
     registerElement("home", {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
+    });
+    isUsingOAuth2 && registerElement('menu', {
+      type: 'menu',
+      items: [
+        {
+          title: 'Log Out',
+          payload: {
+            type: 'logOut'
+          }
+        }
+      ]
     });
   });
 

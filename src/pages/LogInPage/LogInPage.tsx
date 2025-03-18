@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import { Title, useDeskproLatestAppContext, useInitialisedDeskproAppClient } from '@deskpro/app-sdk';
+import { IOAuth2, Title, useDeskproElements, useDeskproLatestAppContext, useInitialisedDeskproAppClient } from '@deskpro/app-sdk';
 import { AnchorButton } from '@deskpro/deskpro-ui';
 import { Container } from '@/components/common';
 import { GLOBAL_CLIENT_ID } from '@/constants';
@@ -17,6 +17,12 @@ function LogInPage() {
     const [authorisationURL, setAuthorisationURL] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { asyncErrorHandler } = useAsyncError();
+    const [isPolling, setIsPolling] = useState(false);
+    const [oAuth2Context, setOAuth2Context] = useState<IOAuth2 | null>(null);
+
+    useDeskproElements(({ clearElements }) => {
+        clearElements();
+    });
 
     useInitialisedDeskproAppClient(async client => {
         if (context?.settings.use_deskpro_saas === undefined) {
@@ -30,18 +36,12 @@ function LogInPage() {
             return;
         };
 
-        const oauth2 = mode === 'global' ? await client.startOauth2Global(GLOBAL_CLIENT_ID) : await client.startOauth2Local(
+        const oauth2Response = mode === 'global' ? await client.startOauth2Global(GLOBAL_CLIENT_ID) : await client.startOauth2Local(
             ({ callbackUrl, state }) => {
                 callbackURLRef.current = callbackUrl;
 
-                if (!context?.settings.client_id) {
-                    asyncErrorHandler(new Error('Client ID is not defined'));
-
-                    return '';
-                };
-
                 return `https://login.wrike.com/oauth2/authorize/v4?${createSearchParams([
-                    ['client_id', context.settings.client_id],
+                    ['client_id', clientID ?? ''],
                     ['state', state],
                     ['response_type', 'code'],
                     ['redirect_uri', callbackUrl]
@@ -59,26 +59,41 @@ function LogInPage() {
             }
         );
 
-        setAuthorisationURL(oauth2.authorizationUrl);
-
-        try {
-            const pollResult = await oauth2.poll();
-
-            await setAccessToken({ client, token: pollResult.data.access_token });
-            pollResult.data.refresh_token && await setRefreshToken({ client, token: pollResult.data.refresh_token });
-
-            navigate('/');
-        } catch (error) {
-            asyncErrorHandler(error instanceof Error ? error : new Error('error logging in with OAuth2'));
-        } finally {
-            setIsLoading(false);
-        };
+        setAuthorisationURL(oauth2Response.authorizationUrl);
+        setOAuth2Context(oauth2Response);
     }, [context, navigate]);
+
+    useInitialisedDeskproAppClient(client => {
+        if (!oAuth2Context) {
+            return;
+        };
+
+        const startPolling = async () => {
+            try {
+                const pollResult = await oAuth2Context.poll();
+
+                await setAccessToken({ client, token: pollResult.data.access_token });
+                pollResult.data.refresh_token && await setRefreshToken({ client, token: pollResult.data.refresh_token });
+
+                navigate('/');
+            } catch (error) {
+                asyncErrorHandler(error instanceof Error ? error : new Error('error logging in with OAuth2'));
+            } finally {
+                setIsPolling(false);
+                setIsLoading(false);
+            };
+        };
+
+        if (isPolling) {
+            startPolling();
+        };
+    }, [oAuth2Context, navigate, isPolling]);
 
     const onLogIn = useCallback(() => {
         setIsLoading(true);
+        setIsPolling(true);
         window.open(authorisationURL, '_blank');
-      }, [setIsLoading, authorisationURL]);
+    }, [setIsLoading, authorisationURL]);
 
     return (
         <Container>

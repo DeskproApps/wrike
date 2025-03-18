@@ -2,8 +2,8 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { match } from "ts-pattern";
 import { useDebouncedCallback } from "use-debounce";
 import { useDeskproAppEvents, useDeskproAppClient, LoadingSpinner } from "@deskpro/app-sdk";
-import { useUnlinkTask } from "@/hooks";
-import { isNavigatePayload, isUnlinkPayload } from "@/utils";
+import { useLogOut, useUnlinkTask } from '@/hooks';
+import { isLogOutPayload, isNavigatePayload, isUnlinkPayload } from '@/utils';
 import {
   HomePage,
   ViewTaskPage,
@@ -21,11 +21,13 @@ const App = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { unlink, isLoading } = useUnlinkTask();
+  const { logOut } = useLogOut();
 
   const debounceElementEvent = useDebouncedCallback((_, __, payload) => {
     return match(payload?.type)
       .with("changePage", () => isNavigatePayload(payload) && navigate(payload.path))
       .with("unlink", () => isUnlinkPayload(payload) && unlink(payload.task))
+      .with('logOut', () => isLogOutPayload(payload) && logOut())
       .run();
   }, 500);
 
