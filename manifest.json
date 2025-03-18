@@ -36,6 +36,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": false,
+      "condition": "settings.use_advanced_connect != false",
       "order": 3
     },
     "access_token": {
@@ -64,7 +65,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": false,
-      "condition": "settings.use_advanced_connect != false && settings.use_access_token != false",
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token != true",
       "order": 6
     },
     "client_secret": {
@@ -72,7 +73,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_advanced_connect != false && settings.use_access_token != false",
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token != true",
       "order": 7
     },
     "callback_url": {
@@ -81,7 +82,7 @@
       "options": { "entrypoint": "#/admin/callback", "height": "100px" },
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_advanced_connect != false && settings.use_access_token != false",
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token != true",
       "order": 8
     },
     "add_comment_when_linking": {
