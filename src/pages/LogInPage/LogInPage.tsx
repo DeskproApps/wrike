@@ -1,14 +1,13 @@
-import { useCallback, useRef, useState } from 'react';
+import { AnchorButton, H3, Stack } from '@deskpro/deskpro-ui';
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import { IOAuth2, Title, useDeskproElements, useDeskproLatestAppContext, useInitialisedDeskproAppClient } from '@deskpro/app-sdk';
-import { AnchorButton } from '@deskpro/deskpro-ui';
-import { Container } from '@/components/common';
-import { GLOBAL_CLIENT_ID } from '@/constants';
-import { Settings } from '@/types';
 import { getTokens } from '@/services/wrike/getTokens';
+import { GLOBAL_CLIENT_ID } from '@/constants';
+import { IOAuth2, useDeskproElements, useDeskproLatestAppContext, useInitialisedDeskproAppClient } from '@deskpro/app-sdk';
+import { Settings } from '@/types';
+import { useAsyncError } from '@/hooks';
+import { useCallback, useRef, useState } from 'react';
 import setAccessToken from '@/services/deskpro/setAccessToken';
 import setRefreshToken from '@/services/deskpro/setRefreshToken';
-import { useAsyncError } from '@/hooks';
 
 function LogInPage() {
     const { context } = useDeskproLatestAppContext<unknown, Settings>();
@@ -20,8 +19,9 @@ function LogInPage() {
     const [isPolling, setIsPolling] = useState(false);
     const [oAuth2Context, setOAuth2Context] = useState<IOAuth2 | null>(null);
 
-    useDeskproElements(({ clearElements }) => {
+    useDeskproElements(({ clearElements, registerElement }) => {
         clearElements();
+        registerElement("refresh", { type: "refresh_button" });
     });
 
     useInitialisedDeskproAppClient(async client => {
@@ -96,8 +96,8 @@ function LogInPage() {
     }, [setIsLoading, authorisationURL]);
 
     return (
-        <Container>
-            <Title title='Log into Wrike' />
+        <Stack padding={12} vertical gap={12}>
+            <H3>Log into your Wrike account.</H3>
             <AnchorButton
                 text='Log In'
                 target='_blank'
@@ -106,7 +106,7 @@ function LogInPage() {
                 disabled={!authorisationURL || isLoading}
                 onClick={onLogIn}
             />
-        </Container>
+        </Stack>
     );
 };
 

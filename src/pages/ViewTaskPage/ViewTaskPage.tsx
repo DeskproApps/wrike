@@ -19,7 +19,7 @@ const ViewTaskPage: FC = () => {
   useSetTitle();
 
   useRegisterElements(({ registerElement }) => {
-    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+    const isUsingOAuth = context?.settings.use_access_token === false || context?.settings.use_advanced_connect === false
 
     registerElement("refresh", { type: "refresh_button" });
     registerElement("home", {
@@ -33,7 +33,7 @@ const ViewTaskPage: FC = () => {
           title: "Unlink task",
           payload: { type: "unlink", task },
         },
-        ...(isUsingOAuth2 ? [{
+        ...(isUsingOAuth ? [{
           title: 'Log Out',
           payload: { type: 'logOut' },
         }] : [])
@@ -50,7 +50,7 @@ const ViewTaskPage: FC = () => {
 
   if (isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 

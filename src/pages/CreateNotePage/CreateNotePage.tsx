@@ -45,14 +45,14 @@ const CreateNotePage = () => {
   useSetTitle("Create Update");
 
   useRegisterElements(({ registerElement }) => {
-    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+    const isUsingOAuth = context?.settings.use_access_token === false || context?.settings.use_advanced_connect === false
 
     registerElement("refresh", { type: "refresh_button" });
     registerElement("home", {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
-    isUsingOAuth2 && registerElement('menu', {
+    isUsingOAuth && registerElement('menu', {
       type: 'menu',
       items: [
         {
@@ -83,7 +83,7 @@ const CreateNotePage = () => {
           loading={submitting}
           disabled={submitting}
         />
-        <Button type="button" text="Cancel" intent="tertiary" onClick={onCancel}/>
+        <Button type="button" text="Cancel" intent="tertiary" onClick={onCancel} />
       </Stack>
     </Container>
   );

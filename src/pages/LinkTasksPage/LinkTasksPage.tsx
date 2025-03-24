@@ -69,14 +69,14 @@ const LinkTasksPage: FC = () => {
   useSetTitle("Link Tasks");
 
   useRegisterElements(({ registerElement }) => {
-    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+    const isUsingOAuth = context?.settings.use_access_token === false || context?.settings.use_advanced_connect === false
 
     registerElement("refresh", { type: "refresh_button" });
     registerElement("home", {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
-    isUsingOAuth2 && registerElement('menu', {
+    isUsingOAuth && registerElement('menu', {
       type: 'menu',
       items: [
         {

@@ -26,7 +26,7 @@ const EditTaskPage: FC = () => {
   const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const { task, isLoading } = useTask(taskId);
-  const [error, setError] = useState<string|null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const onCancel = useCallback(() => {
     navigate(`/issues/view/${task?.id}`);
@@ -55,14 +55,14 @@ const EditTaskPage: FC = () => {
   useSetTitle("Edit Task");
 
   useRegisterElements(({ registerElement }) => {
-    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+    const isUsingOAuth = context?.settings.use_access_token === false || context?.settings.use_advanced_connect === false
 
     registerElement("refresh", { type: "refresh_button" });
     registerElement("home", {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
-    isUsingOAuth2 && registerElement('menu', {
+    isUsingOAuth && registerElement('menu', {
       type: 'menu',
       items: [
         {
@@ -77,7 +77,7 @@ const EditTaskPage: FC = () => {
 
   if (isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 
