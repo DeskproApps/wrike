@@ -20,9 +20,8 @@ function LogInPage() {
     const [oAuth2Context, setOAuth2Context] = useState<IOAuth2 | null>(null);
 
     useDeskproElements(({ clearElements, registerElement }) => {
-        registerElement("refresh", { type: "refresh_button" });
-
         clearElements();
+        registerElement("refresh", { type: "refresh_button" });
     });
 
     useInitialisedDeskproAppClient(async client => {
