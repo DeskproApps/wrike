@@ -25,14 +25,15 @@ const HomePage = () => {
   useBadgeCount(tasks);
 
   useRegisterElements(({ registerElement }) => {
-    const isUsingOAuth2 = context?.settings.use_access_token !== true;
+    const isUsingOAuth = context?.settings.use_access_token === false || context?.settings.use_advanced_connect === false
 
     registerElement("refresh", { type: "refresh_button" });
     registerElement("plus", {
       type: "plus_button",
       payload: { type: "changePage", path: "/tasks/link" },
     });
-    isUsingOAuth2 && registerElement('menu', {
+    
+    isUsingOAuth && registerElement('menu', {
       type: 'menu',
       items: [
         {
@@ -47,7 +48,7 @@ const HomePage = () => {
 
   if (isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 

@@ -13,17 +13,18 @@ type UseLoadingApp = () => void;
 
 const useLoadingApp: UseLoadingApp = () => {
   const navigate = useNavigate();
-  const { context } = useDeskproLatestAppContext<{ticket: {id: string}}, Settings>();
+  const { context } = useDeskproLatestAppContext<{ ticket: { id: string } }, Settings>();
   const { asyncErrorHandler } = useAsyncError();
   const ticketId = context?.data?.ticket.id;
   const settings = context?.settings;
+  const isUsingOAuth = context?.settings.use_access_token === false || context?.settings.use_advanced_connect === false
 
   useInitialisedDeskproAppClient((client) => {
     if (!ticketId || !settings) {
       return;
     }
 
-    client.setUserState(LOG_IN_TYPE_STATE, context.settings.use_access_token ? logInTypes.ACCESS_TOKEN : logInTypes.OAUTH2);
+    client.setUserState(LOG_IN_TYPE_STATE, isUsingOAuth ? logInTypes.OAUTH2 : logInTypes.ACCESS_TOKEN);
 
     checkAuthService(client, settings)
       .then(() => getEntityListService(client, ticketId))

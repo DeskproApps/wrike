@@ -35,7 +35,7 @@ const VerifySettingsPage: FC = () => {
   const [error, setError] = useState<string|null>(null);
 
   const onVerifySettings = useCallback(() => {
-    if (!client || !settings?.use_access_token || !settings.access_token) {
+    if (!client || !settings.access_token) {
       return;
     }
 

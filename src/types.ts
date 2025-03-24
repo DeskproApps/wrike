@@ -18,7 +18,7 @@ export type DateTime = string;
 
 /** Deskpro types */
 export type Settings = {
-  use_advanced_connect?: string;
+  use_advanced_connect?: boolean;
   use_access_token?: boolean;
   instance_url?: string;
   access_token?: string;
