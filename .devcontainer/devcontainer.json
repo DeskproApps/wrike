@@ -10,10 +10,10 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.tabSize": 2
       },
       "extensions": [
-        "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint"
       ]
     }
