@@ -3,7 +3,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import copy from "rollup-plugin-copy";
 
-const PORT = parseInt(process.env.VITE_DEV_SERVER_PORT || "3003");
+const PORT = process.env.VITE_DEV_SERVER_PORT
+  ? parseInt(process.env.VITE_DEV_SERVER_PORT)
+  : undefined;
 
 // https://vitejs.dev/config/
 export default defineConfig({
