@@ -1,15 +1,8 @@
+import { enhanceTask, enhanceNote } from "@/utils";
+import { getCustomFields, getNotesByTaskId, getTaskById, getTasksByIds, getUsersByIds, getWorkflows } from "@/services/wrike";
+import { QueryKey } from "@/utils/query";
 import { useMemo } from "react";
 import { useQueryWithClient, useDeskproLatestAppContext } from "@deskpro/app-sdk";
-import {
-  getTaskById,
-  getWorkflows,
-  getUsersByIds,
-  getTasksByIds,
-  getCustomFields,
-  getNotesByTaskId,
-} from "@/services/wrike";
-import { enhanceTask, enhanceNote } from "@/utils";
-import { QueryKey } from "@/utils/query";
 import type { ITask, ITaskFromList, INote, IUser } from "@/services/wrike/types";
 import type { Settings, TaskType } from "@/types";
 
@@ -89,7 +82,9 @@ const useTask: UseTask = (taskId) => {
       notesByTaskIdQuery,
       customFieldsQuery,
       workflowsQuery,
-      subTask,
+      // Exclude subtask here if there are no ids because subtask.isLoading
+      // will always be true
+      ...(subTaskIds.length > 0 ? [subTask] : [])
     ].some(({ isLoading }) => isLoading),
     task,
     notes,
