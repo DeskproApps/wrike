@@ -18,7 +18,7 @@ const LoadingAppPage: FC = () => {
   const navigate = useNavigate()
 
   // Determine authentication method from settings
-  const isUsingOAuth = context?.settings.use_access_token !== true || context.settings.use_advanced_connect === false
+  const isUsingOAuth = context?.settings.use_access_token === false || context?.settings.use_advanced_connect === false
   const ticketId = context?.data?.ticket.id
 
   useDeskproElements(({ registerElement, clearElements }) => {
@@ -66,7 +66,7 @@ const LoadingAppPage: FC = () => {
   } else {
     // Show error for invalid access tokens (expired or not present)
     return (
-      <div style={{padding: 12}}>
+      <div >
         <ErrorBlock texts={["Invalid Access Token"]} />
       </div>
     );
