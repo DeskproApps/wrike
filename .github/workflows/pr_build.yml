@@ -55,7 +55,7 @@ jobs:
 
             ## Get current version number
             PREV_COMMIT=$(git log -1 --pretty=format:%H -- manifest.json)
-            VERSION=$(git show ${{ steps.get-commit-hash.outputs.PREV_COMMIT }}:manifest.json | grep version | head -n 1 | awk -F'"' '{print $4}')
+            VERSION=$(git show $PREV_COMMIT:manifest.json | grep version | head -n 1 | awk -F'"' '{print $4}')
 
             ## Get the commit message
             MILESTONE=$(echo "$LABELS" | grep -E 'major-version|minor-version' | head -1)
