@@ -27,6 +27,8 @@ jobs:
         run: |
           touch ~/.gitconfig
           mkdir ~/.ssh
+          git config --global user.name "git log -1 --pretty=format:%an"
+          git config --global user.email "$(git log -1 --pretty=format:%ae)"
 
       - name: Lint, Test, Build, and Tag
         uses: devcontainers/ci@v0.3
@@ -45,8 +47,6 @@ jobs:
             pnpm run build
 
             # Tag
-            git config --global user.name "git log -1 --pretty=format:%an"
-            git config --global user.email "$(git log -1 --pretty=format:%ae)"
             if [ "$(git log -1 --pretty=format:%ae)" = "noreply@github.com" ]; then
               echo "Skipping workflow run because previous commit was not made by workflow."
               exit 0
