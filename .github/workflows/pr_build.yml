@@ -26,11 +26,17 @@ jobs:
           git config --global user.name "git log -1 --pretty=format:%an"
           git config --global user.email "$(git log -1 --pretty=format:%ae)"
 
+      - name: Export PR Labels
+        id: extract_labels
+        run: echo "labels=$(jq -r '[.[] | .name] | join(",")' <<< '${{ toJson(github.event.pull_request.labels) }}')" >> $GITHUB_OUTPUT
+        
       - name: Lint, Test, Build, and Tag
         uses: devcontainers/ci@v0.3
+          env:
+            LABELS: "${{ steps.extract_labels.outputs.labels }}"
         with:
           env:
-            GITHUB_EVENT_PATH
+            LABELS
           runCmd: |
             # Lint
             pnpm run lint
@@ -53,7 +59,7 @@ jobs:
             VERSION=$(git show ${{ steps.get-commit-hash.outputs.PREV_COMMIT }}:manifest.json | grep version | head -n 1 | awk -F'"' '{print $4}')
 
             ## Get the commit message
-            MILESTONE=$(jq --raw-output '.pull_request.labels[].name' $GITHUB_EVENT_PATH | grep -E 'major-version|minor-version' | head -1)
+            MILESTONE=$(echo "$LABELS" | grep -E 'major-version|minor-version' | head -1)
 
             echo "Current Version is $VERSION and the milestone is $MILESTONE"
             if [[ "$MILESTONE" == "major-version" ]]; then
