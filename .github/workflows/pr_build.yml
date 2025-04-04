@@ -19,10 +19,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get labels from pull request
-        id: labels
-        run: echo "milestone=$(jq --raw-output '.pull_request.labels[].name' $GITHUB_EVENT_PATH | grep -E 'major-version|minor-version' | head -1)" >> $GITHUB_OUTPUT
-
       - name: Prep local dev
         run: |
           touch ~/.gitconfig
@@ -33,12 +29,10 @@ jobs:
       - name: Lint, Test, Build, and Tag
         uses: devcontainers/ci@v0.3
         env:
-          MILESTONE: "${{ steps.labels.outputs.milestone }}"
-          VERSION: "${{ steps.local-dev-prep.outputs.VERSION }}"
+          GITHUB_EVENT_PATH="$GITHUB_EVENT_PATH"
         with:
-          env: |
-            MILESTONE
-            VERSION
+          env:
+            GITHUB_EVENT_PATH
           runCmd: |
             # Lint
             pnpm run lint
@@ -56,9 +50,14 @@ jobs:
               exit 0
             fi
             
+            ## Get current version number
             PREV_COMMIT=$(git log -1 --pretty=format:%H -- manifest.json)
-            VERSION=$(git show ${{ steps.get-commit-hash.outputs.PREV_COMMIT }}:manifest.json | grep version | awk -F'"' '{print $4}')
-            echo "Current Version is $VERSION"
+            VERSION=$(git show ${{ steps.get-commit-hash.outputs.PREV_COMMIT }}:manifest.json | grep version | head -n 1 | awk -F'"' '{print $4}')
+
+            ## Get the commit message
+            MILESTONE=$(jq --raw-output '.pull_request.labels[].name' $GITHUB_EVENT_PATH | grep -E 'major-version|minor-version' | head -1)
+
+            echo "Current Version is $VERSION and the milestone is $MILESTONE"
             if [[ "$MILESTONE" == "major-version" ]]; then
               pnpm run bumpManifestVer major $VERSION
             elif [[ "$MILESTONE" == "minor-version" ]]; then
