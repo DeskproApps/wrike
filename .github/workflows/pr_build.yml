@@ -23,6 +23,11 @@ jobs:
         id: labels
         run: echo "milestone=$(jq --raw-output '.pull_request.labels[].name' $GITHUB_EVENT_PATH | grep -E 'major-version|minor-version' | head -1)" >> $GITHUB_OUTPUT
 
+      - name: Prep local dev
+        run: |
+          touch ~/.gitconfig
+          mkdir ~/.ssh
+
       - name: Lint, Test, Build, and Tag
         uses: devcontainers/ci@v0.3
         env:
