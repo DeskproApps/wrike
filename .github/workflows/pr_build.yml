@@ -69,6 +69,8 @@ jobs:
               pnpm run bumpManifestVer patch $VERSION
             fi
 
+            pnpm prettier --write manifest.json
+
       - name: Package app zip
         working-directory: dist
         run: |
