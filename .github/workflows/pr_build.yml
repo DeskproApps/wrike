@@ -24,15 +24,11 @@ jobs:
         run: echo "milestone=$(jq --raw-output '.pull_request.labels[].name' $GITHUB_EVENT_PATH | grep -E 'major-version|minor-version' | head -1)" >> $GITHUB_OUTPUT
 
       - name: Prep local dev
-        id: local-dev-prep
         run: |
           touch ~/.gitconfig
           mkdir ~/.ssh
           git config --global user.name "git log -1 --pretty=format:%an"
           git config --global user.email "$(git log -1 --pretty=format:%ae)"
-          PREV_COMMIT=$(git log -1 --pretty=format:%H -- manifest.json)
-          VERSION=$(git show ${{ steps.get-commit-hash.outputs.PREV_COMMIT }}:manifest.json | grep version | awk -F'"' '{print $4}')
-          echo "Current Version is $VERSION"
 
       - name: Lint, Test, Build, and Tag
         uses: devcontainers/ci@v0.3
@@ -44,7 +40,6 @@ jobs:
             MILESTONE
             VERSION
           runCmd: |
-            env
             # Lint
             pnpm run lint
             pnpm tsc --noemit
@@ -60,6 +55,10 @@ jobs:
               echo "Skipping workflow run because previous commit was not made by workflow."
               exit 0
             fi
+            
+            PREV_COMMIT=$(git log -1 --pretty=format:%H -- manifest.json)
+            VERSION=$(git show ${{ steps.get-commit-hash.outputs.PREV_COMMIT }}:manifest.json | grep version | awk -F'"' '{print $4}')
+            echo "Current Version is $VERSION"
             if [[ "$MILESTONE" == "major-version" ]]; then
               pnpm run bumpManifestVer major $VERSION
             elif [[ "$MILESTONE" == "minor-version" ]]; then
