@@ -28,8 +28,6 @@ jobs:
 
       - name: Lint, Test, Build, and Tag
         uses: devcontainers/ci@v0.3
-        env:
-          GITHUB_EVENT_PATH="$GITHUB_EVENT_PATH"
         with:
           env:
             GITHUB_EVENT_PATH
