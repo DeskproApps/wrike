@@ -32,7 +32,7 @@ jobs:
         
       - name: Lint, Test, Build, and Tag
         uses: devcontainers/ci@v0.3
-          env:
+        env:
             LABELS: "${{ steps.extract_labels.outputs.labels }}"
         with:
           env:
