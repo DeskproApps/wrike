@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/wrike",
   "title": "Wrike",
   "description": "Connect your Wrike items to tickets in Deskpro to make them easy to view and update",
-  "version": "1.1.22",
+  "version": "1.1.23",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/wrike",
   "scope": "agent",
   "isSingleInstall": false,
