@@ -1,10 +1,11 @@
+import * as Sentry from '@sentry/react';
+import './instrument';
 import { Suspense, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import { QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-query";
-import { ErrorBoundary } from "react-error-boundary";
 import { Scrollbar } from "@deskpro/deskpro-ui";
 import { DeskproAppProvider, LoadingSpinner } from "@deskpro/app-sdk";
 import { ReplyBoxProvider } from "@/hooks";
@@ -31,11 +32,11 @@ root.render(
             <Suspense fallback={<LoadingSpinner />}>
               <QueryErrorResetBoundary>
                 {({ reset }) => (
-                  <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+                  <Sentry.ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
                     <ReplyBoxProvider>
                       <App />
                     </ReplyBoxProvider>
-                  </ErrorBoundary>
+                  </Sentry.ErrorBoundary>
                 )}
               </QueryErrorResetBoundary>
             </Suspense>
