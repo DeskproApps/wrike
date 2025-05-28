@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/react';
 import './instrument';
 import { Suspense, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
@@ -19,10 +18,13 @@ import "flatpickr/dist/themes/light.css";
 import "simplebar/dist/simplebar.min.css";
 import "tippy.js/dist/tippy.css";
 import "./main.css";
+import { ErrorBoundary, reactErrorHandler } from '@sentry/react';
 
 TimeAgo.addDefaultLocale(en);
 
-const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+const root = ReactDOM.createRoot(document.getElementById('root') as Element, {
+  onRecoverableError: reactErrorHandler(),
+});
 root.render(
   <StrictMode>
     <Scrollbar style={{ height: "100%", width: "100%" }}>
@@ -32,11 +34,11 @@ root.render(
             <Suspense fallback={<LoadingSpinner />}>
               <QueryErrorResetBoundary>
                 {({ reset }) => (
-                  <Sentry.ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+                  <ErrorBoundary onReset={reset} fallback={ErrorFallback}>
                     <ReplyBoxProvider>
                       <App />
                     </ReplyBoxProvider>
-                  </Sentry.ErrorBoundary>
+                  </ErrorBoundary>
                 )}
               </QueryErrorResetBoundary>
             </Suspense>
