@@ -1,10 +1,10 @@
+import './instrument';
 import { Suspense, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import { QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-query";
-import { ErrorBoundary } from "react-error-boundary";
 import { Scrollbar } from "@deskpro/deskpro-ui";
 import { DeskproAppProvider, LoadingSpinner } from "@deskpro/app-sdk";
 import { ReplyBoxProvider } from "@/hooks";
@@ -18,10 +18,13 @@ import "flatpickr/dist/themes/light.css";
 import "simplebar/dist/simplebar.min.css";
 import "tippy.js/dist/tippy.css";
 import "./main.css";
+import { ErrorBoundary, reactErrorHandler } from '@sentry/react';
 
 TimeAgo.addDefaultLocale(en);
 
-const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+const root = ReactDOM.createRoot(document.getElementById('root') as Element, {
+  onRecoverableError: reactErrorHandler(),
+});
 root.render(
   <StrictMode>
     <Scrollbar style={{ height: "100%", width: "100%" }}>
@@ -31,7 +34,7 @@ root.render(
             <Suspense fallback={<LoadingSpinner />}>
               <QueryErrorResetBoundary>
                 {({ reset }) => (
-                  <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+                  <ErrorBoundary onReset={reset} fallback={ErrorFallback}>
                     <ReplyBoxProvider>
                       <App />
                     </ReplyBoxProvider>
