@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { dpNormalize } from "./styles";
 import { addBlankTargetToLinks } from "@/utils";
 import type { FC } from "react";
+import { DeskproAppTheme } from "@deskpro/app-sdk";
 
 type Props = {
   text?: string,
 };
 
-const Container = styled.div`
+const Container = styled.div<DeskproAppTheme>`
   width: 100%;
 
   ${dpNormalize};
