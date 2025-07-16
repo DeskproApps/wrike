@@ -2,6 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import { Button as ButtonUI } from "@deskpro/deskpro-ui";
 import type { ThemeColors, ButtonProps } from "@deskpro/deskpro-ui";
+import { DeskproAppTheme } from "@deskpro/app-sdk";
 
 type ButtonAsLinkProps = { color?: keyof ThemeColors, align?: "left"|"center"|"right" };
 
@@ -10,7 +11,7 @@ export const Button: FC<ButtonProps> = styled(ButtonUI)`
   justify-content: center;
 `;
 
-export const ButtonAsLink = styled.button<ButtonAsLinkProps>`
+export const ButtonAsLink = styled.button<ButtonAsLinkProps & DeskproAppTheme>`
   display: inline;
   background: none;
   border: none;
