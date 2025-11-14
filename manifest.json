@@ -122,12 +122,25 @@
       {
         "url": "__instance_url__/.*",
         "methods": ["GET", "POST", "PUT"],
-        "timeout": 20
+        "timeout": 20,
+        "settingsInjection": {
+          "access_token": {
+            "header": ["Authorization"]
+          }
+        }
       },
       {
         "url": "https://login.wrike.com/oauth2/.*",
         "methods": ["GET", "POST"],
-        "timeout": 20
+        "timeout": 20,
+        "settingsInjection": {
+          "client_id": {
+            "body": ["client_id"]
+          },
+          "client_secret": {
+            "body": ["client_secret"]
+          }
+        }
       }
     ]
   }
